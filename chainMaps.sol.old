@@ -1,0 +1,213 @@
+pragma solidity ^0.4.17;
+//pragma experimental ABIEncoderV2;
+
+contract chainMaps {
+    
+    struct geoLatLng {
+        uint32 lat;
+        uint32 lng;
+        uint8 zoom;
+    }
+    
+    struct place {
+        string title;
+        string desc;
+        string imageLink;
+        geoLatLng position;
+    }
+    
+    struct account {
+        bool exist;
+        address owner;
+        string desc;
+        bool clusterize;
+        geoLatLng position;
+        uint256[] placesIndex; // array de timestamps (hora de escritura)
+        mapping( uint256 => place ) places; // o key vai ser un timestamp (hora de escritura)
+    }
+
+
+    mapping(bytes32 => account) accounts;
+
+
+
+
+    function setAccount( string accountIdName, string desc, bool clusterize, uint32 lat, uint32 lng, uint8 zoom ) {
+
+        if( accountExist(accountIdName) ) { 
+            
+            if( isOwner(accountIdName) ) {
+                accounts[accountHash(accountIdName)].desc = desc;
+                accounts[accountHash(accountIdName)].clusterize = clusterize;
+                accounts[accountHash(accountIdName)].position.lat = lat;
+                accounts[accountHash(accountIdName)].position.lng = lng;
+                accounts[accountHash(accountIdName)].position.zoom = zoom;
+            }
+        }
+        else {
+            account acc;
+            
+            acc.exist = true;
+            acc.position = geoLatLng({
+                lat: lat,
+                lng: lng, 
+                zoom: zoom
+            });
+            acc.owner = msg.sender;
+            acc.desc = desc;
+            acc.clusterize = clusterize;
+            
+            accounts[accountHash(accountIdName)] = acc;
+        }
+    }
+    
+    
+    function getAccount(string accountIdName) 
+        returns (
+            address owner, 
+            string, bool, 
+            uint32 lat, 
+            uint32 lng, 
+            uint8 zoom, 
+            uint placesNumber
+        )  {
+            
+        if( accountExist(accountIdName) ) {
+            account ac;
+            ac = accounts[accountHash(accountIdName)];
+            return (
+                ac.owner, 
+                ac.desc, 
+                ac.clusterize, 
+                ac.position.lat, 
+                ac.position.lng, 
+                ac.position.zoom,
+                ac.placesIndex.length
+            );
+        }
+    }
+    
+    function setPlace( string accountIdName, uint256 ttIndex, string title, string desc, string imageLink, uint32 lat, uint32 lng, uint8 zoom  ) returns (uint256) {
+        uint256 ret;
+        
+
+        
+        if( accountExist(accountIdName) ) { 
+            
+            if( isOwner(accountIdName) ) {
+            
+                place pl;
+                pl.title = title;
+                pl.desc = desc;
+                pl.imageLink = imageLink;
+                pl.position = geoLatLng({
+                        lat: lat,
+                        lng: lng, 
+                        zoom: zoom
+                    });     
+                
+                account acc;
+                acc = accounts[ accountHash(accountIdName) ];
+                
+                if( ttIndex == 0 ) { // Create
+                    uint256 n;
+                    n = now;
+                    acc.places[n] = pl;
+                    acc.placesIndex.push(n);
+                    
+                    ret = n;
+                }
+                else { // update
+                    acc.places[ ttIndex ] = pl;
+                    ret = ttIndex;
+                }
+                
+                
+            }
+            
+            return ret;
+        }
+
+    }
+    
+
+    
+    function deletePlace( string accountIdName, uint256 ttIndex ){
+        
+    }
+    
+    
+    function listPlaces( string accountIdName ) 
+        returns(
+            string[] title,
+            string[] desc,
+            string[] imageLink,
+            uint32[] lat,
+            uint32[] lng,
+            uint8[] zoom
+            ) {
+        
+        string[] title_s;
+        string[] desc_s;
+        string[] imageLink_s;
+        uint32[] lat_s;
+        uint32[] lng_s;
+        uint8[] zoom_s;
+        
+        if( accountExist(accountIdName) ) { 
+            
+            account acc;
+            acc = accounts[ accountHash(accountIdName) ];
+            place pl;
+            
+            uint placesIndexLength = acc.placesIndex.length;
+            for (uint i=0; i<placesIndexLength; i++) {
+                pl = acc.places[i];
+                title_s[i] = pl.title ;
+                desc_s[i] = pl.desc ;
+                imageLink_s[i] = pl.imageLink ;
+                lat_s[i] = pl.position.lat ;
+                lng_s[i] = pl.position.lng ;
+                zoom_s[i] =  pl.position.zoom ;
+            }
+            
+            return (
+                title_s,
+                desc_s,
+                imageLink_s,
+                lat_s,
+                lng_s,
+                zoom_s
+            );
+            
+        }
+        
+    }
+
+    function listPlaceIndex( string accountIdName ) returns( uint256[] ) {
+        if( accountExist(accountIdName) ) { 
+            return accounts[ accountHash(accountIdName) ].placesIndex;
+        }
+    }
+    
+    function accountHash( string accountIdName ) returns (bytes32) {
+        return keccak256(accountIdName);
+    }
+    
+    function accountExist(string accountIdName) returns (bool) {
+        bytes32 accountIdNameHash;
+        accountIdNameHash = accountHash(accountIdName);
+        
+        return (accounts[accountHash(accountIdName)].exist == true );
+    }
+    
+    
+    function isOwner( string accountIdName ) returns (bool){
+        bytes32 accountIdNameHash;
+        accountIdNameHash = accountHash(accountIdName);
+        
+        return (msg.sender == accounts[accountHash(accountIdName)].owner);
+    }
+
+}
+
