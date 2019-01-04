@@ -132,6 +132,26 @@ contract chainMaps {
     }
     
 
+    function getPlace( string memory accountIdName, uint256 ttIndex ) public
+        returns(
+            string memory title,
+            string memory desc,
+            string memory imageLink,
+            uint32 lat,
+            uint32 lng,
+            uint8 zoom
+            ) {
+        if( accountExist(accountIdName) ) { 
+            return (
+                accounts[ accountHash(accountIdName) ].places[ttIndex].title,
+                accounts[ accountHash(accountIdName) ].places[ttIndex].desc,
+                accounts[ accountHash(accountIdName) ].places[ttIndex].imageLink,
+                accounts[ accountHash(accountIdName) ].places[ttIndex].position.lat,
+                accounts[ accountHash(accountIdName) ].places[ttIndex].position.lng,
+                accounts[ accountHash(accountIdName) ].places[ttIndex].position.zoom
+            );
+        }
+    }
     
     function deletePlace( string memory accountIdName, uint256 ttIndex ) public {
         

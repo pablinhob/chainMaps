@@ -33,10 +33,19 @@ $(document).ready(function() {
 
   //console.log(gGisInstance.accountHash.call('lolazo').toString() );
   
-  console.log(gGisInstance.setAccount.sendTransaction('lal', 'lolazo Descripción', true, 10,10,4, {from:gGisContract.eth.accounts[0], gas:200000}));
-  gGisInstance.setAccount.call('lal', 'lolazo Descripción', true, 10,10,4)
+  //console.log(gGisInstance.setAccount.sendTransaction('lal', 'lolazo Descripción', true, 10,10,4, {from:gGisContract.eth.accounts[1], gas:200000}));
+  
   console.log(gGisInstance.getAccount.call('lal').toString());
   console.log(gGisInstance.accountExist.call('lal').toString());
+
+/*
+for(var c=1; c<100; c++){
+	gGisInstance.setPlace.sendTransaction('lal', 0, 'Monte pindoo', 'Un monte de puta madre onde está cheo de pedras que flipas', '', 10, 10, 2, {from:gGisContract.eth.accounts[1], gas:200000});
+}*/
+
+
+
+console.log(gGisInstance.listPlaceIndex.call('lal').toString());
 
 });
 </script>
