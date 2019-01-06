@@ -15,7 +15,6 @@ var connection = {
     //console.log(that.contractInstance.setAccount.sendTransaction('lol', 'lolazo Descripción', true, 10,10,4, {from:that.contract.eth.accounts[0], gas:200000}));
     //console.log(that.contractInstance.accountExist.call('lal').toString());
 
-
   },
 
   /*
