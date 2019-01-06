@@ -4,16 +4,45 @@
     <meta charset="UTF-8">
     <title>Guerrilla GIS v1</title>
   </head>
+
+  <script id="accountChooserTemplate" type="text/template">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="row">
+        <div id="logo" class="text-center">
+        <h1>GuerrillaGIS v1</h1><p>Avoid censorship using the blockchain</p>
+        </div>
+        <form role="form" id="form-buscar">
+          <div class="form-group">
+            <div class="input-group">
+              <input id="1" class="form-control" type="text" name="search" placeholder="Project name id" required/>
+              <span class="input-group-btn">
+              <button class="btn btn-success" type="submit">
+              <i class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></i>
+              </button>
+              </span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </script>
+
   <body>
 
   </body>
+
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='vendor/bootstrap/dist/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
-  <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
   <script src="vendor/web3/dist/web3.min.js"></script>
   <script src="vendor/jquery/dist/jquery.min.js"></script>
+  <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="vendor/underscore/underscore-min.js"></script>
   <script src="vendor/backbone/backbone-min.js"></script>
   <script src="js/conf.js"></script>
   <script src="js/contract.js"></script>
-  <script src="js/test.js"></script>
+
+  <script src="js/router/appRouter.js"></script>
+
+  <script src="js/app.js"></script>
+  <!--script src="js/test.js"></script-->
 </html>
