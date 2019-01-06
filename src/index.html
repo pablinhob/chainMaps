@@ -14,7 +14,7 @@
 <script src="vendor/web3/dist/web3.min.js"></script>
 <script src="vendor/jquery/dist/jquery.min.js"></script>
 <script src="js/conf.js"></script>
-<script src="js/connection.js"></script>
+<script src="js/contract.js"></script>
 
 <script>
 var abi;
@@ -45,9 +45,9 @@ $(document).ready(function() {
   gGisInstance.setPlace.sendTransaction('lal', 0, 'Monte pindoo', 'Un monte de puta madre onde está cheo de pedras que flipas', '', 10, 10, 2, {from:gGisContract.eth.accounts[1], gas:200000});
   }*/
 
-  connection.start();
+  contract.start();
 
-  connection.setAccount({
+  contract.setAccount({
       accountIdName: 'conta1',
       desc: 'A primeira conta ten encanto porque é a primeira',
       clusterize: false,
@@ -59,16 +59,16 @@ $(document).ready(function() {
     200000
   );
 
-  //console.log(connection.contractInstance.accountExist.call('conta1').toString());
+  //console.log(contract.contractInstance.accountExist.call('conta1').toString());
 
 
-  connection.getAccount({
+  contract.getAccount({
       accountIdName: 'conta1'
     },
     function( err, res ) {console.log(res)}
   );
 
-  connection.setPlace({
+  contract.setPlace({
       accountIdName: 'conta1',
       ttIndex: 0,
       title: 'O monte pindo',
@@ -87,7 +87,7 @@ $(document).ready(function() {
 
 
 
-  connection.listPlaceIndex({
+  contract.listPlaceIndex({
       accountIdName: 'conta1'
     },
     function( err, res ) {
