@@ -1,19 +1,20 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Hello World DApp</title>
+  <meta charset="UTF-8">
+  <title>Guerrilla GIS v1</title>
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet' type='text/css'>
 </head>
-<body class="container">
+<body>
 
 </body>
-<!--script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js@1.0.0-beta.36/dist/web3.min.js" integrity="sha256-nWBTbvxhJgjslRyuAKJHK+XcZPlCnmIAAMixz6EefVk=" crossorigin="anonymous"></script-->
-<script src="https://cdn.jsdelivr.net/npm/web3@0.20.4/dist/web3.js"></script>
-<script src="vendor/web3-utils/src/index.js"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
 
+<!--cript src="https://cdn.jsdelivr.net/npm/web3@0.20.4/dist/web3.js"></script-->
+<script src="vendor/web3/dist/web3.min.js"></script>
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="js/conf.js"></script>
+<script src="js/connection.js"></script>
 
 <script>
 var abi;
@@ -22,30 +23,77 @@ var gGisContract;
 var gGisInstance;
 
 $(document).ready(function() {
-	abi = [{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountExist","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"},{"name":"title","type":"string"},{"name":"desc","type":"string"},{"name":"imageLink","type":"string"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setPlace","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"getAccount","outputs":[{"name":"owner","type":"address"},{"name":"desc","type":"string"},{"name":"","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"},{"name":"placesNumber","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"}],"name":"deletePlace","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"desc","type":"string"},{"name":"clusterize","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setAccount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"listPlaceIndex","outputs":[{"name":"placesIndex","type":"uint256[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountHash","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"}];
-	web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9545"));
+/*
+  abi = [{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountExist","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"},{"name":"title","type":"string"},{"name":"desc","type":"string"},{"name":"imageLink","type":"string"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setPlace","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"getAccount","outputs":[{"name":"owner","type":"address"},{"name":"desc","type":"string"},{"name":"","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"},{"name":"placesNumber","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"}],"name":"deletePlace","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"desc","type":"string"},{"name":"clusterize","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setAccount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"listPlaceIndex","outputs":[{"name":"placesIndex","type":"uint256[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountHash","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"}];
+  web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:9545"));
 
-	console.log(web3);
-	gGisContract = web3.eth.contract(abi);
-	gGisInstance = gGisContract.at('0x0846F926C9Afc49E52dC24bBA32f1c41487F643F');
-  
-	//console.log(gGisContract.etfh.accounts[0]);
+  console.log(web3);
+  gGisContract = web3.eth.contract(abi);
+  gGisInstance = gGisContract.at('0xa70ab56b26965eB62716a08c0a43154a780EE565');
+
+  //console.log(gGisContract.etfh.accounts[0]);
 
   //console.log(gGisInstance.accountHash.call('lolazo').toString() );
-  
+
   //console.log(gGisInstance.setAccount.sendTransaction('lal', 'lolazo Descripción', true, 10,10,4, {from:gGisContract.eth.accounts[1], gas:200000}));
-  
+
   console.log(gGisInstance.getAccount.call('lal').toString());
   console.log(gGisInstance.accountExist.call('lal').toString());
+*/
+  /*
+  for(var c=1; c<100; c++){
+  gGisInstance.setPlace.sendTransaction('lal', 0, 'Monte pindoo', 'Un monte de puta madre onde está cheo de pedras que flipas', '', 10, 10, 2, {from:gGisContract.eth.accounts[1], gas:200000});
+  }*/
 
-/*
-for(var c=1; c<100; c++){
-	gGisInstance.setPlace.sendTransaction('lal', 0, 'Monte pindoo', 'Un monte de puta madre onde está cheo de pedras que flipas', '', 10, 10, 2, {from:gGisContract.eth.accounts[1], gas:200000});
-}*/
+  connection.start();
+
+  connection.setAccount({
+      accountIdName: 'conta1',
+      desc: 'A primeira conta ten encanto porque é a primeira',
+      clusterize: false,
+      lat: 120,
+      lng: 10,
+      zoom: 5
+    },
+    function( err, res ) {},
+    200000
+  );
+
+  //console.log(connection.contractInstance.accountExist.call('conta1').toString());
+
+
+  connection.getAccount({
+      accountIdName: 'conta1'
+    },
+    function( err, res ) {console.log(res)}
+  );
+
+  connection.setPlace({
+      accountIdName: 'conta1',
+      ttIndex: 0,
+      title: 'O monte pindo',
+      desc:'O monte pindo mola que te cagas',
+      imageLink:'http://lol.com',
+      lat:10213,
+      lng:234564,
+      zoom:3,
+    },
+    function( err, res ) {
+      alert(res);
+    },
+    200000
+  );
 
 
 
-console.log(gGisInstance.listPlaceIndex.call('lal').toString());
+
+  connection.listPlaceIndex({
+      accountIdName: 'conta1'
+    },
+    function( err, res ) {
+      console.log(res);
+    }
+  );
 
 });
 </script>
