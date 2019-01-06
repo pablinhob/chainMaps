@@ -9,21 +9,29 @@ var AppRouter = Backbone.Router.extend({
     "*path": "default"
   },
   default: function() {
-    alert('default');
+    app.views.accountChooser.render();
+  },
+  account: function(idName) {
+    app.accountIdName = idName;
+    app.navigate('account/'+app.accountIdName+'/map', true);
   },
   map: function( idName, idPlace ) {
+    app.accountIdName = idName;
     alert('map: '+ idName);
     if(idPlace) {
       alert("place "+ idPlace)
     }
   },
   mapShowPlace: function( idName ) {
+    app.accountIdName = idName;
     alert('map: '+ idName);
   },
   adminAccount: function( idName ) {
+    app.accountIdName = idName;
     alert('adminAccount: '+ idName);
   },
   adminPlaces: function( idName, idPlace ) {
+    app.accountIdName = idName;
     alert('adminPlaces: '+ idName);
     if(idPlace) {
       alert("place "+ idPlace)
