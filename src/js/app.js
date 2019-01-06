@@ -1,7 +1,7 @@
 
 
 $(document).ready(function() {
-  //contract.init();
+  contract.init();
   app.init();
 });
 
