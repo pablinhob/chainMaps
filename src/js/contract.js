@@ -49,6 +49,14 @@ var contract = {
     );
   },
 
+  accountExist: function( data, onComplete  ) {
+    var that = this;
+    that.contractInstance.accountExist.call(
+      data.accountIdName,
+      function(err, res) { onComplete( err, res ) }
+    );
+  },
+
   setPlace: function( data, onComplete, gasLimit ) {
     var that = this;
 

@@ -15,7 +15,16 @@ var AccountChooserView = Backbone.View.extend({
     var that = this;
 
     var accIdName = $('.accountForm .accountInput').val();
-    app.router.navigate('account/'+accIdName+'/map',true);
+
+
+    contract.accountExist({accountIdName:accIdName}, function(err,res){
+      if(res == true) {
+        app.router.navigate('account/'+accIdName+'/map',true);
+      }
+      else {
+        alert(accIdName + ' Non existe')
+      }
+    });
   }
 
 });
