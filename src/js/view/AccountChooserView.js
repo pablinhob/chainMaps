@@ -1,4 +1,4 @@
-var AccountChooserView= Backbone.View.extend({
+var AccountChooserView = Backbone.View.extend({
   tpl: _.template( $("#accountChooserTemplate").html(), {} ),
   events: {
     //"click input[type=button]": "goAccount"
@@ -9,7 +9,6 @@ var AccountChooserView= Backbone.View.extend({
   },
   render: function(){
     var that = this;
-
     that.$el.html( that.tpl() );
   },
   goAccount: function() {

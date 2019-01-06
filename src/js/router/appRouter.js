@@ -1,6 +1,6 @@
 var AppRouter = Backbone.Router.extend({
   routes: {
-    "account/:idName": "map",
+    "account/:idName": "account",
     "account/:idName/map": "map",
     "account/:idName/map/id/:idPlace": "map",
     "account/:idName/adminAccount": "adminAccount",
@@ -11,15 +11,17 @@ var AppRouter = Backbone.Router.extend({
   default: function() {
     app.views.accountChooser.render();
   },
+
   account: function(idName) {
     app.accountIdName = idName;
-    app.navigate('account/'+app.accountIdName+'/map', true);
+    app.router.navigate('account/'+app.accountIdName+'/map', true);
   },
   map: function( idName, idPlace ) {
     app.accountIdName = idName;
-    alert('map: '+ idName);
+
+    app.views.map.render();
     if(idPlace) {
-      alert("place "+ idPlace)
+      app.views.map.showPlace(idPlace);
     }
   },
   mapShowPlace: function( idName ) {

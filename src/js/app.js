@@ -12,7 +12,7 @@ var app = {
 
   views: {
     accountChooser: false,
-    mapViewInstance: false,
+    map: false,
     adminAccount: false,
     adminLocations: false
   },
@@ -21,9 +21,10 @@ var app = {
     var that = this;
 
     that.views.accountChooser = new AccountChooserView({ el: $('.content') });
+    that.views.map = new MapView({ el: $('.content') });
 
     that.router = new AppRouter();
-    Backbone.history.start()
+    Backbone.history.start();
   }
   /*,
 
