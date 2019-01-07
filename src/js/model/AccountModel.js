@@ -35,13 +35,23 @@ var AccountModel = Backbone.Model.extend({
       that.toJSON(),
       function( err, res ) {
 
+      that.set( {
+        accountIdName: res[0] ,
+        desc: res[1] ,
+        clusterize: res[2] ,
+        lat: that.fromIntToLatLng( that.decodeContractInt(res[3])) ,
+        lng: that.fromIntToLatLng(  that.decodeContractInt(res[4]))  ,
+        zoom: that.decodeContractInt(res[5]) ,
+        placesNumber: that.decodeContractInt(res[6])
+      });
+/*
         that.set( 'accountIdName',res[0] );
         that.set( 'desc',res[1] );
         that.set( 'clusterize',res[2] );
         that.set( 'lat', that.fromIntToLatLng( that.decodeContractInt(res[3])) );
         that.set( 'lng', that.fromIntToLatLng(  that.decodeContractInt(res[4]))  );
         that.set( 'zoom', that.decodeContractInt(res[5]) );
-        that.set( 'placesNumber', that.decodeContractInt(res[6]) );
+        that.set( 'placesNumber', that.decodeContractInt(res[6]) );*/
         console.log(res)
         console.log(that.toJSON());
       }
