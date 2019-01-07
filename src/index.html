@@ -62,4 +62,19 @@
 
   <script src="js/app.js"></script>
   <!--script src="js/test.js"></script-->
+  <script>
+
+function crea(){
+    var conta = new AccountModel({
+      accountIdName: 'lal',
+      desc: 'lal conta lal',
+      clusterize: false,
+      lat: 45.65788,
+      lng: -10.4535,
+      zoom: 4,
+    });
+
+    conta.saveOnContract(200000);
+}
+  </script>
 </html>

@@ -1,6 +1,7 @@
 var MapView = Backbone.View.extend({
   tpl: _.template( $("#mapTemplate").html(), {} ),
   map: false,
+  account: false,
   events: {
 
   },
@@ -12,6 +13,13 @@ var MapView = Backbone.View.extend({
 
     contract.accountExist({accountIdName:app.accountIdName}, function(err,res){
       if(res == true) {
+
+        that.account = new AccountModel({
+          accountIdName: app.accountIdName
+        });
+
+        that.account.loadFromContract();
+
         that.setMap();
       }
       else {
@@ -27,7 +35,7 @@ var MapView = Backbone.View.extend({
 
   setMap: function() {
     var that = this;
-    
+
     that.$el.html( that.tpl() );
 
     that.map = L.map('mapContainer').setView([51.505, -0.09], 13);
