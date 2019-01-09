@@ -7,8 +7,12 @@ $(document).ready(function() {
 
 var app = {
   accountIdName: false,
-
   router: false,
+
+  data: {
+    account: false,
+    locations: false
+  },
 
   views: {
     accountChooser: false,

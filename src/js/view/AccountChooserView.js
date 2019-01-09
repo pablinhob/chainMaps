@@ -10,6 +10,10 @@ var AccountChooserView = Backbone.View.extend({
   render: function(){
     var that = this;
     that.$el.html( that.tpl() );
+
+
+    app.data.account = false;
+    app.data.locations = false;
   },
   goAccount: function() {
     var that = this;

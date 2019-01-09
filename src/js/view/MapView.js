@@ -1,7 +1,6 @@
 var MapView = Backbone.View.extend({
   tpl: _.template( $("#mapTemplate").html(), {} ),
   map: false,
-  account: false,
   events: {
 
   },
@@ -14,7 +13,7 @@ var MapView = Backbone.View.extend({
     contract.accountExist({accountIdName:app.accountIdName}, function(err,res){
       if(res == true) {
 
-        that.account = new AccountModel({
+        app.data.account = new AccountModel({
           accountIdName: app.accountIdName
         });
 
@@ -44,11 +43,9 @@ var MapView = Backbone.View.extend({
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(that.map);
 
-    that.account.loadFromContract();
-    that.account.on('change', function(){
-      //alert(that.account.get('lat'));
-      //alert(that.account.get('desc'))
-      that.map.flyTo([that.account.get('lat'), that.account.get('lng')], that.account.get('zoom'));
+    app.data.account.loadFromContract();
+    app.data.account.on('change', function(){
+      that.map.flyTo([app.data.account.get('lat'), app.data.account.get('lng')], app.data.account.get('zoom'));
     })
 
   }
