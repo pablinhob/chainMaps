@@ -1,6 +1,12 @@
 var AccountFormView = Backbone.View.extend({
   tpl: _.template( $("#accountFormTemplate").html(), {} ),
+
+  map: false,
+  marker: false,
+
   events: {
+    'keypress #accountLat': 'updateInputLatlng',
+    'keypress #accountLng': 'updateInputLatlng'
   },
   initialize: function(){
 
@@ -8,70 +14,143 @@ var AccountFormView = Backbone.View.extend({
   render: function(){
     var that = this;
     that.$el.html( that.tpl() );
-
+    that.setFormMap();
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
 
+    $('#accountIdName').keypress(function( e ) {
+      if(e.which === 32){
+        return false;
+      }
+    });
+
     $( "#signupForm" ).validate( {
-    				rules: {
-    					firstname: "required",
-    					lastname: "required",
-    					username: {
-    						required: true,
-    						minlength: 2
-    					},
-    					password: {
-    						required: true,
-    						minlength: 5
-    					},
-    					confirm_password: {
-    						required: true,
-    						minlength: 5,
-    						equalTo: "#password"
-    					},
-    					email: {
-    						required: true,
-    						email: true
-    					},
-    					agree: "required"
-    				},
-    				messages: {
-    					firstname: "Please enter your firstname",
-    					lastname: "Please enter your lastname",
-    					username: {
-    						required: "Please enter a username",
-    						minlength: "Your username must consist of at least 2 characters"
-    					},
-    					password: {
-    						required: "Please provide a password",
-    						minlength: "Your password must be at least 5 characters long"
-    					},
-    					confirm_password: {
-    						required: "Please provide a password",
-    						minlength: "Your password must be at least 5 characters long",
-    						equalTo: "Please enter the same password as above"
-    					},
-    					email: "Please enter a valid email address",
-    					agree: "Please accept our policy"
-    				},
-    				errorElement: "em",
-    				errorPlacement: function ( error, element ) {
-    					// Add the `help-block` class to the error element
-    					error.addClass( "help-block" );
+  		rules: {
+  			accountIdName: {
+  				required: true,
+  				minlength: 0,
+          maxlength: 20
+  			},
+  			accountDesc: {
+  				required: false,
+  				minlength: 0,
+          maxlength: 4
+  			},
+        accountLat: {
+          required: true,
+          number: true
+  			},
+        accountLng: {
+          required: true,
+          number: true
+  			},
+        accountZoom: {
+          required: true,
+          number: true
+  			},
+  			agree: "required"
+  		},
+  		messages: {
+  			agree: "Check that you understand the nature of application."
+  		},
+  		errorElement: "em",
+  		errorPlacement: function ( error, element ) {
+  			// Add the `help-block` class to the error element
+  			error.addClass( "help-block" );
 
-    					if ( element.prop( "type" ) === "checkbox" ) {
-    						error.insertAfter( element.parent( "label" ) );
-    					} else {
-    						error.insertAfter( element );
-    					}
-    				},
-    				highlight: function ( element, errorClass, validClass ) {
-    					$( element ).parents( ".col-sm-5" ).addClass( "has-error" ).removeClass( "has-success" );
-    				},
-    				unhighlight: function (element, errorClass, validClass) {
-    					$( element ).parents( ".col-sm-5" ).addClass( "has-success" ).removeClass( "has-error" );
-    				}
-    			} );
+  			if ( element.prop( "type" ) === "checkbox" ) {
+  				error.insertAfter( element.parent( "label" ) );
+  			} else {
+  				error.insertAfter( element );
+  			}
+  		},
+  		highlight: function ( element, errorClass, validClass ) {
+  			$( element ).parent( ).addClass( "has-error" ).removeClass( "has-success" );
+  		},
+  		unhighlight: function (element, errorClass, validClass) {
+  			$( element ).parent( ).addClass( "has-success" ).removeClass( "has-error" );
+  		}
+  	});
 
+  },
+
+  setFormMap: function() {
+    var that = this;
+    var latLngExist = false;
+
+
+    var initData = {};
+
+    if( $('#accountLat').val() == '') {
+      initData.center = [40, 0];
+    }
+    else {
+      latLngExist = true;
+    }
+
+    if( $('#accountZoom').val() == '' ){
+      initData.zoom = 2;
+    }
+
+    initData.layers = [
+      new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Contributors'
+      })
+    ];
+
+    that.map = new L.Map('accountMap', initData);
+    that.map.on('zoomend', function() {
+      $('#accountZoom').val( that.map.getZoom() );
+    });
+    that.map.on('dragend', function(e) {
+       that.updateInputLatlng();
+    });
+
+    if( latLngExist == true ) {
+      that.addMarker();
+      that.updateInputLatlng();
+    }
+
+    that.map.on('click', function (e) {
+    	if( that.marker == false ) {
+    		that.addMarker();
+    	}
+    	that.marker.setLatLng(e.latlng);
+    	that.updateLatLng( that.marker.getLatLng().lat,  that.marker.getLatLng().lng);
+    });
+
+  },
+
+  addMarker: function(){
+    var that = this;
+
+    that.marker = L.marker([0,0],{
+      draggable: true
+    }).addTo(that.map);
+    that.marker.on('dragend', function (e) {
+      that.updateLatLng(that.marker.getLatLng().lat, that.marker.getLatLng().lng);
+    });
+  },
+
+  updateLatLng: function(lat,lng,reverse) {
+    var that = this;
+    if( that.marker == false ) {
+      that.addMarker();
+    }
+
+    if(reverse) {
+      that.marker.setLatLng([lat,lng]);
+      that.map.panTo([lat,lng]);
+      if( $('#accountZoom').val() !='' ){ that.map.setZoom( $('#accountZoom').val() );  }
+    } else {
+      $('#accountLat').val( that.marker.getLatLng().lat );
+      $('#accountLng').val( that.marker.getLatLng().lng );
+      $('#accountZoom').val( that.map.getZoom() );
+      that.map.panTo([lat,lng]);
+    }
+  },
+
+  updateInputLatlng: function() {
+    var that = this;
+    that.updateLatLng($('#accountLat').val(),$('#accountLng').val(),true);
   }
-
 });
