@@ -42,13 +42,13 @@
     <% } %>
 
     <form id="signupForm" method="post" class="form-horizontal"  onSubmit="return false;">
-      <% if( newAccount == true  ) { %>
-      <div class="form-group">
+
+      <div class="form-group"  <% if( newAccount == false  ) { %> style="display:none;" <%}%>>
         <div class="col-sm-5">
           <input type="text" class="form-control" id="accountIdName" name="accountIdName" placeholder="Account name (without spaces)" value="<%- accountIdName %>"/>
         </div>
       </div>
-      <%}%>
+
       <div class="form-group">
         <div class="col-sm-5">
           <textarea class="form-control" id="accountDesc" name="accountDesc" value="<%- desc %>" placeholder="Map description, contact info, etc..." />

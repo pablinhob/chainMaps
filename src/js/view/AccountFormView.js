@@ -5,6 +5,7 @@ var AccountFormView = Backbone.View.extend({
   marker: false,
 
   events: {
+    'submit #signupForm': 'submitAccount',
     'keypress #accountLat': 'updateInputLatlng',
     'keypress #accountLng': 'updateInputLatlng'
   },
@@ -45,6 +46,10 @@ var AccountFormView = Backbone.View.extend({
         }
       });
     }
+    else {
+      that.$el.html( that.tpl( formData ) );
+      that.setForm();
+    }
   },
 
 
@@ -70,7 +75,7 @@ var AccountFormView = Backbone.View.extend({
   			accountDesc: {
   				required: false,
   				minlength: 0,
-          maxlength: 4
+          maxlength: 256
   			},
         accountLat: {
           required: true,
@@ -191,5 +196,26 @@ var AccountFormView = Backbone.View.extend({
   updateInputLatlng: function() {
     var that = this;
     that.updateLatLng($('#accountLat').val(),$('#accountLng').val(),true);
+  },
+
+  submitAccount: function() {
+    var that = this;
+
+    var acc = new AccountModel({
+      accountIdName: $('#accountIdName').val(),
+      desc: $('#accountDesc').val(),
+      clusterize: $('#clusterize').val(),
+      lat: $('#accountLat').val(),
+      lng: $('#accountLng').val(),
+      zoom: $('#accountZoom').val(),
+    });
+    acc.saveOnContract(
+      2000000,
+      function(err, res) {
+        //console.log(err, res);
+        app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
+      }
+    );
+
   }
 });
