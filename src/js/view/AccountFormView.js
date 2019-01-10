@@ -13,9 +13,46 @@ var AccountFormView = Backbone.View.extend({
   },
   render: function(){
     var that = this;
-    that.$el.html( that.tpl() );
+
+    var formData = {
+      newAccount: true,
+      accountIdName: '',
+      desc: '',
+      clusterize: false,
+      lat: '',
+      lng: '',
+      zoom: ''
+    };
+    //that.$el.html( that.tpl(formData) );
+
+    if( app.accountIdName != 'false' ) {
+      contract.accountExist({ accountIdName:app.accountIdName }, function(err,res){
+        if(res == true) {
+          var acc = new AccountModel({
+            accountIdName: app.accountIdName
+          });
+          acc.loadFromContract();
+          acc.on('change', function(){
+            that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON()) ) );
+            that.setForm();
+          });
+        }
+        else {
+          formData.newAccount = true;
+          formData.accountIdName = app.accountIdName;
+          that.$el.html( that.tpl( formData ) );
+          that.setForm();
+        }
+      });
+    }
+  },
+
+
+
+  setForm: function(){
+    var that = this;
+
     that.setFormMap();
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
 
     $('#accountIdName').keypress(function( e ) {
       if(e.which === 32){
@@ -70,8 +107,10 @@ var AccountFormView = Backbone.View.extend({
   			$( element ).parent( ).addClass( "has-success" ).removeClass( "has-error" );
   		}
   	});
-
   },
+
+
+
 
   setFormMap: function() {
     var that = this;

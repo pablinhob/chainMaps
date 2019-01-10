@@ -34,24 +34,42 @@
 
   <script id="accountFormTemplate"  type="text/template">
 
-    <form id="signupForm" method="post" class="form-horizontal" action="">
+    <% if( newAccount == true  ) { %>
+    <div class="panel panel-info">
+      <div class="panel-heading">Create new account </div>
+      <div class="panel-body">Panel Content</div>
+    </div>
+    <% } %>
+
+    <form id="signupForm" method="post" class="form-horizontal"  onSubmit="return false;">
+      <% if( newAccount == true  ) { %>
       <div class="form-group">
         <div class="col-sm-5">
-          <input type="text" class="form-control" id="accountIdName" name="accountIdName" placeholder="Account name (without spaces)" />
+          <input type="text" class="form-control" id="accountIdName" name="accountIdName" placeholder="Account name (without spaces)" value="<%- accountIdName %>"/>
+        </div>
+      </div>
+      <%}%>
+      <div class="form-group">
+        <div class="col-sm-5">
+          <textarea class="form-control" id="accountDesc" name="accountDesc" value="<%- desc %>" placeholder="Map description, contact info, etc..." />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5 col-sm-offset-4">
+          <div class="checkbox">
+          <label>
+            <input type="checkbox" id="clusterize" name="clusterize" value="clusterize"  <% if( clusterize == true ){%> checked <%}%> />Clusterize markers
+          </label>
+          </div>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-5">
-          <textarea class="form-control" id="accountDesc" name="accountDesc" placeholder="Map description, contact info, etc..." />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="accountLat" name="accountLat" placeholder="Latitude" />
-          <input type="text"  class="form-control" id="accountLng" name="accountLng" placeholder="Longitude" />
-          <input type="text"  class="form-control" id="accountZoom" name="accountZoom" placeholder="Zoom" />
+          <input type="text" class="form-control" id="accountLat" name="accountLat" placeholder="Latitude"  value="<%-lat%>" />
+          <input type="text"  class="form-control" id="accountLng" name="accountLng" placeholder="Longitude"  value="<%-lng%>" />
+          <input type="text"  class="form-control" id="accountZoom" name="accountZoom" placeholder="Zoom" value="<%-zoom%>"/>
         </div>
       </div>
       <div id="accountMap" style="width:400px;height:400px;"></div>
@@ -59,7 +77,7 @@
         <div class="col-sm-5 col-sm-offset-4">
           <div class="checkbox">
           <label>
-            <input type="checkbox" id="agree" name="agree" value="agree" />I Understand
+            <input type="checkbox" id="agree" name="agree" value="agree"/>I Understand
           </label>
           </div>
         </div>
