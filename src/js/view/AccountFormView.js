@@ -143,7 +143,10 @@ var AccountFormView = Backbone.View.extend({
 
     that.map = new L.Map('accountMap', initData);
     that.map.on('zoomend', function() {
-      $('#accountZoom').val( that.map.getZoom() );
+      if( !isNaN(that.map.getZoom()) ) {
+        $('#accountZoom').val( that.map.getZoom() );
+      }
+
     });
     that.map.on('dragend', function(e) {
        that.updateInputLatlng();
@@ -204,11 +207,14 @@ var AccountFormView = Backbone.View.extend({
     var acc = new AccountModel({
       accountIdName: $('#accountIdName').val(),
       desc: $('#accountDesc').val(),
-      clusterize: $('#clusterize').val(),
-      lat: $('#accountLat').val(),
-      lng: $('#accountLng').val(),
-      zoom: $('#accountZoom').val(),
+      clusterize: false,
+      lat: parseFloat( $('#accountLat').val() ),
+      lng: parseFloat( $('#accountLng').val() ),
+      //lat:40.737,
+      //lng:-73.923,
+      zoom: parseInt($('#accountZoom').val() )
     });
+
     acc.saveOnContract(
       2000000,
       function(err, res) {

@@ -68,7 +68,7 @@ contract chainMaps {
 
     function getAccount(string memory accountIdName) public
         returns (
-            address owner,
+            string memory owner,
             string memory desc,
             bool,
             uint32 lat,

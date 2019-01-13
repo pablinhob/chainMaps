@@ -1,5 +1,5 @@
-const GPS_DIGITS_AFTER_COMMA = 4;
-const GPS_PRECISSION = 10000000;
+
+const GPS_PRECISSION = 1000000;
 const GPS_ADITION = 100;
 
 var AccountModel = Backbone.Model.extend({
@@ -17,8 +17,11 @@ var AccountModel = Backbone.Model.extend({
     var that = this;
 
     var accountData = that.toJSON();
-    accountData.lat = that.fromLatLngToInt( Number(accountData.lat).toFixed(GPS_DIGITS_AFTER_COMMA) );
-    accountData.lng = that.fromLatLngToInt( Number(accountData.lng).toFixed(GPS_DIGITS_AFTER_COMMA));
+    //accountData.lat = that.fromLatLngToInt( Number(accountData.lat).toFixed(GPS_DIGITS_AFTER_COMMA) );
+    //accountData.lng = that.fromLatLngToInt( Number(accountData.lng).toFixed(GPS_DIGITS_AFTER_COMMA));
+
+    accountData.lat = that.fromLatLngToInt( accountData.lat );
+    accountData.lng = that.fromLatLngToInt( accountData.lng );
 
     contract.setAccount(
       accountData,
@@ -54,8 +57,8 @@ var AccountModel = Backbone.Model.extend({
         that.set( 'lng', that.fromIntToLatLng(  that.decodeContractInt(res[4]))  );
         that.set( 'zoom', that.decodeContractInt(res[5]) );
         that.set( 'placesNumber', that.decodeContractInt(res[6]) );*/
-        console.log(res)
-        console.log(that.toJSON());
+        //console.log(res)
+        //console.log(that.toJSON());
       }
     );
   },
