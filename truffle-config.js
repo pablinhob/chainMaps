@@ -54,7 +54,8 @@ module.exports = {
      },
 
     // Another network with more advanced options...
-    // advanced: {
+    
+// advanced: {
       // port: 8777,             // Custom port
       // network_id: 1342,       // Custom network
       // gas: 8500000,           // Gas sent with each transaction (default: ~6700000)
