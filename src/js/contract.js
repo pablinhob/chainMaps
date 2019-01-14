@@ -9,9 +9,26 @@ var contract = {
     that.web3 = new Web3(new Web3.providers.HttpProvider( conf.httpProvider ));
   	that.contract = that.web3.eth.contract( conf.abi );
   	that.contractInstance = that.contract.at( conf.contractAddress );
+
     that.currentAccount = that.contract.eth.accounts[0];
 
 
+
+    /*web3.eth.getAccounts(function(err, accounts){
+       if (err != null) {
+          console.log(err)
+       }
+       else if (accounts.length === 0) {
+          console.log('MetaMask is locked')
+       }
+       else {
+          that.currentAccount = accounts;
+          console.log('MetaMask is unlocked')
+       }
+    });*/
+
+//alert(that.currentAccount);
+//web3.eth.personal.unlockAccount();
     //console.log(that.contractInstance.setAccount.sendTransaction('lol', 'lolazo Descripción', true, 10,10,4, {from:that.contract.eth.accounts[0], gas:200000}));
     //console.log(that.contractInstance.accountExist.call('lal').toString());
 
@@ -23,20 +40,23 @@ var contract = {
   setAccount: function(  data, onComplete, gasLimit ) {
     var that = this;
 
+    $.when(ethereum.enable() ).then( function( ee ){
 
-    that.contractInstance.setAccount.sendTransaction(
-      data.accountIdName,
-      data.desc,
-      data.clusterize,
-      data.lat,
-      data.lng,
-      data.zoom,
-      {
-        from: that.currentAccount,
-        gas: gasLimit
-      },
-      function(err, res){ onComplete(err,res)}
-    );
+      that.contractInstance.setAccount.sendTransaction(
+        data.accountIdName,
+        data.desc,
+        data.clusterize,
+        data.lat,
+        data.lng,
+        data.zoom,
+        {
+          from: ee[0],
+          gas: gasLimit
+        },
+        function(err, res){  onComplete(err,res)}
+      );
+    });
+
 
     //that.contractInstance.setAccount.sendTransaction('lal', 'lolazo Descripción', true, 10,10,4, {from:conf.account, gas:200000})
   },
@@ -45,7 +65,7 @@ var contract = {
     var that = this;
     that.contractInstance.getAccount.call(
       data.accountIdName,
-      function(err, res) { onComplete( err, res ) }
+      function(err, res) {  onComplete( err, res ) }
     );
   },
 
@@ -53,7 +73,7 @@ var contract = {
     var that = this;
     that.contractInstance.accountExist.call(
       data.accountIdName,
-      function(err, res) { onComplete( err, res ) }
+      function(err, res) { console.log(res);onComplete( err, res ) }
     );
   },
 
@@ -70,7 +90,7 @@ var contract = {
       data.lng,
       data.zoom,
       {
-        from: that.currentAccount,
+        from: that.contract.eth.accounts[0],
         gas:gasLimit
       },
       function( err, res ){

@@ -26,6 +26,8 @@ var AccountModel = Backbone.Model.extend({
     contract.setAccount(
       accountData,
       function( err, res ) {
+
+        console.log('ERRRRR',err);
         onSubmit(err, res);
       },
       gasLimit
