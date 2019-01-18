@@ -2,7 +2,7 @@ var contract = {
   web3: false,
   contract: false,
   contractInstance: false,
-  currentAccount: false,
+  currentEthAccount: false,
   init: function() {
     var that = this;
 
@@ -10,28 +10,8 @@ var contract = {
   	that.contract = that.web3.eth.contract( conf.abi );
   	that.contractInstance = that.contract.at( conf.contractAddress );
 
-    that.currentAccount = that.contract.eth.accounts[0];
-
-
-
-    /*web3.eth.getAccounts(function(err, accounts){
-       if (err != null) {
-          console.log(err)
-       }
-       else if (accounts.length === 0) {
-          console.log('MetaMask is locked')
-       }
-       else {
-          that.currentAccount = accounts;
-          console.log('MetaMask is unlocked')
-       }
-    });*/
-
-//alert(that.currentAccount);
-//web3.eth.personal.unlockAccount();
-    //console.log(that.contractInstance.setAccount.sendTransaction('lol', 'lolazo Descripción', true, 10,10,4, {from:that.contract.eth.accounts[0], gas:200000}));
-    //console.log(that.contractInstance.accountExist.call('lal').toString());
-
+    that.currentEthAccount = '0xc655c4812584BF855d53584e553c22C8D714D9ca';
+    that.currentEthAccountPrivateKey = '15d7f910f479c3e2f0d2eee48a71ab4f017cc786ca31122f37b3518f44b27bfb';
   },
 
   /*
@@ -42,7 +22,7 @@ var contract = {
 
     $.when(ethereum.enable() ).then( function( ee ){
 
-      that.contractInstance.setAccount.sendTransaction(
+      that.contractInstance.setAccount(
         data.accountIdName,
         data.desc,
         data.clusterize,
@@ -51,7 +31,8 @@ var contract = {
         data.zoom,
         {
           from: ee[0],
-          gas: gasLimit
+          gas:'195253'
+          //value: web3.toWei( web3.toBigNumber(0.1),'ether')
         },
         function(err, res){  onComplete(err,res)}
       );
@@ -60,6 +41,32 @@ var contract = {
 
     //that.contractInstance.setAccount.sendTransaction('lal', 'lolazo Descripción', true, 10,10,4, {from:conf.account, gas:200000})
   },
+
+  /*
+    Contract functions call
+  */
+  setAccountRaw: function(  data, onComplete, gasLimit ) {
+    var that = this;
+
+    that.rawTransaction(
+      contract.contractInstance.setAccount.getData(
+        data.accountIdName,
+        data.desc,
+        data.clusterize,
+        data.lat,
+        data.lng,
+        data.zoom,
+        {
+          from: that.currentEthAccount,
+          gas: gasLimit
+        }
+      ),
+      gasLimit,
+      function(err, res){  onComplete(err,res); }
+    );
+
+  },
+
 
   getAccount: function( data, onComplete  ) {
     var that = this;
@@ -120,7 +127,35 @@ var contract = {
         onComplete( err, res );
       }
     );
-  }
+  },
 
+
+
+  rawTransaction: function( data, gasLimit, onComplete) {
+    var that = this;
+    web3.eth.getTransactionCount( that.currentEthAccount , function(error, result) {
+      var nonce = result;
+
+      var rawTransaction = {
+        "from": that.currentEthAccount,
+        "nonce": web3.toHex( nonce ),
+        "gasPrice": web3.toHex( 0.8 ^1000000000),
+        "gasLimit": web3.toHex(gasLimit),
+        "to": conf.contractAddress,
+        "value": "0x00",
+        "data": data,
+        "chainId": conf.currentNetworkId //change the chainID accordingly
+      };
+
+      var privKey = new ethereumjs.Buffer.Buffer( that.currentEthAccountPrivateKey , 'hex');
+      var tx = new ethereumjs.Tx(rawTransaction);
+
+      tx.sign(privKey);
+      var serializedTx = tx.serialize();
+      web3.eth.sendRawTransaction('0x' + serializedTx.toString('hex'), function(err, res) {
+        onComplete(err, res);
+      });
+    });
+  }
 
 };

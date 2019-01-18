@@ -216,10 +216,10 @@ var AccountFormView = Backbone.View.extend({
     });
 
     acc.saveOnContract(
-      2000000000,
+      3000000,
       function(err, res) {
-        //console.log(err, res);
-        app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
+        console.log(err, res);
+        //app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
       }
     );
 

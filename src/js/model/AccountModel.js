@@ -23,11 +23,9 @@ var AccountModel = Backbone.Model.extend({
     accountData.lat = that.fromLatLngToInt( accountData.lat );
     accountData.lng = that.fromLatLngToInt( accountData.lng );
 
-    contract.setAccount(
+    contract.setAccountRaw(
       accountData,
       function( err, res ) {
-
-        console.log('ERRRRR',err);
         onSubmit(err, res);
       },
       gasLimit
