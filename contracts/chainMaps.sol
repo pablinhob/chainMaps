@@ -32,21 +32,36 @@ contract chainMaps {
 
     mapping(bytes32 => account)  accounts;
 
+    event AccountSubmit(
+      address indexed owner,
+      string accountName,
+      string result
+    );
 
-
+    event PlaceSubmit(
+      address owner,
+      uint256 placeTtIndex,
+      string result
+    );
 
     function setAccount( string memory accountIdName, string memory desc, bool clusterize, uint32 lat, uint32 lng, uint8 zoom ) public {
 
         if( accountExist(accountIdName) ) {
 
-            if( isOwner(accountIdName) ) {
-                accounts[accountHash(accountIdName)].ownerIdname = accountIdName;
-                accounts[accountHash(accountIdName)].desc = desc;
-                accounts[accountHash(accountIdName)].clusterize = clusterize;
-                accounts[accountHash(accountIdName)].position.lat = lat;
-                accounts[accountHash(accountIdName)].position.lng = lng;
-                accounts[accountHash(accountIdName)].position.zoom = zoom;
-            }
+          if( isOwner(accountIdName) ) {
+            accounts[accountHash(accountIdName)].ownerIdname = accountIdName;
+            accounts[accountHash(accountIdName)].desc = desc;
+            accounts[accountHash(accountIdName)].clusterize = clusterize;
+            accounts[accountHash(accountIdName)].position.lat = lat;
+            accounts[accountHash(accountIdName)].position.lng = lng;
+            accounts[accountHash(accountIdName)].position.zoom = zoom;
+
+            emit AccountSubmit( msg.sender , accountIdName, 'ACCOUNT_UPDATED');
+          }
+          else{
+            emit AccountSubmit( msg.sender , accountIdName, 'ACCOUNT_NOT_OWNER');
+          }
+
         }
         else {
             account memory acc;
@@ -62,6 +77,7 @@ contract chainMaps {
             acc.clusterize = clusterize;
 
             accounts[accountHash(accountIdName)] = acc;
+            emit AccountSubmit( msg.sender , accountIdName, 'ACCOUNT_CREATED');
         }
     }
 
@@ -119,17 +135,23 @@ contract chainMaps {
                     accounts[ accountHash(accountIdName) ].placesIndex.push(n);
 
                     ret = n;
+                    emit PlaceSubmit( msg.sender , ttIndex, 'PLACE_CREATED');
                 }
                 else { // update
                     accounts[ accountHash(accountIdName) ].places[ ttIndex ] = pl;
                     ret = ttIndex;
+                    emit PlaceSubmit( msg.sender , ttIndex, 'PLACE_UPDATED');
                 }
 
 
             }
+            else {
+              emit PlaceSubmit( msg.sender , accountIdName, 'ACCOUNT_NOT_OWNER');
+            }
 
             return ret;
         }
+
 
     }
 
