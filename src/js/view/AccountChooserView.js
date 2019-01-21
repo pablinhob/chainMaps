@@ -25,7 +25,7 @@ var AccountChooserView = Backbone.View.extend({
         app.router.navigate('account/'+accIdName+'/map',true);
       }
       else {
-        app.router.navigate('account/'+accIdName+'/adminAccount',true);
+        app.router.navigate('account/false/adminAccount',true);
       }
     });
   }

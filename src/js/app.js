@@ -15,6 +15,7 @@ var app = {
   },
 
   views: {
+    header: false,
     accountChooser: false,
     map: false,
     adminAccount: false,
@@ -25,6 +26,7 @@ var app = {
   init: function() {
     var that = this;
 
+    that.views.header = new HeaderView({ el: $('.header') });
     that.views.accountChooser = new AccountChooserView({ el: $('.content') });
     that.views.map = new MapView({ el: $('.content') });
     that.views.adminAccount = new AccountFormView({ el: $('.content') });

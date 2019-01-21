@@ -19,6 +19,7 @@ var AppRouter = Backbone.Router.extend({
   map: function( idName, idPlace ) {
     app.accountIdName = idName;
 
+    app.views.header.render();
     app.views.map.render();
     if(idPlace) {
       app.views.map.showPlace(idPlace);
@@ -26,10 +27,12 @@ var AppRouter = Backbone.Router.extend({
   },
   adminAccount: function( idName ) {
     app.accountIdName = idName;
+    app.views.header.render();
     app.views.adminAccount.render();
   },
   adminLocations: function( idName, idPlace ) {
     app.accountIdName = idName;
+    app.views.header.render();
     if(idPlace) {
       app.views.adminLocationForm.render();
     }
