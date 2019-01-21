@@ -10,7 +10,7 @@ var MapView = Backbone.View.extend({
   render: function(){
     var that = this;
 
-    contract.accountExist({accountIdName:app.accountIdName}, function(err,res){
+    contract.accountExist({accountIdName:app.accountIdName}, function(res){
       if(res == true) {
 
         app.data.account = new AccountModel({

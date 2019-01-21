@@ -25,8 +25,8 @@ var AccountModel = Backbone.Model.extend({
 
     contract.setAccountRaw(
       accountData,
-      function( err, res ) {
-        onSubmit(err, res);
+      function( res ) {
+        onSubmit( res);
       },
       gasLimit
     );
@@ -38,27 +38,16 @@ var AccountModel = Backbone.Model.extend({
     //console.log(that.toJSON());
     contract.getAccount(
       that.toJSON(),
-      function( err, res ) {
-
-      that.set( {
-        accountIdName: res[0] ,
-        desc: res[1] ,
-        clusterize: res[2] ,
-        lat: that.fromIntToLatLng( that.decodeContractInt(res[3])) ,
-        lng: that.fromIntToLatLng(  that.decodeContractInt(res[4]))  ,
-        zoom: that.decodeContractInt(res[5]) ,
-        placesNumber: that.decodeContractInt(res[6])
-      });
-/*
-        that.set( 'accountIdName',res[0] );
-        that.set( 'desc',res[1] );
-        that.set( 'clusterize',res[2] );
-        that.set( 'lat', that.fromIntToLatLng( that.decodeContractInt(res[3])) );
-        that.set( 'lng', that.fromIntToLatLng(  that.decodeContractInt(res[4]))  );
-        that.set( 'zoom', that.decodeContractInt(res[5]) );
-        that.set( 'placesNumber', that.decodeContractInt(res[6]) );*/
-        //console.log(res)
-        //console.log(that.toJSON());
+      function( res ) {
+        that.set( {
+          accountIdName: res[0] ,
+          desc: res[1] ,
+          clusterize: res[2] ,
+          lat: that.fromIntToLatLng( res[3] ) ,
+          lng: that.fromIntToLatLng( res[4])  ,
+          zoom: res[5] ,
+          placesNumber: res[6]
+        });
       }
     );
   },
@@ -75,7 +64,8 @@ var AccountModel = Backbone.Model.extend({
     return (val/GPS_PRECISSION)-GPS_ADITION;
   },
 
-  decodeContractInt: function(val) {
+  /*decodeContractInt: function(val) {
+
     var that = this;
     var ret = 0;
     if( typeof val.c[0] != 'undefined') {
@@ -83,5 +73,5 @@ var AccountModel = Backbone.Model.extend({
     }
 
     return ret;
-  }
+  }*/
 });

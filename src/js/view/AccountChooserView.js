@@ -20,7 +20,7 @@ var AccountChooserView = Backbone.View.extend({
 
     var accIdName = $('.accountForm .accountInput').val();
 
-    contract.accountExist({accountIdName:accIdName}, function(err,res){
+    contract.accountExist({accountIdName:accIdName}, function(res){
       if(res == true) {
         app.router.navigate('account/'+accIdName+'/map',true);
       }
