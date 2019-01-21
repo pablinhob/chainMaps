@@ -1,3 +1,7 @@
+const GPS_PRECISSION = 1000000;
+const GPS_ADITION = 100;
+
+
 // LOCAL
 /*
 var conf = {

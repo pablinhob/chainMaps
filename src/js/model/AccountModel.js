@@ -1,7 +1,4 @@
 
-const GPS_PRECISSION = 1000000;
-const GPS_ADITION = 100;
-
 var AccountModel = Backbone.Model.extend({
   defaults: {
     accountIdName: false,

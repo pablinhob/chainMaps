@@ -138,9 +138,10 @@ var contract = {
   getPlace: function( data, onComplete ) {
     var that = this;
 
-    that.contractInstance.getPlace.call(
+    that.contractInstance.methods.getPlace(
       data.accountIdName,
-      data. ttIndex,
+      data.ttIndex
+    ).call().then(
       function( r ){
         onComplete( res );
       }

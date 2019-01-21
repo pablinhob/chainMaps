@@ -101,11 +101,74 @@
         </div>
       </div>
     </form>
-
   </script>
 
+
   <script id="locationFormTemplate"  type="text/template">
-    Formulario de sitio
+    <div class="panel panel-info">
+    <% if( newLocation == true  ) { %>
+      <div class="panel-heading">Create new Location </div>
+      <div class="panel-body">Panel Content blablablablabla</div>
+    <%}else {%>
+      <div class="panel-heading">Location editor </div>
+      <div class="panel-body">You are editing location metadata</div>
+    <%}%>
+    </div>
+
+    <form id="signupForm" method="post" class="form-horizontal"  onSubmit="return false;">
+
+      <div class="form-group"  style="display:none;" >
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="ttIndex" name="ttIndex" placeholder="" value="<%- ttIndex %>"/>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="name" name="ttIndex" placeholder="" value="<%- ttIndex %>"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5">
+          <textarea class="form-control" id="accountDesc" name="accountDesc" placeholder="Map description, contact info, etc..." ><%- desc %></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5 col-sm-offset-4">
+          <div class="checkbox">
+          <label>
+            <input type="checkbox" id="clusterize" name="clusterize" value="clusterize"  <% if( clusterize == true ){%> checked <%}%> />Clusterize markers
+          </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="col-sm-5">
+          <input type="text" class="form-control" id="accountLat" name="accountLat" placeholder="Latitude"  value="<%-lat%>" />
+          <input type="text"  class="form-control" id="accountLng" name="accountLng" placeholder="Longitude"  value="<%-lng%>" />
+          <input type="text"  class="form-control" id="accountZoom" name="accountZoom" placeholder="Zoom" value="<%-zoom%>"/>
+        </div>
+      </div>
+      <div id="accountMap" style="width:400px;height:400px;"></div>
+      <div class="form-group">
+        <div class="col-sm-5 col-sm-offset-4">
+          <div class="checkbox">
+          <label>
+            <input type="checkbox" id="agree" name="agree" value="agree"/>I Understand
+          </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-4">
+          <button type="submit" class="btn btn-primary" name="signup" value="Sign up"><% if( newAccount == true  ) {%>Create Account<%}else{%>Save<%}%></button>
+        </div>
+      </div>
+    </form>
   </script>
 
   <script id="locationsListTemplate"  type="text/template">
