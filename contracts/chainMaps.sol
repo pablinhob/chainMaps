@@ -255,4 +255,11 @@ contract chainMaps {
         return (msg.sender == accounts[accountHash(accountIdName)].owner);
     }
 
+    function addressIsOwner( address owner,  string memory accountIdName ) public returns (bool){
+      bytes32 accountIdNameHash;
+      accountIdNameHash = accountHash(accountIdName);
+
+      return (owner == accounts[accountHash(accountIdName)].owner);
+    }
+
 }

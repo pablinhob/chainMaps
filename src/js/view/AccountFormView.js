@@ -32,11 +32,24 @@ var AccountFormView = Backbone.View.extend({
           var acc = new AccountModel({
             accountIdName: app.accountIdName
           });
-          acc.loadFromContract();
-          acc.on('change', function(){
-            that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON()) ) );
-            that.setForm();
-          });
+          contract.addressIsOwner(
+            acc.toJSON(),
+            function(isOwner){
+              if( isOwner === true) {
+                acc.loadFromContract();
+                acc.on('change', function(){
+                  that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON()) ) );
+                  that.setForm();
+                });
+              }
+              else {
+                alert('Your address must be owner of the map called "'+app.accountIdName+'" to edit it.');
+                app.router.navigate('',true);
+              }
+            }
+          );
+
+
         }
         else {
           formData.newAccount = true;

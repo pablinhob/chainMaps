@@ -147,6 +147,18 @@ var contract = {
     );
   },
 
+  addressIsOwner: function( data, onComplete ) {
+    var that = this;
+
+    that.contractInstance.methods.addressIsOwner(
+      that.currentEthAccount,
+      data.accountIdName
+    ).call().then(function(res){
+        onComplete( res );
+    });
+  },
+
+
   listPlaceIndex: function(data, onComplete) {
     var that = this;
 
