@@ -215,11 +215,32 @@ var AccountFormView = Backbone.View.extend({
       zoom: parseInt($('#accountZoom').val() )
     });
 
+
+
     acc.saveOnContract(
       200000,
-      function(err, res) {
-        console.log(err, res);
-        //app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
+      function( txH ) {
+
+        if(typeof txH != 'undefined') {
+          console.log('Esperando confirmación...',txH);
+          var evInt = setInterval(function(){
+            contract.web3Wss.eth.getTransactionReceipt(txH).then(
+              function(txObj){
+                if( txObj != null) {
+                  console.log(txObj)
+                  clearInterval(evInt);
+                  app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
+                }
+              }).catch( function(err) {
+                window.location = window.location;
+              });
+          }, 1000);
+        }
+        else {
+          alert('Transaction failed. Try changing gas limit value');
+        }
+
+
       }
     );
 
