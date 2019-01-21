@@ -31,6 +31,7 @@ var AppRouter = Backbone.Router.extend({
     app.views.adminAccount.render();
   },
   adminLocations: function( idName, idPlace ) {
+    alert('')
     app.accountIdName = idName;
     app.views.header.render();
     if(idPlace) {
