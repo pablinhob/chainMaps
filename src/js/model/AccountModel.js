@@ -35,12 +35,13 @@ var AccountModel = Backbone.Model.extend({
 
   loadFromContract: function() {
     var that = this;
-    //console.log(that.toJSON());
+
+
     contract.getAccount(
       that.toJSON(),
       function( res ) {
         that.set( {
-          accountIdName: res[0] ,
+          //accountIdName: res[0] ,
           desc: res[1] ,
           clusterize: res[2] ,
           lat: that.fromIntToLatLng( res[3] ) ,

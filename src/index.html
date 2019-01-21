@@ -12,6 +12,7 @@
     <a href="#account/<%-accountIdName%>/adminAccount">Admin Account</a> |
     <a href="#account/<%-accountIdName%>/adminLocations">Locations</a>
     <%}%>
+
   </script>
 
   <script id="accountChooserTemplate" type="text/template">
@@ -43,12 +44,15 @@
 
   <script id="accountFormTemplate"  type="text/template">
 
-    <% if( newAccount == true  ) { %>
     <div class="panel panel-info">
+    <% if( newAccount == true  ) { %>
       <div class="panel-heading">Create new account </div>
       <div class="panel-body">Panel Content</div>
+    <%}else {%>
+      <div class="panel-heading">Account editor </div>
+      <div class="panel-body">You are editing metadata of map "<%-accountIdName%>"</div>
+    <%}%>
     </div>
-    <% } %>
 
     <form id="signupForm" method="post" class="form-horizontal"  onSubmit="return false;">
 

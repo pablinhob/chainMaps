@@ -16,7 +16,7 @@ var AccountFormView = Backbone.View.extend({
     var that = this;
 
     var formData = {
-      newAccount: true,
+      newAccount: false,
       accountIdName: '',
       desc: '',
       clusterize: false,
@@ -27,6 +27,7 @@ var AccountFormView = Backbone.View.extend({
     //that.$el.html( that.tpl(formData) );
 
     if( app.accountIdName != 'false' ) {
+
       contract.accountExist({ accountIdName:app.accountIdName }, function(res){
         if(res == true) {
           var acc = new AccountModel({
@@ -38,6 +39,7 @@ var AccountFormView = Backbone.View.extend({
               if( isOwner === true) {
                 acc.loadFromContract();
                 acc.on('change', function(){
+                  console.log(acc.toJSON());
                   that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON()) ) );
                   that.setForm();
                 });
@@ -60,6 +62,7 @@ var AccountFormView = Backbone.View.extend({
       });
     }
     else {
+      formData.newAccount = true;
       that.$el.html( that.tpl( formData ) );
       that.setForm();
     }
@@ -240,7 +243,7 @@ var AccountFormView = Backbone.View.extend({
             contract.web3Wss.eth.getTransactionReceipt(txH).then(
               function(txObj){
                 if( txObj != null) {
-                  console.log(txObj)
+                  //console.log(txObj)
                   clearInterval(evInt);
                   app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
                 }
