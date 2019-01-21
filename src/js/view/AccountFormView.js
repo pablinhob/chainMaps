@@ -216,7 +216,7 @@ var AccountFormView = Backbone.View.extend({
     });
 
     acc.saveOnContract(
-      2000000000,
+      200000,
       function(err, res) {
         console.log(err, res);
         //app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);

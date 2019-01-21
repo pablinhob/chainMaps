@@ -70,18 +70,15 @@ var contract = {
     var that = this;
 
     that.rawTransaction(
-      contract.contractInstance.setAccount.getData(
+      contract.contractInstance.methods.setAccount(
         data.accountIdName,
         data.desc,
         data.clusterize,
         data.lat,
         data.lng,
-        data.zoom,
-        {
-          from: that.currentEthAccount,
-          gas: gasLimit
-        }
-      ),
+        data.zoom
+
+      ).encodeABI(),
       gasLimit,
       function(err, res){  onComplete(err,res); }
     );
@@ -165,14 +162,15 @@ var contract = {
 
   rawTransaction: function( data, gasLimit, onComplete) {
     var that = this;
-    web3.eth.getTransactionCount( that.currentEthAccount , function(error, result) {
+
+    that.web3.eth.getTransactionCount( that.currentEthAccount , function(error, result) {
       var nonce = result;
 
       var rawTransaction = {
         "from": that.currentEthAccount,
-        "nonce": web3.toHex( nonce ),
-        "gasPrice": web3.toHex( 0.8 ^1000000000),
-        "gasLimit": web3.toHex(gasLimit),
+        "nonce": that.web3.utils.toHex( nonce ),
+        "gasPrice": that.web3.utils.toHex( 0.8 ^1000000000),
+        "gasLimit": that.web3.utils.toHex(gasLimit),
         "to": conf.contractAddress,
         "value": "0x00",
         "data": data,
@@ -184,7 +182,7 @@ var contract = {
 
       tx.sign(privKey);
       var serializedTx = tx.serialize();
-      web3.eth.sendRawTransaction('0x' + serializedTx.toString('hex'), function(err, res) {
+      that.web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'), function(err, res) {
           onComplete(err, res);
       });
     });
