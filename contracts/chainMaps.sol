@@ -34,12 +34,13 @@ contract chainMaps {
 
     event AccountSubmit(
       address indexed owner,
-      string accountName,
+      string accountIdName,
       string result
     );
 
     event PlaceSubmit(
       address owner,
+      string accountIdName,
       uint256 placeTtIndex,
       string result
     );
@@ -135,18 +136,18 @@ contract chainMaps {
                     accounts[ accountHash(accountIdName) ].placesIndex.push(n);
 
                     ret = n;
-                    emit PlaceSubmit( msg.sender , ttIndex, 'PLACE_CREATED');
+                    emit PlaceSubmit( msg.sender, accountIdName, ttIndex, 'PLACE_CREATED');
                 }
                 else { // update
                     accounts[ accountHash(accountIdName) ].places[ ttIndex ] = pl;
                     ret = ttIndex;
-                    emit PlaceSubmit( msg.sender , ttIndex, 'PLACE_UPDATED');
+                    emit PlaceSubmit( msg.sender, accountIdName , ttIndex, 'PLACE_UPDATED');
                 }
 
 
             }
             else {
-              emit PlaceSubmit( msg.sender , accountIdName, 'ACCOUNT_NOT_OWNER');
+              emit PlaceSubmit( msg.sender, accountIdName, ttIndex, 'ACCOUNT_NOT_OWNER');
             }
 
             return ret;
