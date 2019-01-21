@@ -80,7 +80,7 @@ var contract = {
 
       ).encodeABI(),
       gasLimit,
-      function(err, res){  onComplete(err,res); }
+      function(err, res){  onComplete(res); }
     );
 
   },
@@ -165,7 +165,6 @@ var contract = {
 
     that.web3.eth.getTransactionCount( that.currentEthAccount , function(error, result) {
       var nonce = result;
-
       var rawTransaction = {
         "from": that.currentEthAccount,
         "nonce": that.web3.utils.toHex( nonce ),
@@ -182,8 +181,8 @@ var contract = {
 
       tx.sign(privKey);
       var serializedTx = tx.serialize();
-      that.web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'), function(err, res) {
-          onComplete(err, res);
+      that.web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'), function(res) {
+          onComplete(res);
       });
     });
   }

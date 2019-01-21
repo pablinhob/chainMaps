@@ -27,7 +27,7 @@ var AccountFormView = Backbone.View.extend({
     //that.$el.html( that.tpl(formData) );
 
     if( app.accountIdName != 'false' ) {
-      contract.accountExist({ accountIdName:app.accountIdName }, function(err,res){
+      contract.accountExist({ accountIdName:app.accountIdName }, function(res){
         if(res == true) {
           var acc = new AccountModel({
             accountIdName: app.accountIdName
