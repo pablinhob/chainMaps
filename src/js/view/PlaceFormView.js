@@ -21,6 +21,7 @@ var PlaceFormView = Backbone.View.extend({
 
 
     that.$el.html( that.tpl(tplData) );
+    FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
   }
 
 });

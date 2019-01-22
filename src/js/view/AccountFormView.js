@@ -1,9 +1,6 @@
 var AccountFormView = Backbone.View.extend({
   tpl: _.template( $("#accountFormTemplate").html(), {} ),
 
-  map: false,
-  marker: false,
-
   events: {
     'submit #signupForm': 'submitAccount',
     'keypress #accountLat': 'updateInputLatlng',
@@ -73,7 +70,7 @@ var AccountFormView = Backbone.View.extend({
   setForm: function(){
     var that = this;
 
-    that.setFormMap();
+    FormUtils.setFormMap('#accountLat','#accountLng','#accountZoom');
 
     $('#accountIdName').keypress(function( e ) {
       if(e.which === 32){
@@ -128,93 +125,6 @@ var AccountFormView = Backbone.View.extend({
   			$( element ).parent( ).addClass( "has-success" ).removeClass( "has-error" );
   		}
   	});
-  },
-
-
-
-
-  setFormMap: function() {
-    var that = this;
-    var latLngExist = false;
-
-
-    var initData = {};
-
-    if( $('#accountLat').val() == '') {
-      initData.center = [40, 0];
-    }
-    else {
-      latLngExist = true;
-    }
-
-    if( $('#accountZoom').val() == '' ){
-      initData.zoom = 2;
-    }
-
-    initData.layers = [
-      new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> Contributors'
-      })
-    ];
-
-    that.map = new L.Map('accountMap', initData);
-    that.map.on('zoomend', function() {
-      if( !isNaN(that.map.getZoom()) ) {
-        $('#accountZoom').val( that.map.getZoom() );
-      }
-
-    });
-    that.map.on('dragend', function(e) {
-       that.updateInputLatlng();
-    });
-
-    if( latLngExist == true ) {
-      that.addMarker();
-      that.updateInputLatlng();
-    }
-
-    that.map.on('click', function (e) {
-    	if( that.marker == false ) {
-    		that.addMarker();
-    	}
-    	that.marker.setLatLng(e.latlng);
-    	that.updateLatLng( that.marker.getLatLng().lat,  that.marker.getLatLng().lng);
-    });
-
-  },
-
-  addMarker: function(){
-    var that = this;
-
-    that.marker = L.marker([0,0],{
-      draggable: true
-    }).addTo(that.map);
-    that.marker.on('dragend', function (e) {
-      that.updateLatLng(that.marker.getLatLng().lat, that.marker.getLatLng().lng);
-    });
-  },
-
-  updateLatLng: function(lat,lng,reverse) {
-    var that = this;
-    if( that.marker == false ) {
-      that.addMarker();
-    }
-
-    if(reverse) {
-      that.marker.setLatLng([lat,lng]);
-      that.map.panTo([lat,lng]);
-      if( $('#accountZoom').val() !='' ){ that.map.setZoom( $('#accountZoom').val() );  }
-    } else {
-      $('#accountLat').val( that.marker.getLatLng().lat );
-      $('#accountLng').val( that.marker.getLatLng().lng );
-      $('#accountZoom').val( that.map.getZoom() );
-      that.map.panTo([lat,lng]);
-    }
-  },
-
-  updateInputLatlng: function() {
-    var that = this;
-    that.updateLatLng($('#accountLat').val(),$('#accountLng').val(),true);
   },
 
   submitAccount: function() {
