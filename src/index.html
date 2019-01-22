@@ -10,7 +10,8 @@
     <%if( accountIdName != false ) { %>
     | <a href="#account/<%-accountIdName%>/map">Map</a> |
     <a href="#account/<%-accountIdName%>/adminAccount">Admin Account</a> |
-    <a href="#account/<%-accountIdName%>/adminLocations">Locations</a>
+    <a href="#account/<%-accountIdName%>/adminPlaces/">Places list</a> |
+    <a href="#account/<%-accountIdName%>/adminPlaces/id/true">Place</a>
     <%}%>
 
   </script>
@@ -104,14 +105,14 @@
   </script>
 
 
-  <script id="locationFormTemplate"  type="text/template">
+  <script id="placeFormTemplate"  type="text/template">
     <div class="panel panel-info">
-    <% if( newLocation == true  ) { %>
-      <div class="panel-heading">Create new Location </div>
+    <% if( newPlace == true  ) { %>
+      <div class="panel-heading">Create new place </div>
       <div class="panel-body">Panel Content blablablablabla</div>
     <%}else {%>
-      <div class="panel-heading">Location editor </div>
-      <div class="panel-body">You are editing location metadata</div>
+      <div class="panel-heading">place editor </div>
+      <div class="panel-body">You are editing place metadata</div>
     <%}%>
     </div>
 
@@ -132,28 +133,19 @@
 
       <div class="form-group">
         <div class="col-sm-5">
-          <textarea class="form-control" id="accountDesc" name="accountDesc" placeholder="Map description, contact info, etc..." ><%- desc %></textarea>
+          <textarea class="form-control" id="placeDesc" name="placeDesc" placeholder="Place" ><%- desc %></textarea>
         </div>
       </div>
 
-      <div class="form-group">
-        <div class="col-sm-5 col-sm-offset-4">
-          <div class="checkbox">
-          <label>
-            <input type="checkbox" id="clusterize" name="clusterize" value="clusterize"  <% if( clusterize == true ){%> checked <%}%> />Clusterize markers
-          </label>
-          </div>
-        </div>
-      </div>
 
       <div class="form-group">
         <div class="col-sm-5">
-          <input type="text" class="form-control" id="accountLat" name="accountLat" placeholder="Latitude"  value="<%-lat%>" />
-          <input type="text"  class="form-control" id="accountLng" name="accountLng" placeholder="Longitude"  value="<%-lng%>" />
-          <input type="text"  class="form-control" id="accountZoom" name="accountZoom" placeholder="Zoom" value="<%-zoom%>"/>
+          <input type="text" class="form-control" id="placeLat" name="placeLat" placeholder="Latitude"  value="<%-lat%>" />
+          <input type="text"  class="form-control" id="placeLng" name="placeLng" placeholder="Longitude"  value="<%-lng%>" />
+          <input type="text"  class="form-control" id="placeZoom" name="placeZoom" placeholder="Zoom" value="<%-zoom%>"/>
         </div>
       </div>
-      <div id="accountMap" style="width:400px;height:400px;"></div>
+      <div id="placeMap" style="width:400px;height:400px;"></div>
       <div class="form-group">
         <div class="col-sm-5 col-sm-offset-4">
           <div class="checkbox">
@@ -165,13 +157,13 @@
       </div>
       <div class="form-group">
         <div class="col-sm-9 col-sm-offset-4">
-          <button type="submit" class="btn btn-primary" name="signup" value="Sign up"><% if( newAccount == true  ) {%>Create Account<%}else{%>Save<%}%></button>
+          <button type="submit" class="btn btn-primary" name="signup" value="Sign up"><% if( newPlace == true  ) {%>Create Place<%}else{%>Save<%}%></button>
         </div>
       </div>
     </form>
   </script>
 
-  <script id="locationsListTemplate"  type="text/template">
+  <script id="placesListTemplate"  type="text/template">
     Lista de sitios
   </script>
 
@@ -202,8 +194,8 @@
   <script src="js/view/HeaderView.js"></script>
   <script src="js/view/AccountChooserView.js"></script>
   <script src="js/view/AccountFormView.js"></script>
-  <script src="js/view/LocationFormView.js"></script>
-  <script src="js/view/LocationsListView.js"></script>
+  <script src="js/view/PlaceFormView.js"></script>
+  <script src="js/view/PlacesListView.js"></script>
   <script src="js/view/MapView.js"></script>
 
   <script src="js/router/appRouter.js"></script>

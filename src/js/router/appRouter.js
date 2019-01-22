@@ -4,8 +4,8 @@ var AppRouter = Backbone.Router.extend({
     "account/:idName/map": "map",
     "account/:idName/map/id/:idPlace": "map",
     "account/:idName/adminAccount": "adminAccount",
-    "account/:idName/adminLocations": "adminLocations",
-    "account/:idName/adminLocations/id/:idPlace": "adminLocations",
+    "account/:idName/adminPlaces": "adminPlaces",
+    "account/:idName/adminPlaces/id/:idPlace": "adminPlaces",
     "*path": "default"
   },
   default: function() {
@@ -30,15 +30,15 @@ var AppRouter = Backbone.Router.extend({
     app.views.header.render();
     app.views.adminAccount.render();
   },
-  adminLocations: function( idName, idPlace ) {
-    alert('')
+  adminPlaces: function( idName, idPlace ) {
     app.accountIdName = idName;
     app.views.header.render();
+
     if(idPlace) {
-      app.views.adminLocationForm.render();
+      app.views.adminPlaceForm.render();
     }
     else {
-      app.views.adminLocationsList.render();
+      app.views.adminPlaceList.render();
     }
   }
 });
