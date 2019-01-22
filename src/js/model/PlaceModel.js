@@ -9,6 +9,25 @@ var PlaceModel = Backbone.Model.extend({
     zoom: false
   },
 
+  saveOnContract: function( gasLimit, onSubmit ) {
+    var that = this;
+
+    var placeData = that.toJSON();
+
+    placeData.accountIdName = app.accountIdName;
+    placeData.lat = that.fromLatLngToInt( placeData.lat );
+    placeData.lng = that.fromLatLngToInt( placeData.lng );
+
+    contract.setPlaceRaw(
+      placeData,
+      function( res ) {
+        onSubmit( res);
+      },
+      gasLimit
+    );
+
+  },
+
   loadFromContract: function() {
     var that = this;
 
@@ -29,10 +48,6 @@ var PlaceModel = Backbone.Model.extend({
         });
       }
     );
-  },
-
-  saveOnContract: function() {
-
   },
 
   fromIntToLatLng: function( val ){

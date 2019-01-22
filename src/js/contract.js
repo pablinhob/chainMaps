@@ -38,7 +38,7 @@ var contract = {
   /*
     Contract functions call
   */
-  setAccount: function(  data, onComplete, gasLimit ) {
+  /*setAccount: function(  data, onComplete, gasLimit ) {
     var that = this;
 
     $.when(ethereum.enable() ).then( function( ee ){
@@ -61,7 +61,7 @@ var contract = {
 
 
     //that.contractInstance.setAccount.sendTransaction('lal', 'lolazo Descripción', true, 10,10,4, {from:conf.account, gas:200000})
-  },
+  },*/
 
   /*
     Contract functions call
@@ -112,7 +112,7 @@ var contract = {
       function(res) { console.log(res);onComplete( res) }
     );
   },
-
+/*
   setPlace: function( data, onComplete, gasLimit ) {
     var that = this;
 
@@ -132,6 +132,25 @@ var contract = {
       function( res ){
         onComplete( res );
       }
+    );
+  },*/
+
+  setPlaceRaw: function( data, onComplete, gasLimit ) {
+    var that = this;
+
+    that.rawTransaction(
+      contract.contractInstance.methods.setPlace(
+        data.accountIdName,
+        data.ttIndex,
+        data.title,
+        data.desc,
+        data.imageLink,
+        data.lat,
+        data.lng,
+        data.zoom
+      ).encodeABI(),
+      gasLimit,
+      function(res){  onComplete(res); }
     );
   },
 
