@@ -11,12 +11,12 @@ var PlaceFormView = Backbone.View.extend({
     var tplData = {
       newPlace: true,
       ttIndex: '',
-      title: false,
-      desc: false,
-      imageLink: false,
-      lat: false,
-      lng: false,
-      zoom: false
+      title: '',
+      desc: '',
+      imageLink: '',
+      lat: '',
+      lng: '',
+      zoom: ''
     };
 
 
