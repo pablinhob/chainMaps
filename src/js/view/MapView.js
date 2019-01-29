@@ -36,7 +36,19 @@ var MapView = Backbone.View.extend({
   renderPlaces: function() {
     var that = this;
 
-    PlaceCollection.get()
+    that.placeCollection.checkout(function(place){
+      that.renderPlace(place);
+
+      var marker = L.marker(
+        [place.get('lat'), place.get('lng')]
+      ).addTo(that.map);
+      marker.bindPopup('<h2>'+place.get('title')+'</h2><p>'+place.get('desc')+'</p>');
+    });
+  },
+
+  renderPlace: function( place ) {
+    var that = this;
+
   },
 
   setMap: function() {
@@ -62,11 +74,7 @@ var MapView = Backbone.View.extend({
         app.data.account.get('zoom')
       );
 
-      var marker = L.marker(
-        [app.data.account.get('lat'), app.data.account.get('lng')]
-      ).addTo(that.map);
-      marker.bindPopup("<b>Hello world!</b><br>I am a popup.");
-
+      that.renderPlaces();
     });
 
   }

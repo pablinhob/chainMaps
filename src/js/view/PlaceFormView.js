@@ -47,11 +47,11 @@ var PlaceFormView = Backbone.View.extend({
         },
         placeTitle: {
           required: false,
-          rangelength:[0,100]
+          rangelength:[5,100]
         },
         placeDesc: {
           required: false,
-          rangelength:[0,200]
+          rangelength:[5,200]
         },
         placeLat: {
           required: true,

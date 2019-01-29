@@ -34,17 +34,17 @@ var PlaceModel = Backbone.Model.extend({
     var dataAccount = that.toJSON();
     dataAccount.accountIdName = app.accountIdName;
 
-    contract.getAccount(
+    contract.getPlace(
       dataAccount,
       function( res ) {
         that.set( {
           //accountIdName: res[0] ,
-          title: res[1] ,
-          desc: res[2] ,
-          imageLink: res[3] ,
-          lat: that.fromIntToLatLng( res[4] ) ,
-          lng: that.fromIntToLatLng( res[5]) ,
-          zoom: res[6]
+          title: res.title ,
+          desc: res.desc ,
+          imageLink: res.imageLink ,
+          lat: that.fromIntToLatLng( res.lat ) ,
+          lng: that.fromIntToLatLng( res.lng) ,
+          zoom: res.zoom
         });
       }
     );
