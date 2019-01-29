@@ -1,6 +1,7 @@
 var MapView = Backbone.View.extend({
   tpl: _.template( $("#mapTemplate").html(), {} ),
   map: false,
+  placeCollection: new PlaceCollection(),
   events: {
 
   },
@@ -17,7 +18,6 @@ var MapView = Backbone.View.extend({
           accountIdName: app.accountIdName
         });
 
-
         that.setMap();
       }
       else {
@@ -28,7 +28,15 @@ var MapView = Backbone.View.extend({
   },
 
   showPlace: function(idPlace) {
-    alert("Show in map "+ idPlace)
+    var that = this;
+
+    alert("Show in map "+ idPlace);
+  },
+
+  renderPlaces: function() {
+    var that = this;
+
+    PlaceCollection.get()
   },
 
   setMap: function() {
