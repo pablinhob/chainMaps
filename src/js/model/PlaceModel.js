@@ -1,6 +1,6 @@
 var PlaceModel = Backbone.Model.extend({
   defaults: {
-    ttIndex: false,
+    ttIndex: 0,
     title: false,
     desc: false,
     imageLink: false,
@@ -48,6 +48,12 @@ var PlaceModel = Backbone.Model.extend({
         });
       }
     );
+  },
+
+  fromLatLngToInt: function( val ){
+    var that = this;
+    //return val;
+    return parseInt( (val+GPS_ADITION)*GPS_PRECISSION );
   },
 
   fromIntToLatLng: function( val ){

@@ -35,7 +35,7 @@ var AppRouter = Backbone.Router.extend({
     app.views.header.render();
 
     if(idPlace) {
-      app.views.adminPlaceForm.render();
+      app.views.adminPlaceForm.render(idPlace);
     }
     else {
       app.views.adminPlaceList.render();

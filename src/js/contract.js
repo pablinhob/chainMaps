@@ -182,12 +182,12 @@ var contract = {
   listPlaceIndex: function(data, onComplete) {
     var that = this;
 
-    that.contractInstance.listPlaceIndex.call(
-      data.accountIdName,
-      function( res ){
-        onComplete( res );
-      }
+    that.contractInstance.methods.listPlaceIndex(
+      data.accountIdName
+    ).call().then(
+      function(res) { onComplete( res ); }
     );
+
   },
 
 

@@ -11,7 +11,7 @@
     | <a href="#account/<%-accountIdName%>/map">Map</a> |
     <a href="#account/<%-accountIdName%>/adminAccount">Admin Account</a> |
     <a href="#account/<%-accountIdName%>/adminPlaces/">Places list</a> |
-    <a href="#account/<%-accountIdName%>/adminPlaces/id/true">Place</a>
+    <a href="#account/<%-accountIdName%>/adminPlaces/id/false">Add place</a>
     <%}%>
 
   </script>
@@ -116,14 +116,7 @@
     <%}%>
     </div>
 
-    <form id="signupForm" method="post" class="form-horizontal"  onSubmit="return false;">
-
-      <div class="form-group"  style="display:none;" >
-        <div class="col-sm-5">
-          <input type="text" class="form-control" id="ttIndex" name="ttIndex" placeholder="" value="<%- ttIndex %>"/>
-        </div>
-      </div>
-
+    <form id="placeForm" method="post" class="form-horizontal"  onSubmit="return false;">
 
       <div class="form-group">
         <div class="col-sm-5">
@@ -133,13 +126,13 @@
 
       <div class="form-group">
         <div class="col-sm-5">
-          <input type="text" class="form-control" id="name" name="title" placeholder="Place title" value="<%- title %>"/>
+          <input type="text" class="form-control" id="placeTitle" name="placeTitle" placeholder="Place title" value="<%- title %>"/>
         </div>
       </div>
 
       <div class="form-group">
         <div class="col-sm-5">
-          <textarea class="form-control" id="placeDesc" name="placeDesc" placeholder="Place" ><%- desc %></textarea>
+          <textarea class="form-control" id="placeDesc" name="placeDesc" placeholder="Place Description" ><%- desc %></textarea>
         </div>
       </div>
 
@@ -196,6 +189,7 @@
   <script src="js/contract.js"></script>
 
   <script src="js/model/AccountModel.js"></script>
+  <script src="js/model/PlaceModel.js"></script>
 
   <script src="js/view/FormUtils.js"></script>
 

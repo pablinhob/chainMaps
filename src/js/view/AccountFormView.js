@@ -2,9 +2,9 @@ var AccountFormView = Backbone.View.extend({
   tpl: _.template( $("#accountFormTemplate").html(), {} ),
 
   events: {
-    'submit #signupForm': 'submitAccount',
-    'keypress #accountLat': 'updateInputLatlng',
-    'keypress #accountLng': 'updateInputLatlng'
+    'submit #signupForm': 'submitAccount'
+    /*'keypress #placeLat': 'updateInputLatlng',
+    'keypress #placeLng': 'updateInputLatlng'*/
   },
   initialize: function(){
 
@@ -23,7 +23,7 @@ var AccountFormView = Backbone.View.extend({
     };
     //that.$el.html( that.tpl(formData) );
 
-    if( app.accountIdName != 'false' ) {
+    if( app.accountIdName != 'false'  ) {
 
       contract.accountExist({ accountIdName:app.accountIdName }, function(res){
         if(res == true) {
@@ -65,8 +65,6 @@ var AccountFormView = Backbone.View.extend({
     }
   },
 
-
-
   setForm: function(){
     var that = this;
 
@@ -82,13 +80,11 @@ var AccountFormView = Backbone.View.extend({
   		rules: {
   			accountIdName: {
   				required: true,
-  				minlength: 0,
-          maxlength: 20
+          rangelength:[0,20]
   			},
   			accountDesc: {
   				required: false,
-  				minlength: 0,
-          maxlength: 256
+          rangelength:[0,200]
   			},
         accountLat: {
           required: true,
