@@ -161,7 +161,7 @@ var contract = {
       data.accountIdName,
       data.ttIndex
     ).call().then(
-      function( r ){
+      function( res ){
         onComplete( res );
       }
     );
