@@ -45,7 +45,20 @@ var MapView = Backbone.View.extend({
 
     app.data.account.loadFromContract();
     app.data.account.on('change', function(){
-      that.map.flyTo([app.data.account.get('lat'), app.data.account.get('lng')], app.data.account.get('zoom'));
+
+      that.map.flyTo(
+        [
+          app.data.account.get('lat'),
+          app.data.account.get('lng')
+        ],
+        app.data.account.get('zoom')
+      );
+
+      var marker = L.marker(
+        [app.data.account.get('lat'), app.data.account.get('lng')]
+      ).addTo(that.map);
+      marker.bindPopup("<b>Hello world!</b><br>I am a popup.");
+
     });
 
   }
