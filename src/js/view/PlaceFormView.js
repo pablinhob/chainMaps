@@ -36,8 +36,23 @@ var PlaceFormView = Backbone.View.extend({
   setForm: function(){
     var that = this;
 
+
     FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
 
+    app.data.account = new AccountModel({
+      accountIdName: app.accountIdName
+    });
+    app.data.account.loadFromContract();
+    app.data.account.on('change', function(){
+
+      FormUtils.map.flyTo(
+        [
+          app.data.account.get('lat'),
+          app.data.account.get('lng')
+        ],
+        app.data.account.get('zoom')
+      );
+    });
 
     $( "#placeForm" ).validate( {
   		rules: {
