@@ -1,6 +1,7 @@
 var MapView = Backbone.View.extend({
   tpl: _.template( $("#mapTemplate").html(), {} ),
   map: false,
+  markerCluster: false,
   placeCollection: new PlaceCollection(),
   events: {
 
@@ -39,10 +40,20 @@ var MapView = Backbone.View.extend({
     that.placeCollection.checkout(function(place){
       that.renderPlace(place);
 
+      var contentMarker = '<h2>'+place.get('title')+'</h2><p>'+place.get('desc')+'</p>';
       var marker = L.marker(
         [place.get('lat'), place.get('lng')]
-      ).addTo(that.map);
-      marker.bindPopup('<h2>'+place.get('title')+'</h2><p>'+place.get('desc')+'</p>');
+      )
+      if(true){//if( app.data.account.get('clusterize') == 'true')
+console.log(marker)
+        that.markerCluster.addLayer(marker);
+        that.map.addLayer(that.markerCluster);
+      }
+      else {
+        marker.addTo(that.map);
+      }
+
+      marker.bindPopup(contentMarker);
     });
   },
 
@@ -62,6 +73,10 @@ var MapView = Backbone.View.extend({
       maxZoom: 18,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(that.map);
+
+    if(true){//if( app.data.account.get('clusterize') == 'true') {
+      that.markerCluster = L.markerClusterGroup();
+    }
 
     app.data.account.loadFromContract();
     app.data.account.on('change', function(){
