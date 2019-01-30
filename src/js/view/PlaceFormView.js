@@ -57,15 +57,15 @@ var PlaceFormView = Backbone.View.extend({
     $( "#placeForm" ).validate( {
   		rules: {
         ttIndex: {
-          required: false,
+          required: true,
           number: true
         },
         placeTitle: {
-          required: false,
+          required: true,
           rangelength:[5,100]
         },
         placeDesc: {
-          required: false,
+          required: true,
           rangelength:[5,200]
         },
         placeLat: {
@@ -134,52 +134,7 @@ var PlaceFormView = Backbone.View.extend({
                 if( txObj != null) {
                   //console.log(txObj)
                   clearInterval(evInt);
-                  app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
-                }
-              }).catch( function(err) {
-                window.location = window.location;
-              });
-          }, 1000);
-        }
-        else {
-          alert('Transaction failed. Try changing gas limit value');
-        }
-
-
-      }
-    );
-
-  },
-
-  submitAccount: function() {
-    var that = this;
-
-    var acc = new PlaceModel({
-      accountIdName: $('#accountIdName').val(),
-      desc: $('#accountDesc').val(),
-      clusterize: false,
-      lat: parseFloat( $('#accountLat').val() ),
-      lng: parseFloat( $('#accountLng').val() ),
-      //lat:40.737,
-      //lng:-73.923,
-      zoom: parseInt($('#accountZoom').val() )
-    });
-
-
-
-    acc.saveOnContract(
-      200000,
-      function( txH ) {
-
-        if(typeof txH != 'undefined') {
-          console.log('Esperando confirmación...',txH);
-          var evInt = setInterval(function(){
-            contract.web3Wss.eth.getTransactionReceipt(txH).then(
-              function(txObj){
-                if( txObj != null) {
-                  //console.log(txObj)
-                  clearInterval(evInt);
-                  app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
+                  app.router.navigate('account/'+app.accountIdName+'/map',true);
                 }
               }).catch( function(err) {
                 window.location = window.location;
