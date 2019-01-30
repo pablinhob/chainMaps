@@ -126,10 +126,12 @@ var AccountFormView = Backbone.View.extend({
   submitAccount: function() {
     var that = this;
 
+
+
     var acc = new AccountModel({
       accountIdName: $('#accountIdName').val(),
       desc: $('#accountDesc').val(),
-      clusterize: false,
+      clusterize: $('#clusterize').prop('checked'),
       lat: parseFloat( $('#accountLat').val() ),
       lng: parseFloat( $('#accountLng').val() ),
       //lat:40.737,

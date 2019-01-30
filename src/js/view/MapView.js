@@ -44,8 +44,7 @@ var MapView = Backbone.View.extend({
       var marker = L.marker(
         [place.get('lat'), place.get('lng')]
       )
-      if(true){//if( app.data.account.get('clusterize') == 'true')
-console.log(marker)
+      if( app.data.account.get('clusterize') == true ){
         that.markerCluster.addLayer(marker);
         that.map.addLayer(that.markerCluster);
       }
@@ -74,12 +73,16 @@ console.log(marker)
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(that.map);
 
-    if(true){//if( app.data.account.get('clusterize') == 'true') {
-      that.markerCluster = L.markerClusterGroup();
-    }
+
+
 
     app.data.account.loadFromContract();
     app.data.account.on('change', function(){
+
+
+      if( app.data.account.get('clusterize') == true ) {
+        that.markerCluster = L.markerClusterGroup();
+      }
 
       that.map.flyTo(
         [
