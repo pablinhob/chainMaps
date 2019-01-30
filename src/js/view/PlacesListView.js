@@ -3,7 +3,8 @@ var PlacesListView = Backbone.View.extend({
   tplListElement: _.template( $("#placesListElementTemplate").html(), {} ),
   placeCollection: new PlaceCollection(),
   events: {
-    'click .addPlace': 'addPlace'
+    'click .addPlace': 'addPlace',
+    'click .edit': 'editPlace'
   },
   initialize: function(){
 
@@ -24,6 +25,7 @@ var PlacesListView = Backbone.View.extend({
     var that = this;
     $(that.$el).find('.loading').hide();
     $(that.$el).find('.listContainer').append(
+
       that.tplListElement( place.toJSON() )
     );
   },
@@ -31,6 +33,16 @@ var PlacesListView = Backbone.View.extend({
   addPlace: function(ev) {
     var that = this;
     app.router.navigate('account/'+app.accountIdName+'/adminPlaces/id/false',true);
+  },
+
+  editPlace: function(ev) {
+    var that = this;
+
+    app.router.navigate(
+      'account/'+app.accountIdName+'/adminPlaces/id/'+$(ev.target).parent().attr('dataId'),
+      true
+    );
+
   }
 
 });

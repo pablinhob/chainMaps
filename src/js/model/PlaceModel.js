@@ -40,8 +40,8 @@ var PlaceModel = Backbone.Model.extend({
       function( res ) {
         that.set( {
           //accountIdName: res[0] ,
-          id: res.ttIndex,
-          ttIndex: res.ttIndex,
+          id: dataAccount.ttIndex,
+          ttIndex: dataAccount.ttIndex,
           title: res.title ,
           desc: res.desc ,
           imageLink: res.imageLink ,

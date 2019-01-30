@@ -25,10 +25,25 @@ var PlaceFormView = Backbone.View.extend({
     //that.$el.html( that.tpl(formData) );
     //FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
 
-    if( idPlace == 'false' ) {
+    if( idPlace != 'false' ) {
+
+      var acc = new PlaceModel({ttIndex: idPlace});
+
+
+      acc.loadFromContract();
+
+      acc.on('change', function(){
+        console.log(acc.toJSON())
+
+        that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON())  ) );
+        that.setForm();
+      });
+
+    } else {
       that.$el.html( that.tpl(formData) );
       that.setForm();
     }
+
 
   },
 

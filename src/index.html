@@ -10,8 +10,8 @@
     <%if( accountIdName != false ) { %>
     | <a href="#account/<%-accountIdName%>/map">Map</a> |
     <a href="#account/<%-accountIdName%>/adminAccount">Admin Account</a> |
-    <a href="#account/<%-accountIdName%>/adminPlaces">Places list</a> |
-    <a href="#account/<%-accountIdName%>/adminPlaces/id/false">Add place</a>
+    <a href="#account/<%-accountIdName%>/adminPlaces">Places list</a>
+
     <%}%>
 
   </script>
@@ -164,7 +164,7 @@
 
   <script id="placesListTemplate"  type="text/template">
     <div><button class="addPlace">Add place</button></div>
-      <div class="loading">Loading..</div>
+      <div class="loading">Loading...</div>
       <ul class="list-group listContainer">
       </ul>
     <div><button class="addPlace">Add place</button></div>
@@ -194,6 +194,8 @@
   <script src="vendor/underscore/underscore-min.js"></script>
   <script src="vendor/backbone/backbone-min.js"></script>
   <script src="vendor/leaflet/dist/leaflet.js"></script>
+  <script src="vendor/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  
 
 
 
