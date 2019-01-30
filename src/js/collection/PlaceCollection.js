@@ -20,7 +20,7 @@ var PlaceCollection = Backbone.Collection.extend({
     place.loadFromContract();
     place.on('change', function(){
       eachPlaceFunction(place);
-
+      that.add(place);
     });
   }
 });

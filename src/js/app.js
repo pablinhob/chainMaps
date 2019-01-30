@@ -20,7 +20,7 @@ var app = {
     map: false,
     adminAccount: false,
     adminPlaceForm: false,
-    adminPlacesList: false
+    adminPlaceList: false
   },
 
   init: function() {
@@ -31,7 +31,7 @@ var app = {
     that.views.map = new MapView({ el: $('.content') });
     that.views.adminAccount = new AccountFormView({ el: $('.content') });
     that.views.adminPlaceForm = new PlaceFormView({ el: $('.content') });
-    that.views.adminPlacesList = new PlacesListView({ el: $('.content') });
+    that.views.adminPlaceList = new PlacesListView({ el: $('.content') });
 
     that.router = new AppRouter();
     Backbone.history.start();

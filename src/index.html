@@ -10,7 +10,7 @@
     <%if( accountIdName != false ) { %>
     | <a href="#account/<%-accountIdName%>/map">Map</a> |
     <a href="#account/<%-accountIdName%>/adminAccount">Admin Account</a> |
-    <a href="#account/<%-accountIdName%>/adminPlaces/">Places list</a> |
+    <a href="#account/<%-accountIdName%>/adminPlaces">Places list</a> |
     <a href="#account/<%-accountIdName%>/adminPlaces/id/false">Add place</a>
     <%}%>
 
@@ -163,7 +163,19 @@
   </script>
 
   <script id="placesListTemplate"  type="text/template">
-    Lista de sitios
+    <div><button class="addPlace">Add place</button></div>
+      <ul class="list-group">
+        <%= list %>
+      </ul>
+    <div><button class="addPlace">Add place</button></div>
+  </script>
+
+  <script id="placesListElementTemplate"  type="text/template">
+    <li class="list-group-item" dataId="<%-id%>">
+      <span><%-title%></span>
+      <button class="edit">Edit</button>
+      <button class="delete">Delete</button>
+    </li>
   </script>
 
   <body>

@@ -1,5 +1,6 @@
 var PlacesListView = Backbone.View.extend({
   tpl: _.template( $("#placesListTemplate").html(), {} ),
+  tplListElement: _.template( $("#placesListElementTemplate").html(), {} ),
   events: {
   },
   initialize: function(){
@@ -7,7 +8,10 @@ var PlacesListView = Backbone.View.extend({
   },
   render: function(){
     var that = this;
-    //that.$el.html( that.tpl() );
+
+    var listElement = that.tplListElement({id:10,title:'Ola mundo elemento'});
+
+    that.$el.html( that.tpl({list:listElement}) );
   }
 
 });
