@@ -134,7 +134,7 @@ var PlaceFormView = Backbone.View.extend({
                 if( txObj != null) {
                   //console.log(txObj)
                   clearInterval(evInt);
-                  app.router.navigate('account/'+app.accountIdName+'/map',true);
+                  app.router.navigate('account/'+app.accountIdName+'/adminPlaces',true);
                 }
               }).catch( function(err) {
                 window.location = window.location;
