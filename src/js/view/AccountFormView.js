@@ -36,7 +36,7 @@ var AccountFormView = Backbone.View.extend({
               if( isOwner === true) {
                 acc.loadFromContract();
                 acc.on('change', function(){
-                  console.log(acc.toJSON());
+
                   that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON()) ) );
                   that.setForm();
                 });
