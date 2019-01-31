@@ -6,14 +6,23 @@
   </head>
 
   <script id="headerTemplate" type="text/template">
-    <div class="container">
+    <div class="">
       <a href=""><i class="fa fa-home fa-3x"></i></a>
-      <%if( accountIdName != false ) { %>
-      <!--| <a href="#account/<%-accountIdName%>/map">Map</a> |
-      <a href="#account/<%-accountIdName%>/adminAccount">Admin account</a> |-->
-      <a href="#account/<%-accountIdName%>/adminPlaces" class="right"><i class="fa fa-cogs fa-3x"></i></a>
-      <a href="#account/<%-accountIdName%>/adminPlaces" class="right"><i class="fa fa-map fa-3x"></i></a>
-      <%}%>
+
+
+      <div class="webMenu">
+        <ul class="dropdown-menu">
+          <%if( accountIdName != false ) { %>
+            <li><a href="#account/<%-accountIdName%>/adminPlaces"><i class="fa fa-map-marker"></i> Edit map places</a></li>
+            <li><a href="#account/<%-accountIdName%>/adminAccount"><i class="fa fa-map"></i> Edit map info</a></li>
+          <%}%>
+          <li><a href=""><i class="fa fa-cogs"></i> Account conf (ETH)</a></li>
+          <li><a href=""><i class="fa fa-info-circle"></i> About</a></li>
+        </ul>
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+          <i class="fa fa-bars fa-2x"></i>
+        </button>
+      </div>
 
     </div>
 
