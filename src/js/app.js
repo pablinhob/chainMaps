@@ -32,6 +32,7 @@ var app = {
     that.views.adminAccount = new AccountFormView({ el: $('.content') });
     that.views.adminPlaceForm = new PlaceFormView({ el: $('.content') });
     that.views.adminPlaceList = new PlacesListView({ el: $('.content') });
+    that.views.popup = new PopupView({ el: $('#popup .modal-content') });
 
     that.router = new AppRouter();
     Backbone.history.start();

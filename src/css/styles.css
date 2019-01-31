@@ -30,6 +30,9 @@ body {
   .webMenu .dropdown-menu {
     margin-left: -160px;
   }
+    .webMenu .dropdown-menu a {
+      cursor:pointer;
+    }
 
 /* PORTADA */
 .content #logo {
