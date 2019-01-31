@@ -8,6 +8,7 @@
     "jquery-validation": "^1.19.0",
     "leaflet": "1.0.0",
     "leaflet.markercluster": "^1.4.1",
+    "modernizr": "^3.6.0",
     "require": "^2.4.20",
     "web3": "0.20.7"
   }

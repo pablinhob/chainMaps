@@ -9,14 +9,17 @@ var AppRouter = Backbone.Router.extend({
     "*path": "default"
   },
   default: function() {
+    canvasEnable = true;
     app.views.accountChooser.render();
   },
 
   account: function(idName) {
+    canvasEnable = false;
     app.accountIdName = idName;
     app.router.navigate('account/'+app.accountIdName+'/map', true);
   },
   map: function( idName, idPlace ) {
+    canvasEnable = false;
     app.accountIdName = idName;
 
     app.views.header.render();
@@ -26,11 +29,13 @@ var AppRouter = Backbone.Router.extend({
     }
   },
   adminAccount: function( idName ) {
+    canvasEnable = false;
     app.accountIdName = idName;
     app.views.header.render();
     app.views.adminAccount.render();
   },
   adminPlaces: function( idName, idPlace ) {
+    canvasEnable = false;
     app.accountIdName = idName;
     app.views.header.render();
 
