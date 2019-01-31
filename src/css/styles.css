@@ -48,6 +48,8 @@ body {
 }
 .listaEditor .listContainer li .title {
   font-size: 25px;
+  float:left;
+  height: 40px;
 }
 
 /* MAP */
