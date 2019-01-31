@@ -2,6 +2,7 @@ var PopupView = Backbone.View.extend({
   tplInfo: _.template( $("#popupInfoTemplate").html(), {} ),
   tplTransaction: _.template( $("#popupTransactionTemplate").html(), {} ),
   tplEthAccountConf: _.template( $("#popupEthAccountConfTemplate").html(), {} ),
+  tplConfirm: _.template( $("#popupConfirmTemplate").html(), {} ),
   events: {
   },
   initialize: function(){
@@ -21,6 +22,11 @@ var PopupView = Backbone.View.extend({
   renderEthAccountConf: function() {
     var that = this;
     that.$el.html(that.tplEthAccountConf() );
+    $('#popup').modal();
+  },
+  renderConfirm: function() {
+    var that = this;
+    that.$el.html(that.tplConfirm() );
     $('#popup').modal();
   }
 });

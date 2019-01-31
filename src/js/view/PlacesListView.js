@@ -4,7 +4,8 @@ var PlacesListView = Backbone.View.extend({
   placeCollection: new PlaceCollection(),
   events: {
     'click .addPlace': 'addPlace',
-    'click .edit': 'editPlace'
+    'click .edit': 'editPlace',
+    'click .delete': 'deletePlace'
   },
   initialize: function(){
 
@@ -42,7 +43,10 @@ var PlacesListView = Backbone.View.extend({
       'account/'+app.accountIdName+'/adminPlaces/id/'+$(ev.target).parent().attr('dataId'),
       true
     );
+  },
 
+  deletePlace: function(ev) {
+    app.views.popup.renderConfirm();
   }
 
 });

@@ -22,11 +22,14 @@ var AppRouter = Backbone.Router.extend({
     canvasEnable = true;
     app.accountIdName = idName;
 
-    app.views.header.render();
-    app.views.map.render();
-    if(idPlace) {
-      app.views.map.showPlace(idPlace);
-    }
+    setTimeout(function(){
+      app.views.header.render();
+      app.views.map.render();
+      if(idPlace) {
+        app.views.map.showPlace(idPlace);
+      }
+    }, 1000);
+
   },
   adminAccount: function( idName ) {
     canvasEnable = true;
