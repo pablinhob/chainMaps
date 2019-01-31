@@ -37,7 +37,8 @@ var MapView = Backbone.View.extend({
       }
     });
 
-    canvasEnable = true;
+
+
 
   },
 
@@ -64,6 +65,7 @@ var MapView = Backbone.View.extend({
         marker.addTo(that.map);
       }
       marker.bindPopup(contentMarker);
+      canvasEnable = false;
     });
   },
 
