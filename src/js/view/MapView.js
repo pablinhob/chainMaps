@@ -9,6 +9,13 @@ var MapView = Backbone.View.extend({
   initialize: function(){
 
   },
+
+  setMapFullScreen: function() {
+    var that = this;
+    $('#mapContainer').css('width','100%');
+    $('#mapContainer').css('height', ( $(window).height()-$('.header').height() )+'px');
+  },
+
   render: function(){
     var that = this;
 
@@ -20,11 +27,17 @@ var MapView = Backbone.View.extend({
         });
 
         that.setMap();
+
+        $(window).resize(function(){
+          that.setMapFullScreen();
+        });
       }
       else {
         app.router.navigate('',true);
       }
     });
+
+    canvasEnable = true;
 
   },
 
@@ -38,7 +51,6 @@ var MapView = Backbone.View.extend({
     var that = this;
 
     that.placeCollection.checkout(function(place){
-      that.renderPlace(place);
 
       var contentMarker = '<h2>'+place.get('title')+'</h2><p>'+place.get('desc')+'</p>';
       var marker = L.marker(
@@ -51,7 +63,6 @@ var MapView = Backbone.View.extend({
       else {
         marker.addTo(that.map);
       }
-
       marker.bindPopup(contentMarker);
     });
   },
@@ -65,8 +76,8 @@ var MapView = Backbone.View.extend({
     var that = this;
 
     that.$el.html( that.tpl() );
-
-    that.map = L.map('mapContainer').setView([0, 0], 4);
+    that.setMapFullScreen();
+    that.map = L.map('mapContainer').setView([0, 0], 2);
     L.tileLayer(
       'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
       maxZoom: 18,

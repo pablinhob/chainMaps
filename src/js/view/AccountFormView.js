@@ -142,7 +142,7 @@ var AccountFormView = Backbone.View.extend({
 
 
     acc.saveOnContract(
-      200000,
+      2000000,
       function( txH ) {
 
         if(typeof txH != 'undefined') {

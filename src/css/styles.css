@@ -1,0 +1,49 @@
+body {
+  background-color: #000;
+}
+
+.header {
+  height:60px;
+  padding-left:10px;
+  padding-right:10px;
+  background-color: #000;
+}
+
+  .header a {
+    margin-top:10px;
+    color:#fff;
+    margin-right:15px;
+  }
+
+  .header .right{
+    float:right;
+  }
+
+.content .container {
+  background-color: #fff;
+  padding-top:15px;
+  padding-bottom:15px;
+}
+
+
+/* PORTADA */
+.content #logo {
+  color:#fff;
+  margin-top:100px;
+}
+
+/* MAP */
+
+#mapContainer {
+  width:100%;
+  height: 1000px;
+}
+
+#bgCanvas {
+  background-color: #000;
+  position:fixed;
+  top:0;
+  left:0;
+  z-index:-1000;
+
+}
