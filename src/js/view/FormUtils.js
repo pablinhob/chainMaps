@@ -81,13 +81,12 @@ var FormUtils = {
 
     if(reverse) {
       that.marker.setLatLng([lat,lng]);
-      that.map.panTo([lat,lng]);
       if( $(that.inputZoom).val() !='' ){ that.map.setZoom( $(that.inputZoom).val() );  }
     } else {
       $(that.inputLat).val( that.marker.getLatLng().lat );
       $(that.inputLng).val( that.marker.getLatLng().lng );
       $(that.inputZoom).val( that.map.getZoom() );
-      that.map.panTo([lat,lng]);
+
     }
   },
 
