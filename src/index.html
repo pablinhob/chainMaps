@@ -176,7 +176,7 @@
   <script id="placeFormTemplate"  type="text/template">
     <div class="container">
       <div class="panel panel-info">
-      <% if( newPlace == true  ) { %>
+      <% if( ttIndex == 0  ) { %>
         <div class="panel-heading">Create new place </div>
         <div class="panel-body">Panel Content blablablablabla</div>
       <%}else {%>
@@ -225,7 +225,7 @@
         </div>
         <div class="form-group">
           <div class="col-sm-9 col-sm-offset-4">
-            <button type="submit" class="btn btn-primary" name="signup" value="Sign up"><% if( newPlace == true  ) {%>Create place<%}else{%>Save place<%}%></button>
+            <button type="submit" class="btn btn-primary" name="signup" value="Sign up"><% if( ttIndex == 0  ) {%>Create place<%}else{%>Save place<%}%></button>
           </div>
         </div>
       </form>

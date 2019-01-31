@@ -12,7 +12,6 @@ var PlaceFormView = Backbone.View.extend({
     var that = this;
 
     var formData = {
-      newPlace: true,
       ttIndex: 0,
       title: '',
       desc: '',
@@ -22,28 +21,41 @@ var PlaceFormView = Backbone.View.extend({
       zoom: ''
     };
 
-    //that.$el.html( that.tpl(formData) );
-    //FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
+    app.data.account = new AccountModel({
+      accountIdName: app.accountIdName
+    });
+    app.data.account.loadFromContract();
+    app.data.account.on('change', function(){
 
-    if( idPlace != 'false' ) {
 
-      var acc = new PlaceModel({ttIndex: idPlace});
+      if( idPlace != 'false' ) {
+
+        var acc = new PlaceModel({ttIndex: idPlace});
 
 
-      acc.loadFromContract();
+        acc.loadFromContract();
 
-      acc.on('change', function(){
-        console.log(acc.toJSON())
+        acc.on('change', function(){
+          console.log(acc.toJSON())
 
-        that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON())  ) );
+          that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON())  ) );
+          that.setForm();
+        });
+
+      } else {
+        that.$el.html( that.tpl(formData) );
         that.setForm();
-      });
 
-    } else {
-      that.$el.html( that.tpl(formData) );
-      that.setForm();
-    }
+        FormUtils.map.flyTo(
+          [
+            app.data.account.get('lat'),
+            app.data.account.get('lng')
+          ],
+          app.data.account.get('zoom')
+        );
+      }
 
+    });
 
   },
 
@@ -54,20 +66,7 @@ var PlaceFormView = Backbone.View.extend({
 
     FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
 
-    app.data.account = new AccountModel({
-      accountIdName: app.accountIdName
-    });
-    app.data.account.loadFromContract();
-    app.data.account.on('change', function(){
 
-      FormUtils.map.flyTo(
-        [
-          app.data.account.get('lat'),
-          app.data.account.get('lng')
-        ],
-        app.data.account.get('zoom')
-      );
-    });
 
     $( "#placeForm" ).validate( {
   		rules: {
