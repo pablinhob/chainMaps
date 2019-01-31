@@ -32,6 +32,18 @@ body {
   margin-top:100px;
 }
 
+/* EDITOR LISTA */
+.listaEditor .listContainer button{
+  float:right;
+  margin-left: 10px;
+}
+.listaEditor .listContainer li {
+  height: 60px;
+}
+.listaEditor .listContainer li .title {
+  font-size: 25px;
+}
+
 /* MAP */
 
 #mapContainer {

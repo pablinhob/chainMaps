@@ -170,7 +170,7 @@
   </script>
 
   <script id="placesListTemplate"  type="text/template">
-    <div class="container">
+    <div class="container listaEditor">
       <div><button class="addPlace">Add place</button></div>
         <div class="loading">Loading...</div>
         <ul class="list-group listContainer">
@@ -181,9 +181,9 @@
 
   <script id="placesListElementTemplate"  type="text/template">
     <li class="list-group-item" dataId="<%-id%>">
-      <span><%-title%></span>
-      <button class="edit">Edit</button>
-      <button class="delete">Delete</button>
+      <span class="title"><%-title%></span>
+      <button class="delete"><i class="fa fa-trash fa-2x"></i></button>
+      <button class="edit"><i class="fa fa-edit fa-2x"></i></button>
     </li>
   </script>
 
