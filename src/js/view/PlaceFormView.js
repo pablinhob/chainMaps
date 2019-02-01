@@ -46,13 +46,13 @@ var PlaceFormView = Backbone.View.extend({
         that.$el.html( that.tpl(formData) );
         that.setForm();
 
-        FormUtils.map.flyTo(
+        FormUtils.map.panTo(
           [
             app.data.account.get('lat'),
             app.data.account.get('lng')
-          ],
-          app.data.account.get('zoom')
-        );
+          ]);
+        FormUtils.map.setZoom( app.data.account.get('zoom') );
+
       }
 
     });
