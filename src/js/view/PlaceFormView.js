@@ -135,33 +135,33 @@ var PlaceFormView = Backbone.View.extend({
     });
 
 
-
-    acc.saveOnContract(
-      200000,
-      function( txH ) {
-
-        if(typeof txH != 'undefined') {
-          console.log('Esperando confirmación...',txH);
-          var evInt = setInterval(function(){
-            contract.web3Wss.eth.getTransactionReceipt(txH).then(
-              function(txObj){
-                if( txObj != null) {
-                  //console.log(txObj)
-                  clearInterval(evInt);
-                  app.router.navigate('account/'+app.accountIdName+'/adminPlaces',true);
-                }
-              }).catch( function(err) {
-                window.location = window.location;
-              });
-          }, 1000);
+    app.views.popup.renderTransaction( function(d){
+      app.views.popup.renderTransactionWaiting();
+      acc.saveOnContract(
+        d.gasLimit,
+        function( txH ) {
+          if(typeof txH != 'undefined') {
+            console.log('Esperando confirmación...',txH);
+            var evInt = setInterval(function(){
+              contract.web3Wss.eth.getTransactionReceipt(txH).then(
+                function(txObj){
+                  if( txObj != null) {
+                    //console.log(txObj)
+                    clearInterval(evInt);
+                    app.router.navigate('account/'+app.accountIdName+'/adminPlaces',true);
+                    app.views.popup.close();
+                  }
+                }).catch( function(err) {
+                  app.views.popup.renderTransactionError('Unknown error');
+                });
+            }, 1000);
+          }
+          else {
+            app.views.popup.renderTransactionError('Transaction failed. Try again changing "gas limit" value');
+          }
         }
-        else {
-          alert('Transaction failed. Try changing gas limit value');
-        }
-
-
-      }
-    );
+      );
+    });
 
   }
 
