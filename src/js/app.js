@@ -8,7 +8,7 @@ $(document).ready(function() {
 var app = {
   accountIdName: false,
   router: false,
-
+  ethDollarPrice: false,
   data: {
     account: false,
     locations: false
@@ -34,24 +34,16 @@ var app = {
     that.views.adminPlaceList = new PlacesListView({ el: $('.content') });
     that.views.popup = new PopupView({ el: $('#popup .modal-content') });
 
+    that.getEthDollar();
     that.router = new AppRouter();
     Backbone.history.start();
+  },
+
+  getEthDollar: function() {
+    var that = this;
+    $.ajax( "https://api.coinmarketcap.com/v1/ticker/ethereum/" ).done(function( d ) {
+      that.ethDollarPrice = d[0].price_usd;
+    });
   }
-  /*,
 
-  showAccountChooser: function(){
-
-  },
-
-  showMap: function() {
-
-  },
-
-  showAdminAccount: function {
-
-  },
-
-  showAdminLocations: function {
-
-  }*/
 };

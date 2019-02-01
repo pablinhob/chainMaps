@@ -3,6 +3,7 @@ var PopupView = Backbone.View.extend({
   tplTransaction: _.template( $("#popupTransactionTemplate").html(), {} ),
   tplEthAccountConf: _.template( $("#popupEthAccountConfTemplate").html(), {} ),
   tplConfirm: _.template( $("#popupConfirmTemplate").html(), {} ),
+
   events: {
   },
   initialize: function(){
@@ -14,11 +15,20 @@ var PopupView = Backbone.View.extend({
     $('#popup').modal();
   },
 
-  renderTransaction: function(){
+  renderTransaction: function(onSuccessFunction){
     var that = this;
     that.$el.html(that.tplTransaction() );
     $('#popup').modal();
+    that.$el.find('.confirmTransaction').on('click', function(){
+
+      onSuccessFunction({
+        gasLimit: parseInt( that.$el.find('#gaslimit').val() ),
+        donation: parseInt( that.$el.find('#donate').val() )
+      });
+    });
+
   },
+
   renderEthAccountConf: function() {
     var that = this;
     that.$el.html(that.tplEthAccountConf() );
@@ -28,5 +38,9 @@ var PopupView = Backbone.View.extend({
     var that = this;
     that.$el.html(that.tplConfirm() );
     $('#popup').modal();
+  },
+
+  close: function(){
+    $('#popup').modal('hide');
   }
 });

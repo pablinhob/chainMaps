@@ -26,7 +26,45 @@
   </script>
 
   <script id="popupTransactionTemplate" type="text/template">
-    popupTransactionTemplate
+    <div class="modal-header" style="padding:35px 50px;">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <h4><span class="glyphicon glyphicon-transfer"></span> Tansaction details</h4>
+    </div>
+    <div class="modal-body" style="padding:40px 50px;">
+      <form role="form">
+        <div class="form-group">
+          <label for="gaslimit"><span class="glyphicon glyphicon-signal"></span> Gas limit (<a target="_blank" href="https://kb.myetherwallet.com/gas/what-is-gas-ethereum.html">?</a>)</label>
+          <input type="text" class="form-control" id="gaslimit" value="<%- conf.defaultGasLimit %>">
+        </div>
+
+        <div class="form-group">
+          <label for="donate"><span class="glyphicon glyphicon-tint"></span> Want to donate? </label>
+          <select class="form-control" id="donate">
+            <option value="0">Not today</option>
+            <option value="0.0005">0.0005ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.0005*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
+            <option value="0.001" selected>0.001ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.001*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
+            <option value="0.002">0.002ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.002*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
+            <option value="0.003">0.003ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.003*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
+            <option value="0.01">0.01ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.01*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
+            <option value="0.02">0.02ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.02*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
+            <option value="0.04">0.04ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.04*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
+          </select>
+        </div>
+
+        <!--div class="form-group">
+          <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+          <input type="text" class="form-control" id="psw" placeholder="Enter password">
+        </div>
+        <div class="checkbox">
+          <label><input type="checkbox" value="" checked>Remember me</label>
+        </div>
+          <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button-->
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-danger btn-default " data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+      <button class="btn btn-success pull-right confirmTransaction"><span class="glyphicon glyphicon-ok"></span> Confirm transaction</button>
+    </div>
   </script>
 
   <script id="popupInfoTemplate" type="text/template">

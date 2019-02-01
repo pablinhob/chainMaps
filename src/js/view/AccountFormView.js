@@ -140,9 +140,10 @@ var AccountFormView = Backbone.View.extend({
     });
 
 
+  app.views.popup.renderTransaction( function(d){
 
     acc.saveOnContract(
-      2000000,
+      d.gasLimit,
       function( txH ) {
 
         if(typeof txH != 'undefined') {
@@ -154,6 +155,7 @@ var AccountFormView = Backbone.View.extend({
                   //console.log(txObj)
                   clearInterval(evInt);
                   app.router.navigate('account/'+$('#accountIdName').val()+'/map',true);
+                  app.views.popup.close();
                 }
               }).catch( function(err) {
                 window.location = window.location;
@@ -167,6 +169,8 @@ var AccountFormView = Backbone.View.extend({
 
       }
     );
+
+  });
 
   }
 });
