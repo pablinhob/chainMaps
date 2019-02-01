@@ -56,7 +56,7 @@ var MapView = Backbone.View.extend({
       var contentMarker = '<h2>'+place.get('title')+'</h2><p>'+place.get('desc')+'</p>';
       var marker = L.marker(
         [place.get('lat'), place.get('lng')]
-      )
+      );
       if( app.data.account.get('clusterize') == true ){
         that.markerCluster.addLayer(marker);
         that.map.addLayer(that.markerCluster);
@@ -77,33 +77,28 @@ var MapView = Backbone.View.extend({
   setMap: function() {
     var that = this;
 
-    that.$el.html( that.tpl() );
-    that.setMapFullScreen();
-    that.map = L.map('mapContainer').setView([0, 0], 2);
-    L.tileLayer(
-      'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-      maxZoom: 18,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-    }).addTo(that.map);
-
-
-
-
     app.data.account.loadFromContract();
     app.data.account.on('change', function(){
+
+
+      that.$el.html( that.tpl() );
+      that.setMapFullScreen();
+      that.map = L.map('mapContainer').setView(
+        [app.data.account.get('lat'), app.data.account.get('lng')],
+        app.data.account.get('zoom')
+      );
+      L.tileLayer(
+        'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+        //maxZoom: 18,
+        //scrollWheelZoom: true,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      }).addTo(that.map);
 
 
       if( app.data.account.get('clusterize') == true ) {
         that.markerCluster = L.markerClusterGroup();
       }
 
-      that.map.flyTo(
-        [
-          app.data.account.get('lat'),
-          app.data.account.get('lng')
-        ],
-        app.data.account.get('zoom')
-      );
 
       that.renderPlaces();
     });
