@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-group">
-          <label for="donate"><span class="glyphicon glyphicon-tint"></span> Want to donate? </label>
+          <label for="donate"><span class="glyphicon glyphicon-tint"></span> This project need your help. Do you want to donate? </label>
           <select class="form-control" id="donate">
             <option value="0">Not today</option>
             <option value="0.0005">0.0005ETH  <%if(app.ethDollarPrice){%>(<%- parseFloat(0.0005*app.ethDollarPrice).toFixed(2) %>$)<%}%></option>
@@ -56,7 +56,7 @@
 
     <div class="col-xs-2 center-block waiting" style="float:none; display:none;">
       <div><i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i></div>
-      <div>Sending...</div>
+      <div>Mining...</div>
     </div>
     <div class="error" style="float:none; display:none;">
 
