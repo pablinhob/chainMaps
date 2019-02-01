@@ -54,6 +54,17 @@ body {
   height: 40px;
 }
 
+
+/* POPUP */
+
+#popup .waiting {
+  margin-top:50px;
+  margin-bottom: 50px;
+}
+#popup .error {
+  margin-left: 50px;
+  color:red;
+}
 /* MAP */
 
 #mapContainer {

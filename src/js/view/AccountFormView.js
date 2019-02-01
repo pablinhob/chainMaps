@@ -163,7 +163,7 @@ var AccountFormView = Backbone.View.extend({
           }, 1000);
         }
         else {
-            app.views.popup.renderTransactionError('Transaction failed. Try changing gas limit value');
+            app.views.popup.renderTransactionError('Transaction failed. Try again changing "gas limit" value');
         }
 
 
