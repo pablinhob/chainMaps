@@ -18,19 +18,31 @@ var AppRouter = Backbone.Router.extend({
     app.accountIdName = idName;
     app.router.navigate('account/'+app.accountIdName+'/map', true);
   },
-  map: function( idName, idPlace ) {
-    canvasEnable = true;
-    app.accountIdName = idName;
 
-    setTimeout(function(){
-      app.views.header.render();
-      app.views.map.render();
-      if(idPlace) {
-        app.views.map.showPlace(idPlace);
-      }
-    }, 1000);
+  map: function( idName, idPlace ) {
+    var that = this;
+    canvasEnable = true;
+
+    if( app.accountIdName ) {
+      that.mapMap( idName, idPlace );
+    }
+    else {
+      setTimeout(function(){
+        that.mapMap( idName, idPlace );
+      }, 1200);
+    }
 
   },
+
+  mapMap: function( idName, idPlace ) {
+    app.accountIdName = idName;
+    app.views.header.render();
+    app.views.map.render();
+    if(idPlace) {
+      app.views.map.showPlace(idPlace);
+    }
+  },
+
   adminAccount: function( idName ) {
     canvasEnable = true;
     app.accountIdName = idName;

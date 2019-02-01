@@ -141,7 +141,7 @@ var AccountFormView = Backbone.View.extend({
 
 
   app.views.popup.renderTransaction( function(d){
-
+    app.views.popup.renderTransactionWaiting();
     acc.saveOnContract(
       d.gasLimit,
       function( txH ) {
@@ -158,12 +158,12 @@ var AccountFormView = Backbone.View.extend({
                   app.views.popup.close();
                 }
               }).catch( function(err) {
-                window.location = window.location;
+                app.views.popup.renderTransactionError('Unknown error');
               });
           }, 1000);
         }
         else {
-          alert('Transaction failed. Try changing gas limit value');
+            app.views.popup.renderTransactionError('Transaction failed. Try changing gas limit value');
         }
 
 

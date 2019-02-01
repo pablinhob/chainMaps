@@ -20,13 +20,27 @@ var PopupView = Backbone.View.extend({
     that.$el.html(that.tplTransaction() );
     $('#popup').modal();
     that.$el.find('.confirmTransaction').on('click', function(){
-
       onSuccessFunction({
         gasLimit: parseInt( that.$el.find('#gaslimit').val() ),
         donation: parseInt( that.$el.find('#donate').val() )
       });
     });
+  },
 
+  renderTransactionWaiting: function(){
+    var that = this;
+    that.$el.find('.working').hide();
+    that.$el.find('.error').hide();
+    that.$el.find('.waiting').show();
+  },
+
+  renderTransactionError: function(err) {
+    var that = this;
+    that.$el.find('.working').show();
+    that.$el.find('.error').show();
+    that.$el.find('.waiting').hide();
+
+    that.$el.find('.error').html(err);
   },
 
   renderEthAccountConf: function() {
