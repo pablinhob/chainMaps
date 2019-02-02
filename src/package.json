@@ -11,6 +11,7 @@
     "leaflet.markercluster": "^1.4.1",
     "modernizr": "^3.6.0",
     "require": "^2.4.20",
+    "secp256k1": "^3.6.2",
     "web3": "0.20.7"
   }
 }
