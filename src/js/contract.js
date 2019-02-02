@@ -30,9 +30,8 @@ var contract = {
        }
     );*/
 
-
-    that.currentEthAccount = '0xc655c4812584BF855d53584e553c22C8D714D9ca';
-    that.currentEthAccountPrivateKey = '15d7f910f479c3e2f0d2eee48a71ab4f017cc786ca31122f37b3518f44b27bfb';
+    //that.currentEthAccount = '0xc655c4812584BF855d53584e553c22C8D714D9ca';
+    //that.currentEthAccountPrivateKey = '15d7f910f479c3e2f0d2eee48a71ab4f017cc786ca31122f37b3518f44b27bfb';
   },
 
   /*
@@ -62,6 +61,7 @@ var contract = {
 
     //that.contractInstance.setAccount.sendTransaction('lal', 'lolazo Descripción', true, 10,10,4, {from:conf.account, gas:200000})
   },*/
+
 
   /*
     Contract functions call
@@ -171,7 +171,7 @@ var contract = {
     var that = this;
 
     that.contractInstance.methods.addressIsOwner(
-      that.currentEthAccount,
+      ethAccount.getPublicKey(),
       data.accountIdName
     ).call().then(function(res){
         onComplete( res );
@@ -195,10 +195,10 @@ var contract = {
   rawTransaction: function( data, gasLimit, onComplete) {
     var that = this;
 
-    that.web3.eth.getTransactionCount( that.currentEthAccount , function(error, result) {
+    that.web3.eth.getTransactionCount( ethAccount.getPublicKey() , function(error, result) {
       var nonce = result;
       var rawTransaction = {
-        "from": that.currentEthAccount,
+        "from": ethAccount.getPublicKey(),
         "nonce": that.web3.utils.toHex( nonce ),
         "gasPrice": that.web3.utils.toHex( 0.8 ^1000000000),
         "gasLimit": that.web3.utils.toHex(gasLimit),
@@ -208,7 +208,7 @@ var contract = {
         "chainId": conf.currentNetworkId //change the chainID accordingly
       };
 
-      var privKey = new ethereumjs.Buffer.Buffer( that.currentEthAccountPrivateKey , 'hex');
+      var privKey = new ethereumjs.Buffer.Buffer( ethAccount.privateKey , 'hex');
       var tx = new ethereumjs.Tx(rawTransaction);
 
       tx.sign(privKey);
