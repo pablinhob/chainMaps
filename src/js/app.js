@@ -34,6 +34,7 @@ var app = {
     that.views.adminPlaceList = new PlacesListView({ el: $('.content') });
     that.views.popup = new PopupView({ el: $('#popup .modal-content') });
 
+    ethAccount.loadLocalStorage(); 
     that.getEthDollar();
     that.router = new AppRouter();
     Backbone.history.start();

@@ -47,10 +47,10 @@ function canvasApp() {
 
 	//var theCanvas = $('#bgCanvas');
   var theCanvas = document.getElementById(canvasId);
-  console.log(theCanvas)
+
 
 	var context = theCanvas.getContext("2d");
-  console.log(context)
+
 
 	var displayWidth;
 	var displayHeight;

@@ -45,9 +45,66 @@ var PopupView = Backbone.View.extend({
 
   renderEthAccountConf: function() {
     var that = this;
-    that.$el.html(that.tplEthAccountConf() );
+    var ethAccountData = {privateAddress:'', publicAddress:'', accountBalance:''};
+
+    if( ethAccount.privateKey != false ){
+      ethAccountData = {
+        privateAddress:ethAccount.privateKey
+      }
+    }
+
+    that.$el.html(that.tplEthAccountConf(ethAccountData) );
     $('#popup').modal();
+    $('#popup #privateKeyAddress').on('keypress', function(){
+      if($('#privateKeyAddress').val() != '') {
+        that.renderEthAccountConfUpdateInfo($('#privateKeyAddress').val());
+      }
+    });
+    $('#popup #privateKeyAddress').bind("paste", function(e){
+      var pasteVal = e.originalEvent.clipboardData.getData('text');
+      if(pasteVal != '') {
+        that.renderEthAccountConfUpdateInfo(pasteVal);
+      }
+    });
+    $('#popup #saveAccountConf').on('click', function() {
+      ethAccount.privateKey=$('#privateKeyAddress').val();
+      ethAccount.saveLocalStorage();
+      that.close();
+    });
+
+    if( $('#privateKeyAddress').val() != '' ) {
+      that.renderEthAccountConfUpdateInfo($('#privateKeyAddress').val());
+    }
+
   },
+
+  renderEthAccountConfUpdateInfo: function(privateKey) {
+    var that = this;
+
+    $('#popup .accountInfo').html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i> Checking account data...');
+
+    try { // statements to try
+      ethAccount.getBalance(
+        ethAccount.getPublicKeyFromPRivate(privateKey),
+        function(b){
+          $('#popup .accountInfo').html(
+            '<div style="color:green;">Address: ' +
+            '<a target="_blank" href="https://etherscan.io/address/' + ethAccount.getPublicKeyFromPRivate(privateKey) + '">'+ethAccount.getPublicKeyFromPRivate(privateKey) +'</a> '+
+            '<br>Balance: '+ (b/1000000000000000000)+ ' ETH</div>'
+          );
+        }
+      );
+    }
+    catch (e) {
+      $('#popup .accountInfo').html(
+        '<div style="color:red;"> Invalid ETH private key</div>'
+      );
+    }
+
+
+    //publicAddress: ethAccount.getPublicKey()
+  },
+
   renderConfirm: function() {
     var that = this;
     that.$el.html(that.tplConfirm() );

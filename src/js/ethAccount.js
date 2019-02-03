@@ -3,11 +3,37 @@ var ethAccount = {
   privateKey: false,
   getPublicKey: function() {
     var that = this;
-    var b = ethereumjs.Util.toBuffer('0x'+that.privateKey);
+    return that.getPublicKeyFromPRivate(that.privateKey);
+  },
+
+  getPublicKeyFromPRivate: function(privateKey) {
+    var that = this;
+    var b = ethereumjs.Util.toBuffer('0x'+privateKey);
     var wallet = ethereumjs.Wallet.fromPrivateKey( b );
     return ethereumjs.Util.bufferToHex( wallet.getAddress() );
   },
-  getBalance: function( onResultFunction ) { // balance in wei
-    contract.web3.eth.getBalance(ethAccount.getPublicKey() ).then(function(d){ onResultFunction(d) } );
+
+  getBalance: function( address, onResultFunction ) { // balance in wei
+    contract.web3.eth.getBalance( address )
+      .then(function(d){
+        onResultFunction(d);
+      });
+  },
+
+  saveLocalStorage: function(){
+    var that = this;
+
+    if( typeof localStorage != 'undefined' ) {
+      localStorage.setItem('privateKey', that.privateKey );
+    }
+  },
+
+  loadLocalStorage: function() {
+    var that = this;
+
+    if( typeof localStorage != 'undefined' ) {
+      that.privateKey = localStorage.getItem('privateKey') || false;
+    }
+
   }
 }
