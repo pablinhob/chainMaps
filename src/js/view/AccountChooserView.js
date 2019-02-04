@@ -24,7 +24,16 @@ var AccountChooserView = Backbone.View.extend({
         app.router.navigate('account/'+accIdName+'/map',true);
       }
       else {
-        app.router.navigate('account/false/adminAccount',true);
+        var r = confirm("The Map does not exist, do you want to create it?");
+        if (r == true) {
+
+            app.views.popup.renderEthAccountConf(function(){
+              app.router.navigate('account/false/adminAccount',true);
+            });
+      
+
+
+        }
       }
     });
   }

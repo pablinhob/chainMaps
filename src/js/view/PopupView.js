@@ -93,6 +93,7 @@ var PopupView = Backbone.View.extend({
             '<a target="_blank" href="https://etherscan.io/address/' + ethAccount.getPublicKeyFromPRivate(privateKey) + '">'+ethAccount.getPublicKeyFromPRivate(privateKey) +'</a> '+
             '<br>Balance: '+ (b/1000000000000000000)+ ' ETH</div>'
           );
+          $('#popup #saveAccountConf').attr("disabled", false);
         }
       );
     }
@@ -100,6 +101,7 @@ var PopupView = Backbone.View.extend({
       $('#popup .accountInfo').html(
         '<div style="color:red;"> Invalid ETH private key</div>'
       );
+      $('#popup #saveAccountConf').attr("disabled", true);
     }
 
 
