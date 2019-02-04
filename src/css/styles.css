@@ -4,14 +4,18 @@ body {
 
 .header {
   height:60px;
-  padding-left:10px;
-  padding-right:10px;
-}
 
+}
+  .header .logo {
+    margin-left: 20px;
+  }
+  .header .logo img {
+    margin-top:5px;
+  }
   .header a {
-    margin-top:10px;
+    font-size:32px;
     color:#fff;
-    margin-right:15px;
+    text-decoration: none;
   }
 
 
