@@ -24,6 +24,23 @@ var PlaceFormView = Backbone.View.extend({
     app.data.account = new AccountModel({
       accountIdName: app.accountIdName
     });
+
+    contract.addressIsOwner(
+      {
+        accountIdName: app.accountIdName
+      },
+      function(isOwner){
+        if( isOwner !== true) {
+          alert('You don`t have permissions: Your address must be owner of the map "'+app.accountIdName+'"');
+          app.views.popup.renderEthAccountConf(function(){
+            location.reload();
+          });
+        }
+      }
+    );
+
+
+
     app.data.account.loadFromContract();
     app.data.account.on('change', function(){
 

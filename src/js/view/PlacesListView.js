@@ -13,6 +13,21 @@ var PlacesListView = Backbone.View.extend({
   render: function(){
     var that = this;
 
+    contract.addressIsOwner(
+      {
+        accountIdName: app.accountIdName
+      },
+      function(isOwner){
+        if( isOwner !== true) {
+          alert('You don`t have permissions: Your address must be owner of the map "'+app.accountIdName+'"');
+          app.views.popup.renderEthAccountConf(function(){
+            location.reload();
+          });
+        }
+      }
+    );
+
+
     that.$el.html( that.tpl() );
     $(that.$el).find('.loading').show();
     $(that.$el).find('.listContainer').html('')

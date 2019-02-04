@@ -46,7 +46,6 @@ var AccountFormView = Backbone.View.extend({
               else {
                 alert('You don`t have permissions: Your address must be owner of the map "'+app.accountIdName+'"');
                 app.views.popup.renderEthAccountConf(function(){
-
                   location.reload();
                 });
               }
