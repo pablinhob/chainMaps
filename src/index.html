@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Guerrilla GIS v1</title>
+    <title>GuerrillaGIS v1</title>
   </head>
 
   <script id="headerTemplate" type="text/template">
     <div class="">
-      <div class="logo"><a href=""><img src="img/logo_small.png"> Guerrilla GIS v1</a></div>
+      <div class="logo"><a href=""><img src="img/logo_small.png"> GuerrillaGIS v1</a></div>
       <div class="webMenu">
         <ul class="dropdown-menu">
           <li><a href="#account/<%-accountIdName%>"><i class="fa fa-map"></i> View map</a></li>
@@ -71,7 +71,7 @@
 
   <script id="popupInfoTemplate" type="text/template">
     <div class="modal-header" style="padding:35px 50px;">
-      <h4><span class="glyphicon glyphicon-info-sign"></span> Guerrilla GIS</h4>
+      <h4><span class="glyphicon glyphicon-info-sign"></span> GuerrillaGIS</h4>
     </div>
     <div class="modal-body" style="padding:40px 50px;">
 
@@ -142,14 +142,15 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="row">
         <div id="logo" class="text-center">
+        <div><img src="img/logo_medium.png"> </div>
         <h1>GuerrillaGIS v1</h1><p>Avoid censorship using the blockchain</p>
         </div>
         <form role="form" class="accountForm" onSubmit="return false;">
           <div class="form-group">
             <div class="input-group">
-              <input id="1" class="form-control accountInput" type="text" name="account" placeholder="Project name id" required/>
+              <input id="1" class="form-control accountInput" type="text" name="account" placeholder="Map name (ex:example_map)" required/>
               <span class="input-group-btn">
-              <button class="btn btn-success" type="submit">
+              <button class="btn btn-success accountSuccess" type="submit">
               <i class="glyphicon glyphicon glyphicon-chevron-right" aria-hidden="true"></i>
               </button>
               </span>

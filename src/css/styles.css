@@ -9,10 +9,14 @@ body {
   .header .logo {
     margin-left: 20px;
   }
+  .header a {
+
+  }
+
   .header .logo img {
     margin-top:5px;
   }
-  .header a {
+  .header .logo a {
     font-size:32px;
     color:#fff;
     text-decoration: none;
@@ -41,7 +45,15 @@ body {
 /* PORTADA */
 .content #logo {
   color:#fff;
-  margin-top:100px;
+  margin-top:60px;
+}
+
+.content .accountForm {
+  margin-top: 30px;
+}
+.content .accountInput, .content .accountSuccess {
+  height:50px;
+  font-size:20px;
 }
 
 /* EDITOR LISTA */
