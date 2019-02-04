@@ -19,8 +19,8 @@ var HeaderView = Backbone.View.extend({
 
     that.$el.html( that.tpl(tplData) );
 
-    $('.displayAccountConfPopup').on('click', function(){app.views.popup.renderEthAccountConf() });
-    $('.displayAboutPopup').on('click', function(){app.views.popup.renderInfo() });
+    $('.displayAccountConfPopup').on('click', function(){app.views.popup.renderEthAccountConf(function(){} ) });
+    $('.displayAboutPopup').on('click', function(){app.views.popup.renderInfo( ) });
   },
   goAccount: function() {
 

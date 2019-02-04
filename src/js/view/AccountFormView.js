@@ -26,7 +26,9 @@ var AccountFormView = Backbone.View.extend({
     if( app.accountIdName != 'false'  ) {
 
       contract.accountExist({ accountIdName:app.accountIdName }, function(res){
+
         if(res == true) {
+
           var acc = new AccountModel({
             accountIdName: app.accountIdName
           });
@@ -42,8 +44,11 @@ var AccountFormView = Backbone.View.extend({
                 });
               }
               else {
-                alert('Your address must be owner of the map called "'+app.accountIdName+'" to edit it.');
-                app.router.navigate('',true);
+                alert('You don`t have permissions: Your address must be owner of the map "'+app.accountIdName+'"');
+                app.views.popup.renderEthAccountConf(function(){
+
+                  location.reload();
+                });
               }
             }
           );

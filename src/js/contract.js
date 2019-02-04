@@ -102,14 +102,13 @@ var contract = {
 
   accountExist: function( data, onComplete  ) {
     var that = this;
-    /*that.contractInstance.accountExist.call(
-      data.accountIdName,
-      function(err, res) { console.log(res);onComplete( err, res ) }
-    );*/
+
     that.contractInstance.methods.accountExist(
       data.accountIdName
     ).call().then(
-      function(res) { console.log(res);onComplete( res) }
+      function(res) {
+        onComplete(res)
+      }
     );
   },
 /*
@@ -170,12 +169,19 @@ var contract = {
   addressIsOwner: function( data, onComplete ) {
     var that = this;
 
-    that.contractInstance.methods.addressIsOwner(
-      ethAccount.getPublicKey(),
-      data.accountIdName
-    ).call().then(function(res){
-        onComplete( res );
-    });
+    try { // statements to try
+      that.contractInstance.methods.addressIsOwner(
+        ethAccount.getPublicKey(),
+        data.accountIdName
+      ).call().then(
+        function(res){
+          onComplete( res );
+        }
+      );
+    }
+    catch (e) {
+      onComplete(false)
+    }
   },
 
 

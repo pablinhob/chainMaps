@@ -10,11 +10,12 @@
       <b><a href="">Guerrilla GIS v1 (Logo)</a></b>
       <div class="webMenu">
         <ul class="dropdown-menu">
+          <li><a href="#account/<%-accountIdName%>"><i class="fa fa-map"></i> View map</a></li>
           <%if( accountIdName != false ) { %>
             <li><a href="#account/<%-accountIdName%>/adminPlaces"><i class="fa fa-map-marker"></i> Edit map places</a></li>
-            <li><a href="#account/<%-accountIdName%>/adminAccount"><i class="fa fa-map"></i> Edit map info</a></li>
+            <li><a href="#account/<%-accountIdName%>/adminAccount"><i class="fa fa-compass"></i> Edit map info</a></li>
           <%}%>
-          <li><a class="displayAccountConfPopup" ><i class="fa fa-cogs"></i> Account conf (ETH)</a></li>
+          <li><a class="displayAccountConfPopup" ><i class="fa fa-credit-card"></i> Account conf (ETH)</a></li>
           <li><a  class="displayAboutPopup"><i class="fa fa-info-circle"></i> About</a></li>
         </ul>
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">

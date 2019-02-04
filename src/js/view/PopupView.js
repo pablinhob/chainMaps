@@ -43,7 +43,7 @@ var PopupView = Backbone.View.extend({
     that.$el.find('.error').html(err);
   },
 
-  renderEthAccountConf: function() {
+  renderEthAccountConf: function( onResultFunction ) {
     var that = this;
     var ethAccountData = {privateAddress:'', publicAddress:'', accountBalance:''};
 
@@ -70,6 +70,7 @@ var PopupView = Backbone.View.extend({
       ethAccount.privateKey=$('#privateKeyAddress').val();
       ethAccount.saveLocalStorage();
       that.close();
+      onResultFunction();
     });
 
     if( $('#privateKeyAddress').val() != '' ) {
