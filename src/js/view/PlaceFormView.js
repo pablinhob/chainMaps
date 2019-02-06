@@ -41,6 +41,7 @@ var PlaceFormView = Backbone.View.extend({
 
 
 
+
     app.data.account.loadFromContract();
     app.data.account.on('change', function(){
 
@@ -56,20 +57,27 @@ var PlaceFormView = Backbone.View.extend({
           console.log(acc.toJSON())
 
           that.$el.html( that.tpl( $.extend({}, formData, acc.toJSON())  ) );
+          FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
+          FormUtils.updateInputLatlng();
           that.setForm();
         });
 
       } else {
         that.$el.html( that.tpl(formData) );
-        that.setForm();
 
-        FormUtils.map.panTo(
-          [
+
+        /*FormUtils.map.panTo(
+          new L.LatLng(
             app.data.account.get('lat'),
             app.data.account.get('lng')
-          ]);
-        FormUtils.map.setZoom( app.data.account.get('zoom') );
-
+          ));*/
+        $('#placeLat').val(app.data.account.get('lat'));
+        $('#placeLng').val(app.data.account.get('lng'));
+        $('#placeZoom').val( app.data.account.get('zoom'));
+        FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
+        
+        FormUtils.updateInputLatlng();
+        that.setForm();
       }
 
     });
@@ -79,10 +87,6 @@ var PlaceFormView = Backbone.View.extend({
 
   setForm: function(){
     var that = this;
-
-
-    FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
-
 
 
     $( "#placeForm" ).validate( {
@@ -113,9 +117,9 @@ var PlaceFormView = Backbone.View.extend({
         },
         agree: "required"
   		},
-  		messages: {
+  		/*messages: {
   			agree: "Check that you understand the nature of application."
-  		},
+  		},*/
   		errorElement: "em",
   		errorPlacement: function ( error, element ) {
   			// Add the `help-block` class to the error element

@@ -20,7 +20,7 @@ var FormUtils = {
     var initData = {};
 
     if( $(that.inputLat).val() == '') {
-      initData.center = [40, 0];
+      initData.center = [0, 0];
     }
     else {
       latLngExist = true;
@@ -44,12 +44,12 @@ var FormUtils = {
 
     });
     that.map.on('dragend', function(e) {
-       that.updateInputLatlng();
+       //that.updateLatlng();
     });
 
     if( latLngExist == true ) {
       that.addMarker();
-      that.updateInputLatlng();
+      //that.updateInputLatlng();
     }
 
     that.map.on('click', function (e) {
@@ -68,9 +68,9 @@ var FormUtils = {
     that.marker = L.marker([0,0],{
       draggable: true
     }).addTo(that.map);
-    that.marker.on('dragend', function (e) {
+    /*that.marker.on('dragend', function (e) {
       that.updateLatLng(that.marker.getLatLng().lat, that.marker.getLatLng().lng);
-    });
+    });*/
   },
 
   updateLatLng: function(lat,lng,reverse) {

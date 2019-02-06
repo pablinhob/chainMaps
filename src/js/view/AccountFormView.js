@@ -73,7 +73,7 @@ var AccountFormView = Backbone.View.extend({
     var that = this;
 
     FormUtils.setFormMap('#accountLat','#accountLng','#accountZoom');
-
+    FormUtils.updateInputLatlng();
     $('#accountIdName').keypress(function( e ) {
       if(e.which === 32){
         return false;
