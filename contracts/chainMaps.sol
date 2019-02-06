@@ -179,7 +179,17 @@ contract chainMaps {
     }
 
     function deletePlace( string memory accountIdName, uint256 ttIndex ) public {
+        if( accountExist(accountIdName) ) {
 
+            for (uint i=0; i<accounts[ accountHash(accountIdName) ].placesIndex.length; i++) {
+                if( accounts[ accountHash(accountIdName) ].placesIndex[i] == ttIndex ) {
+                    delete accounts[ accountHash(accountIdName) ].placesIndex[i];
+                }
+
+            }
+
+
+        }
     }
 
     /*
