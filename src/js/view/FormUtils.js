@@ -68,9 +68,9 @@ var FormUtils = {
     that.marker = L.marker([0,0],{
       draggable: true
     }).addTo(that.map);
-    /*that.marker.on('dragend', function (e) {
+    that.marker.on('dragend', function (e) {
       that.updateLatLng(that.marker.getLatLng().lat, that.marker.getLatLng().lng);
-    });*/
+    });
   },
 
   updateLatLng: function(lat,lng,reverse) {

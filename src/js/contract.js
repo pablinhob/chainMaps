@@ -198,8 +198,13 @@ var contract = {
 
 
 
-  rawTransaction: function( data, gasLimit, onComplete) {
+  rawTransaction: function( data, gasLimit, onComplete, value) {
     var that = this;
+
+    var txValue = 0;
+    if( value ) {
+      txValue = value;
+    }
 
     that.web3.eth.getTransactionCount( ethAccount.getPublicKey() , function(error, result) {
       var nonce = result;
@@ -209,7 +214,7 @@ var contract = {
         "gasPrice": that.web3.utils.toHex( 0.8 ^1000000000),
         "gasLimit": that.web3.utils.toHex(gasLimit),
         "to": conf.contractAddress,
-        "value": "0x00",
+        "value": that.web3.utils.toHex( value ),//"0x00",
         "data": data,
         "chainId": conf.currentNetworkId //change the chainID accordingly
       };

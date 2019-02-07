@@ -45,7 +45,27 @@ contract chainMaps {
       string result
     );
 
-    function setAccount( string memory accountIdName, string memory desc, bool clusterize, uint32 lat, uint32 lng, uint8 zoom ) public {
+
+    constructor() public { owner = msg.sender; }
+    address payable owner;
+
+    // This contract only defines a modifier but does not use
+    // it: it will be used in derived contracts.
+    // The function body is inserted where the special symbol
+    // `_;` in the definition of a modifier appears.
+    // This means that if the owner calls this function, the
+    // function is executed and otherwise, an exception is
+    // thrown.
+    modifier onlyOwner {
+        require(
+            msg.sender == owner,
+            "Only owner can call this function."
+        );
+        _;
+    }
+
+
+    function setAccount( string memory accountIdName, string memory desc, bool clusterize, uint32 lat, uint32 lng, uint8 zoom ) public payable {
 
         if( accountExist(accountIdName) ) {
 
@@ -109,7 +129,7 @@ contract chainMaps {
         }
     }
 
-    function setPlace( string memory accountIdName, uint256 ttIndex, string memory title, string memory desc, string memory imageLink, uint32 lat, uint32 lng, uint8 zoom  ) public returns (uint256) {
+    function setPlace( string memory accountIdName, uint256 ttIndex, string memory title, string memory desc, string memory imageLink, uint32 lat, uint32 lng, uint8 zoom  ) public payable returns (uint256) {
         uint256 ret;
 
 
@@ -178,7 +198,7 @@ contract chainMaps {
         }
     }
 
-    function deletePlace( string memory accountIdName, uint256 ttIndex ) public {
+    function deletePlace( string memory accountIdName, uint256 ttIndex ) public payable {
         if( accountExist(accountIdName) ) {
 
             for (uint i=0; i<accounts[ accountHash(accountIdName) ].placesIndex.length; i++) {
@@ -271,5 +291,16 @@ contract chainMaps {
 
       return (owner == accounts[accountHash(accountIdName)].owner);
     }
+
+
+
+
+    //function deposit() public payable {}
+
+    function withdraw() external onlyOwner {
+        owner.transfer(address(this).balance);
+    }
+
+
 
 }
