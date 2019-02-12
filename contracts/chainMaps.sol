@@ -148,10 +148,10 @@ contract chainMaps {
                         zoom: zoom
                     });
 
-
+                uint256 n;
+                n = now;
                 if( ttIndex == 0 ) { // Create
-                    uint256 n;
-                    n = now;
+
                     accounts[ accountHash(accountIdName) ].places[n] = pl;
                     accounts[ accountHash(accountIdName) ].placesIndex.push(n);
 
@@ -159,9 +159,11 @@ contract chainMaps {
                     emit PlaceSubmit( msg.sender, accountIdName, ttIndex, 'PLACE_CREATED');
                 }
                 else { // update
-                    accounts[ accountHash(accountIdName) ].places[ ttIndex ] = pl;
-                    ret = ttIndex;
-                    emit PlaceSubmit( msg.sender, accountIdName , ttIndex, 'PLACE_UPDATED');
+
+                    replacePlaceTtindex(accountIdName,ttIndex, n);
+                    accounts[ accountHash(accountIdName) ].places[ n ] = pl;
+                    ret = n;
+                    emit PlaceSubmit( msg.sender, accountIdName , n, 'PLACE_UPDATED');
                 }
 
 
@@ -174,6 +176,21 @@ contract chainMaps {
         }
 
 
+    }
+
+    function replacePlaceTtindex(string memory accountIdName ,uint256 ttIndex, uint256 newTtIndex) private {
+        if( accountExist(accountIdName) ) {
+
+            for (uint i=0; i<accounts[ accountHash(accountIdName) ].placesIndex.length; i++) {
+                if( accounts[ accountHash(accountIdName) ].placesIndex[i] == ttIndex ) {
+                    accounts[ accountHash(accountIdName) ].placesIndex[i] = newTtIndex;
+                    break;
+                }
+
+            }
+
+
+        }
     }
 
 
@@ -200,14 +217,14 @@ contract chainMaps {
 
     function deletePlace( string memory accountIdName, uint256 ttIndex ) public payable {
         if( accountExist(accountIdName) ) {
+            if( isOwner(accountIdName) ) {
+                for (uint i=0; i<accounts[ accountHash(accountIdName) ].placesIndex.length; i++) {
+                    if( accounts[ accountHash(accountIdName) ].placesIndex[i] == ttIndex ) {
+                        delete accounts[ accountHash(accountIdName) ].placesIndex[i];
+                    }
 
-            for (uint i=0; i<accounts[ accountHash(accountIdName) ].placesIndex.length; i++) {
-                if( accounts[ accountHash(accountIdName) ].placesIndex[i] == ttIndex ) {
-                    delete accounts[ accountHash(accountIdName) ].placesIndex[i];
                 }
-
             }
-
 
         }
     }
@@ -293,9 +310,6 @@ contract chainMaps {
     }
 
 
-
-
-    //function deposit() public payable {}
 
     function withdraw() external onlyOwner {
         owner.transfer(address(this).balance);
