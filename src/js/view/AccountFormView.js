@@ -16,6 +16,7 @@ var AccountFormView = Backbone.View.extend({
       newAccount: false,
       accountIdName: '',
       desc: '',
+      extraData: '',
       clusterize: false,
       lat: '',
       lng: '',
@@ -135,6 +136,7 @@ var AccountFormView = Backbone.View.extend({
     var acc = new AccountModel({
       accountIdName: $('#accountIdName').val(),
       desc: $('#accountDesc').val(),
+      extraData: '',
       clusterize: $('#clusterize').prop('checked'),
       lat: parseFloat( $('#accountLat').val() ),
       lng: parseFloat( $('#accountLng').val() ),
@@ -169,9 +171,8 @@ var AccountFormView = Backbone.View.extend({
         else {
             app.views.popup.renderTransactionError('Transaction failed. Try again changing "gas limit" value');
         }
-
-
-      }
+      },
+      d.donationValue
     );
 
   });

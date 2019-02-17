@@ -22,7 +22,7 @@ var PopupView = Backbone.View.extend({
     that.$el.find('.confirmTransaction').on('click', function(){
       onSuccessFunction({
         gasLimit: parseInt( that.$el.find('#gaslimit').val() ),
-        donation: parseInt( that.$el.find('#donate').val() )
+        donationValue: parseInt( that.$el.find('#donate').val() )
       });
     });
   },

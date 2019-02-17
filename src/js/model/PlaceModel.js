@@ -5,12 +5,13 @@ var PlaceModel = Backbone.Model.extend({
     title: false,
     desc: false,
     imageLink: false,
+    category: false,
     lat: false,
     lng: false,
     zoom: false
   },
 
-  saveOnContract: function( gasLimit, onSubmit ) {
+  saveOnContract: function( gasLimit, onSubmit, value ) {
     var that = this;
 
     var placeData = that.toJSON();
@@ -24,7 +25,8 @@ var PlaceModel = Backbone.Model.extend({
       function( res ) {
         onSubmit( res);
       },
-      gasLimit
+      gasLimit,
+      value
     );
 
   },
@@ -44,7 +46,8 @@ var PlaceModel = Backbone.Model.extend({
           ttIndex: dataAccount.ttIndex,
           title: res.title ,
           desc: res.desc ,
-          imageLink: res.imageLink ,
+          imageLink: res.imageLink,
+          category: res.category,
           lat: that.fromIntToLatLng( res.lat ) ,
           lng: that.fromIntToLatLng( res.lng) ,
           zoom: res.zoom

@@ -66,13 +66,14 @@ var contract = {
   /*
     Contract functions call
   */
-  setAccountRaw: function(  data, onComplete, gasLimit ) {
+  setAccountRaw: function(  data, onComplete, gasLimit, value ) {
     var that = this;
 
     that.rawTransaction(
       contract.contractInstance.methods.setAccount(
         data.accountIdName,
         data.desc,
+        data.extraData,
         data.clusterize,
         data.lat,
         data.lng,
@@ -80,7 +81,8 @@ var contract = {
 
       ).encodeABI(),
       gasLimit,
-      function(res){  onComplete(res); }
+      function(res){  onComplete(res); },
+      value
     );
 
   },
@@ -134,7 +136,7 @@ var contract = {
     );
   },*/
 
-  setPlaceRaw: function( data, onComplete, gasLimit ) {
+  setPlaceRaw: function( data, onComplete, gasLimit, value ) {
     var that = this;
 
     that.rawTransaction(
@@ -144,12 +146,14 @@ var contract = {
         data.title,
         data.desc,
         data.imageLink,
+        data.category,
         data.lat,
         data.lng,
         data.zoom
       ).encodeABI(),
       gasLimit,
-      function(res){  onComplete(res); }
+      function(res){  onComplete(res); },
+      value
     );
   },
 

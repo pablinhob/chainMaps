@@ -209,18 +209,23 @@ contract chainMaps {
             string memory title,
             string memory desc,
             string memory imageLink,
+            uint32 category,
             uint32 lat,
             uint32 lng,
             uint8 zoom
             ) {
         if( accountExist(accountIdName) ) {
+            place memory pl;
+            pl = accounts[accountHash(accountIdName)].places[ttIndex];
+
             return (
-                accounts[ accountHash(accountIdName) ].places[ttIndex].title,
-                accounts[ accountHash(accountIdName) ].places[ttIndex].desc,
-                accounts[ accountHash(accountIdName) ].places[ttIndex].imageLink,
-                accounts[ accountHash(accountIdName) ].places[ttIndex].position.lat,
-                accounts[ accountHash(accountIdName) ].places[ttIndex].position.lng,
-                accounts[ accountHash(accountIdName) ].places[ttIndex].position.zoom
+                pl.title,
+                pl.desc,
+                pl.imageLink,
+                pl.category,
+                pl.position.lat,
+                pl.position.lng,
+                pl.position.zoom
             );
         }
     }

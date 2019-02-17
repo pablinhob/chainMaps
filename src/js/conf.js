@@ -1,8 +1,9 @@
 const GPS_PRECISSION = 1000000;
 const GPS_ADITION = 100;
 
-
-// LOCAL
+//
+// TRUFFLE LOCAL
+//
 /*
 var conf = {
   httpProvider: 'http://127.0.0.1:9545',
@@ -11,17 +12,35 @@ var conf = {
   defaultGasLimit: 2000000
 };*/
 
+
+//
 // ROPSTEN testnet on INFURA
-var conf = {
+//
+/*var conf = {
   httpProvider: 'https://ropsten.infura.io/v3/2dad8e8275d24f00ad1f5985b4bf1ba6',
   wssProvider: 'wss://ropsten.infura.io/ws',
   abi: [{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"}],"name":"getPlace","outputs":[{"name":"title","type":"string"},{"name":"desc","type":"string"},{"name":"imageLink","type":"string"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountExist","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"},{"name":"title","type":"string"},{"name":"desc","type":"string"},{"name":"imageLink","type":"string"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setPlace","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"getAccount","outputs":[{"name":"owner","type":"string"},{"name":"desc","type":"string"},{"name":"","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"},{"name":"placesNumber","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"}],"name":"deletePlace","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"owner","type":"address"},{"name":"accountIdName","type":"string"}],"name":"addressIsOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"desc","type":"string"},{"name":"clusterize","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setAccount","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"listPlaceIndex","outputs":[{"name":"placesIndex","type":"uint256[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountHash","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":false,"name":"accountIdName","type":"string"},{"indexed":false,"name":"result","type":"string"}],"name":"AccountSubmit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"owner","type":"address"},{"indexed":false,"name":"accountIdName","type":"string"},{"indexed":false,"name":"placeTtIndex","type":"uint256"},{"indexed":false,"name":"result","type":"string"}],"name":"PlaceSubmit","type":"event"}],
   contractAddress: '0xB6d3aF42782eABC74C223D6BBB9EdD7dBD27B5Ee',
   defaultGasLimit: 1000000,
   currentNetworkId: 3 // 3:ropsten
+};*/
+
+// 17 FEB 2019
+var conf = {
+  httpProvider: 'https://ropsten.infura.io/v3/2dad8e8275d24f00ad1f5985b4bf1ba6',
+  wssProvider: 'wss://ropsten.infura.io/ws',
+  abi: [{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"}],"name":"getPlace","outputs":[{"name":"title","type":"string"},{"name":"desc","type":"string"},{"name":"imageLink","type":"string"},{"name":"category","type":"uint32"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountExist","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[],"name":"withdraw","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"getAccount","outputs":[{"name":"owner","type":"string"},{"name":"desc","type":"string"},{"name":"extraData","type":"string"},{"name":"","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"},{"name":"placesNumber","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"}],"name":"deletePlace","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"owner","type":"address"},{"name":"accountIdName","type":"string"}],"name":"addressIsOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"desc","type":"string"},{"name":"extraData","type":"string"},{"name":"clusterize","type":"bool"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setAccount","outputs":[],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"},{"name":"ttIndex","type":"uint256"},{"name":"title","type":"string"},{"name":"desc","type":"string"},{"name":"imageLink","type":"string"},{"name":"category","type":"uint32"},{"name":"lat","type":"uint32"},{"name":"lng","type":"uint32"},{"name":"zoom","type":"uint8"}],"name":"setPlace","outputs":[{"name":"","type":"uint256"}],"payable":true,"stateMutability":"payable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"listPlaceIndex","outputs":[{"name":"placesIndex","type":"uint256[]"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"accountIdName","type":"string"}],"name":"accountHash","outputs":[{"name":"","type":"bytes32"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":false,"name":"accountIdName","type":"string"},{"indexed":false,"name":"result","type":"string"}],"name":"AccountSubmit","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"owner","type":"address"},{"indexed":false,"name":"accountIdName","type":"string"},{"indexed":false,"name":"placeTtIndex","type":"uint256"},{"indexed":false,"name":"result","type":"string"}],"name":"PlaceSubmit","type":"event"}],
+  contractAddress: '0xA0CbBBBcC3FD295311CCC699072751c07BE64C97',
+  defaultGasLimit: 1000000,
+  currentNetworkId: 3 // 3:ropsten
 };
 
- // ROPSTEN LOCAL
+
+
+//
+// GETH ROPSTEN LOCAL
+//
+
 /*
 var conf = {
   httpProvider: 'http://127.0.0.1:8545',

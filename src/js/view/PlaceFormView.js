@@ -75,7 +75,7 @@ var PlaceFormView = Backbone.View.extend({
         $('#placeLng').val(app.data.account.get('lng'));
         $('#placeZoom').val( app.data.account.get('zoom'));
         FormUtils.setFormMap('#placeLat','#placeLng','#placeZoom');
-        
+
         FormUtils.updateInputLatlng();
         that.setForm();
       }
@@ -150,6 +150,7 @@ var PlaceFormView = Backbone.View.extend({
       title: $('#placeTitle').val(),
       desc: $('#placeDesc').val(),
       imageLink: '',
+      category: 1,
       lat: parseFloat( $('#placeLat').val() ),
       lng: parseFloat( $('#placeLng').val() ),
       zoom: parseInt($('#placeZoom').val() )
@@ -180,7 +181,8 @@ var PlaceFormView = Backbone.View.extend({
           else {
             app.views.popup.renderTransactionError('Transaction failed. Try again changing "gas limit" value');
           }
-        }
+        },
+        d.donationValue
       );
     });
 

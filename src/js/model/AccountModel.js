@@ -3,6 +3,7 @@ var AccountModel = Backbone.Model.extend({
   defaults: {
     accountIdName: false,
     desc: false,
+    extraData: false,
     clusterize: false,
     lat: false,
     lng: false,
@@ -10,7 +11,7 @@ var AccountModel = Backbone.Model.extend({
     placesNumber: false
   },
 
-  saveOnContract: function( gasLimit, onSubmit ) {
+  saveOnContract: function( gasLimit, onSubmit, value ) {
     var that = this;
 
     var accountData = that.toJSON();
@@ -25,7 +26,8 @@ var AccountModel = Backbone.Model.extend({
       function( res ) {
         onSubmit( res);
       },
-      gasLimit
+      gasLimit,
+      value
     );
 
   },
@@ -40,11 +42,12 @@ var AccountModel = Backbone.Model.extend({
         that.set( {
           //accountIdName: res[0] ,
           desc: res[1] ,
-          clusterize: res[2] ,
-          lat: that.fromIntToLatLng( res[3] ) ,
-          lng: that.fromIntToLatLng( res[4])  ,
-          zoom: res[5] ,
-          placesNumber: res[6]
+          extraData: res[2],
+          clusterize: res[3] ,
+          lat: that.fromIntToLatLng( res[4] ) ,
+          lng: that.fromIntToLatLng( res[5])  ,
+          zoom: res[6] ,
+          placesNumber: res[7]
         });
       }
     );
