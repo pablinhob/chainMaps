@@ -13,7 +13,7 @@ var AccountFormView = Backbone.View.extend({
     var that = this;
 
     var formData = {
-      newDialogText: 'You are going to create a new map and store it into Ethereum blockchain. Make sure your can remember this name to use in a future.',
+      newDialogText: 'You are going to create a new map and store it into Ethereum blockchain. Make sure you can remember this name to use it in a future.',
       newAccount: false,
       accountIdName: '',
       desc: '',
@@ -27,7 +27,7 @@ var AccountFormView = Backbone.View.extend({
 
     if( app.accountIdName != 'false'  ) {
 
-      formData.newDialogText = 'You are going to create a new map called "'+app.accountIdName+'" and store it into Ethereum blockchain. Make sure your can remember this name to use in a future';
+      formData.newDialogText = 'You are going to create a new map called "'+app.accountIdName+'" and store it into Ethereum blockchain. Make sure you can remember this name to use it in a future.';
 
       contract.accountExist({ accountIdName:app.accountIdName }, function(res){
 
