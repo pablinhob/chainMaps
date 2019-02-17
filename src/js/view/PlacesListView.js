@@ -37,6 +37,15 @@ var PlacesListView = Backbone.View.extend({
 
   },
 
+  renderPlacesOffline: function() {
+    var that = this;
+      $(that.$el).find('.listContainer').html('')
+    that.placeCollection.each( function(e) {
+
+      that.renderPlace(e);
+    });
+  },
+
   renderPlace: function(place) {
     var that = this;
     $(that.$el).find('.loading').hide();
@@ -65,7 +74,6 @@ var PlacesListView = Backbone.View.extend({
     var deleteId = $(ev.target).parent().attr('dataid');
     var place = that.placeCollection.get(deleteId);
 
-//deleteOnContract: function( gasLimit, onSubmit, value )
 
 
     app.views.popup.renderTransaction( function(d){
@@ -81,7 +89,9 @@ var PlacesListView = Backbone.View.extend({
                   if( txObj != null) {
                     //console.log(txObj)
                     clearInterval(evInt);
-                    app.router.navigate('account/'+app.accountIdName+'/adminPlaces',true);
+                    //app.router.navigate('account/'+app.accountIdName+'/adminPlaces',true);
+                    that.placeCollection.remove(place);
+                    that.renderPlacesOffline();
                     app.views.popup.close();
                   }
                 }).catch( function(err) {
