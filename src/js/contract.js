@@ -202,6 +202,17 @@ var contract = {
 
 
 
+  withdrawRAW: function( onComplete, gasLimit ) {
+    var that = this;
+
+    that.rawTransaction(
+      contract.contractInstance.methods.withdraw().encodeABI(),
+      gasLimit,
+      function(res){  onComplete(res); },
+      0
+    );
+  },
+
   rawTransaction: function( data, gasLimit, onComplete, value) {
     var that = this;
 
