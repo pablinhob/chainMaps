@@ -182,7 +182,7 @@
       <div class="panel panel-info">
       <% if( newAccount == true  ) { %>
         <div class="panel-heading">Create new account </div>
-        <div class="panel-body">Panel Content</div>
+        <div class="panel-body"><%= newDialogText %></div>
       <%}else {%>
         <div class="panel-heading">Account editor </div>
         <div class="panel-body">You are editing metadata of map "<%-accountIdName%>"</div>
@@ -191,7 +191,7 @@
 
       <form id="signupForm" method="post" class="form-horizontal"  onSubmit="return false;">
 
-        <div class="form-group"  <% if( newAccount == false  ) { %> style="display:none;" <%}%>>
+        <div class="form-group"  <% if( accountIdName != false  ) { %> style="display:none;" <%}%>>
           <div class="col-sm-5">
             <input type="text" class="form-control" id="accountIdName" name="accountIdName" placeholder="Account name (without spaces)" value="<%- accountIdName %>"/>
           </div>
