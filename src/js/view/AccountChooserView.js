@@ -13,6 +13,12 @@ var AccountChooserView = Backbone.View.extend({
 
     app.data.account = false;
     app.data.locations = false;
+
+    $('.accountForm .accountInput').keypress(function( e ) {
+      if(e.which === 32){
+        return false;
+      }
+    });
   },
   goAccount: function() {
     var that = this;
@@ -30,7 +36,7 @@ var AccountChooserView = Backbone.View.extend({
             app.views.popup.renderEthAccountConf(function(){
               app.router.navigate('account/false/adminAccount',true);
             });
-      
+
 
 
         }
