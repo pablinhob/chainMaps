@@ -15,6 +15,7 @@ contract chainMaps {
         string title;
         string desc;
         string imageLink;
+        uint32 category;
         geoLatLng position;
     }
 
@@ -23,6 +24,7 @@ contract chainMaps {
         address owner;
         string ownerIdname;
         string desc;
+        string extraData;
         bool clusterize;
         geoLatLng position;
         uint256[] placesIndex; // array de timestamps (hora de escritura)
@@ -65,13 +67,14 @@ contract chainMaps {
     }
 
 
-    function setAccount( string memory accountIdName, string memory desc, bool clusterize, uint32 lat, uint32 lng, uint8 zoom ) public payable {
+    function setAccount( string memory accountIdName, string memory desc, string memory extraData, bool clusterize, uint32 lat, uint32 lng, uint8 zoom ) public payable {
 
         if( accountExist(accountIdName) ) {
 
           if( isOwner(accountIdName) ) {
             accounts[accountHash(accountIdName)].ownerIdname = accountIdName;
             accounts[accountHash(accountIdName)].desc = desc;
+            accounts[accountHash(accountIdName)].extraData = extraData;
             accounts[accountHash(accountIdName)].clusterize = clusterize;
             accounts[accountHash(accountIdName)].position.lat = lat;
             accounts[accountHash(accountIdName)].position.lng = lng;
@@ -95,6 +98,7 @@ contract chainMaps {
             });
             acc.owner = msg.sender;
             acc.desc = desc;
+            acc.extraData = extraData;
             acc.clusterize = clusterize;
 
             accounts[accountHash(accountIdName)] = acc;
@@ -107,6 +111,7 @@ contract chainMaps {
         returns (
             string memory owner,
             string memory desc,
+            string memory extraData,
             bool,
             uint32 lat,
             uint32 lng,
@@ -120,6 +125,7 @@ contract chainMaps {
             return (
                 ac.ownerIdname,
                 ac.desc,
+                ac.extraData,
                 ac.clusterize,
                 ac.position.lat,
                 ac.position.lng,
@@ -129,7 +135,7 @@ contract chainMaps {
         }
     }
 
-    function setPlace( string memory accountIdName, uint256 ttIndex, string memory title, string memory desc, string memory imageLink, uint32 lat, uint32 lng, uint8 zoom  ) public payable returns (uint256) {
+    function setPlace( string memory accountIdName, uint256 ttIndex, string memory title, string memory desc, string memory imageLink, uint32 category, uint32 lat, uint32 lng, uint8 zoom  ) public payable returns (uint256) {
         uint256 ret;
 
 
@@ -137,11 +143,14 @@ contract chainMaps {
         if( accountExist(accountIdName) ) {
 
             if( isOwner(accountIdName) ) {
+                bytes32 accountIdNameHash;
+                accountIdNameHash = accountHash(accountIdName);
 
                 place memory pl;
                 pl.title = title;
                 pl.desc = desc;
                 pl.imageLink = imageLink;
+                pl.category = category;
                 pl.position = geoLatLng({
                         lat: lat,
                         lng: lng,
@@ -149,11 +158,12 @@ contract chainMaps {
                     });
 
                 uint256 n;
+
                 n = now;
                 if( ttIndex == 0 ) { // Create
 
-                    accounts[ accountHash(accountIdName) ].places[n] = pl;
-                    accounts[ accountHash(accountIdName) ].placesIndex.push(n);
+                    accounts[ accountIdNameHash ].places[n] = pl;
+                    accounts[ accountIdNameHash ].placesIndex.push(n);
 
                     ret = n;
                     emit PlaceSubmit( msg.sender, accountIdName, ttIndex, 'PLACE_CREATED');
@@ -161,7 +171,7 @@ contract chainMaps {
                 else { // update
 
                     replacePlaceTtindex(accountIdName,ttIndex, n);
-                    accounts[ accountHash(accountIdName) ].places[ n ] = pl;
+                    accounts[ accountIdNameHash ].places[ n ] = pl;
                     ret = n;
                     emit PlaceSubmit( msg.sender, accountIdName , n, 'PLACE_UPDATED');
                 }
