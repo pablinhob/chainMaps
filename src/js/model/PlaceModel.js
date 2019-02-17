@@ -56,6 +56,23 @@ var PlaceModel = Backbone.Model.extend({
     );
   },
 
+  deleteOnContract: function( gasLimit, onSubmit, value ) {
+    var that = this;
+
+    var placeData = that.toJSON();
+
+    placeData.accountIdName = app.accountIdName;
+
+    contract.deletePlaceRaw(
+      placeData,
+      function( res ) {
+        onSubmit( res);
+      },
+      gasLimit,
+      value
+    );
+  },
+
   fromLatLngToInt: function( val ){
     var that = this;
     //return val;

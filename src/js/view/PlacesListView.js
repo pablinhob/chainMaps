@@ -61,7 +61,42 @@ var PlacesListView = Backbone.View.extend({
   },
 
   deletePlace: function(ev) {
-    app.views.popup.renderConfirm();
+    var that = this;
+    var deleteId = $(ev.target).parent().attr('dataid');
+    var place = that.placeCollection.get(deleteId);
+
+//deleteOnContract: function( gasLimit, onSubmit, value )
+
+
+    app.views.popup.renderTransaction( function(d){
+      app.views.popup.renderTransactionWaiting();
+      place.deleteOnContract(
+        d.gasLimit,
+        function( txH ) {
+          if(typeof txH != 'undefined') {
+            console.log('Esperando confirmación...',txH);
+            var evInt = setInterval(function(){
+              contract.web3Wss.eth.getTransactionReceipt(txH).then(
+                function(txObj){
+                  if( txObj != null) {
+                    //console.log(txObj)
+                    clearInterval(evInt);
+                    app.router.navigate('account/'+app.accountIdName+'/adminPlaces',true);
+                    app.views.popup.close();
+                  }
+                }).catch( function(err) {
+                  app.views.popup.renderTransactionError('Unknown error');
+                });
+            }, 1000);
+          }
+          else {
+            app.views.popup.renderTransactionError('Transaction failed. Try again changing "gas limit" value');
+          }
+        },
+        d.donationValue
+      );
+    });
+
   }
 
 });

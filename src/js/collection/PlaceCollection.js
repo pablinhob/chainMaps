@@ -8,8 +8,9 @@ var PlaceCollection = Backbone.Collection.extend({
       },
       function(res){
         $.each(res, function(i,ttIndex){
-
-          that.getPlace(ttIndex, eachPlaceFunction);
+          if( ttIndex != 0 ){
+            that.getPlace(ttIndex, eachPlaceFunction);
+          }
         });
       });
   },

@@ -157,6 +157,22 @@ var contract = {
     );
   },
 
+
+  deletePlaceRaw: function( data, onComplete, gasLimit, value ) {
+    var that = this;
+
+    that.rawTransaction(
+      contract.contractInstance.methods.deletePlace(
+        data.accountIdName,
+        data.ttIndex
+      ).encodeABI(),
+      gasLimit,
+      function(res){  onComplete(res); },
+      value
+    );
+  },
+
+
   getPlace: function( data, onComplete ) {
     var that = this;
 
