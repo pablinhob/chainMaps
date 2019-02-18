@@ -274,6 +274,12 @@
 
         <div class="form-group">
           <div class="col-sm-5">
+            <input type="text" class="form-control" id="placeImageLink" name="placeImageLink" placeholder="Place Image Link" value="<%- imageLink %>"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-5">
             <select class="placeCategory" id="placeCategory" name="placeCategory"  >
               <% $.each(Category, function(i,e) { %>
                 <option <% if(category == i) {%>SELECTED<%}%> value="<%=i%>" data-content="<i class='glyphicon glyphicon-<%=e%>'></i> <%-e%>" ></option>

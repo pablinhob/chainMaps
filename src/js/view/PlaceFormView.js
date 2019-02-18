@@ -152,7 +152,7 @@ var PlaceFormView = Backbone.View.extend({
       ttIndex: $('#ttIndex').val(),
       title: $('#placeTitle').val(),
       desc: $('#placeDesc').val(),
-      imageLink: '',
+      imageLink: $('#placeImageLink').val(),
       category: $('#placeCategory').val(),
       lat: parseFloat( $('#placeLat').val() ),
       lng: parseFloat( $('#placeLng').val() ),
