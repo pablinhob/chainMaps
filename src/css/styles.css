@@ -2,6 +2,10 @@ body {
   font-family: 'Roboto Condensed', sans-serif;
   background-color: #000;
 }
+body * {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 
 .header {
   height:60px;
