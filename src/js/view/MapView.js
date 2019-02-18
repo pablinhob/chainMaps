@@ -56,9 +56,16 @@ var MapView = Backbone.View.extend({
     that.placeCollection.checkout(function(place){
 
       var contentMarker = '<h2>'+place.get('title')+'</h2><p>'+place.get('desc')+'</p>';
+
+      var markerIcon= false;
+      if( place.get('category') != 0 ) {
+        markerIcon = {icon: L.icon.glyph({ prefix: 'glyphicon', glyph: Category[place.get('category')] }) };
+      }
+
+
       var marker = L.marker(
         [place.get('lat'), place.get('lng')],
-        {icon: L.icon.glyph({ prefix: 'glyphicon', glyph: 'menu-left' }) }
+        markerIcon
       );
       if( app.data.account.get('clusterize') == true ){
         that.markerCluster.addLayer(marker);
