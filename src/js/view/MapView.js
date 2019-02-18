@@ -51,11 +51,14 @@ var MapView = Backbone.View.extend({
   renderPlaces: function() {
     var that = this;
 
+    //L.marker([-20,-20], {icon: L.icon.glyph({ prefix: 'mif', glyph: 'earth' }) }).addTo(that.map);
+
     that.placeCollection.checkout(function(place){
 
       var contentMarker = '<h2>'+place.get('title')+'</h2><p>'+place.get('desc')+'</p>';
       var marker = L.marker(
-        [place.get('lat'), place.get('lng')]
+        [place.get('lat'), place.get('lng')],
+        {icon: L.icon.glyph({ prefix: 'glyphicon', glyph: 'menu-left' }) }
       );
       if( app.data.account.get('clusterize') == true ){
         that.markerCluster.addLayer(marker);

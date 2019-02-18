@@ -16,6 +16,7 @@ var PlaceFormView = Backbone.View.extend({
       title: '',
       desc: '',
       imageLink: '',
+      category:0,
       lat: '',
       lng: '',
       zoom: ''
@@ -88,6 +89,8 @@ var PlaceFormView = Backbone.View.extend({
   setForm: function(){
     var that = this;
 
+    $('select.placeCategory').selectpicker();
+
 
     $( "#placeForm" ).validate( {
   		rules: {
@@ -150,7 +153,7 @@ var PlaceFormView = Backbone.View.extend({
       title: $('#placeTitle').val(),
       desc: $('#placeDesc').val(),
       imageLink: '',
-      category: 1,
+      category: $('#placeCategory').val(),
       lat: parseFloat( $('#placeLat').val() ),
       lng: parseFloat( $('#placeLng').val() ),
       zoom: parseInt($('#placeZoom').val() )
