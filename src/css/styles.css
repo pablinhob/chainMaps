@@ -86,7 +86,33 @@ body * {
   margin-left: 50px;
   color:red;
 }
+
+
 /* MAP */
+
+.functionButtons {
+  z-index:1000;top:75px;right:10px;position:absolute;
+}
+
+.functionButtons .btn{
+  margin-left:10px;
+  width:50px;
+  height:50px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color:black;
+}
+
+.functionButtons .link span{
+  margin-left:-2px;
+  margin-top:3px;font-size:29px;color:white;
+}
+
+.functionButtons .embed span{
+  margin-left:-3px;
+  font-size:24px;color:white;font-weight:bold;
+}
+
 
 #mapContainer {
   width:100%;
@@ -99,5 +125,4 @@ body * {
   top:0;
   left:0;
   z-index:-1000;
-
 }
