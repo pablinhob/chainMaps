@@ -81,10 +81,10 @@
 
   <script id="popupInfoTemplate" type="text/template">
     <div class="modal-header" style="padding:35px 50px;">
-      <h4><span class="glyphicon glyphicon-info-sign"></span> Guerrilla GIS</h4>
+      <h4><%=title%></h4>
     </div>
     <div class="modal-body" style="padding:40px 50px;">
-
+      <%=content%>
     </div>
     <div class="modal-footer">
       <button class="btn btn-success btn-default pull-right" data-dismiss="modal"> Close </button>
@@ -173,7 +173,7 @@
 
   <script id="mapTemplate" type="text/template">
     <div class="functionButtons" style="">
-      <div class="link btn"><span class="glyphicon glyphicon-link"></span></div>
+        <div class="link btn"><span class="glyphicon glyphicon-link"></span></div>
       <div class="embed btn" ><span>&lt;/&gt;</span></div>
     </div>
     <div id="mapContainer">

@@ -4,7 +4,8 @@ var MapView = Backbone.View.extend({
   markerCluster: false,
   placeCollection: new PlaceCollection(),
   events: {
-
+    'click .functionButtons .link': 'linkPopup',
+    'click .functionButtons .embed': 'embedPopup'
   },
   initialize: function(){
 
@@ -115,6 +116,20 @@ var MapView = Backbone.View.extend({
       that.renderPlaces();
     });
 
+  },
+
+  linkPopup: function() {
+    var that = this;
+
+    app.views.popup.renderInfo('<span class="glyphicon glyphicon-link"></span> Share your map', '<input type="text" value="'+window.location.href+'" style="width:360px;" readonly /><button class="copyClipboard btn btn-primary">Copy to clipboard </button>' );
+  },
+
+  embedPopup: function() {
+    var that = this;
+    app.views.popup.renderInfo(
+      '<span>&lt;/&gt;</span> Embed this map in your page or blog',
+      ''
+    );
   }
 
 

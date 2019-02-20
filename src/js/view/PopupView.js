@@ -9,9 +9,9 @@ var PopupView = Backbone.View.extend({
   initialize: function(){
     var that = this;
   },
-  renderInfo: function(){
+  renderInfo: function(title,content){
     var that = this;
-    that.$el.html(that.tplInfo() );
+    that.$el.html(that.tplInfo({title:title,content:content}) );
     $('#popup').modal();
   },
 
