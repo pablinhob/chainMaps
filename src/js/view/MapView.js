@@ -121,14 +121,17 @@ var MapView = Backbone.View.extend({
   linkPopup: function() {
     var that = this;
 
-    app.views.popup.renderInfo('<span class="glyphicon glyphicon-link"></span> Share your map', '<input type="text" value="'+window.location.href+'" style="width:360px;" readonly /><button class="copyClipboard btn btn-primary">Copy to clipboard </button>' );
+    app.views.popup.renderInfo('<span class="glyphicon glyphicon-share"></span> Share your map', '<input type="text" value="'+window.location.href+'" style="width:100%;" readonly />' );
   },
 
   embedPopup: function() {
     var that = this;
     app.views.popup.renderInfo(
       '<span>&lt;/&gt;</span> Embed this map in your page or blog',
-      ''
+      '<textarea style="width:100%;height:100px;">'+
+        '<iframe scrolling="no" frameborder="no" src="'+window.location.host+'/indexEmbed.html" style="width: 400px; height: 400px;">'+
+        '</iframe>'+
+      '</textarea>'
     );
   }
 
