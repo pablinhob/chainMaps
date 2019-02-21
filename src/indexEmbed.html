@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
   </head>
   <script id="mapTemplate" type="text/template">
+    <div onclick="parent.window.location = window.location.protocol +'//'+window.location.host;" style="cursor:pointer;border-radius: 5px;padding:5px;position:absolute;left:5px;bottom:5px;z-index:1000;color:white;box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);background-color:black;"><img width="25" src="img/logo_medium.png"> Powered by CHAINMAPS v1</div>
     <div class="functionButtons" style="">
     </div>
     <div id="mapContainer">
@@ -55,6 +56,6 @@
       }
     };
     app.views.map.render();
-    
+
   </script>
 </html>
