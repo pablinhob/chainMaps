@@ -13,8 +13,16 @@ var MapView = Backbone.View.extend({
 
   setMapFullScreen: function() {
     var that = this;
+
     $('#mapContainer').css('width','100%');
-    $('#mapContainer').css('height', ( $(window).height()-$('.header').height() )+'px');
+    if(window.frameElement) {
+      $('#mapContainer').css('height', ( $(window).height())+'px');
+    }
+    else {
+      $('#mapContainer').css('height', ( $(window).height()-$('.header').height() )+'px');
+    }
+
+
   },
 
   render: function(){
