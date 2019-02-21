@@ -129,7 +129,7 @@ var MapView = Backbone.View.extend({
     app.views.popup.renderInfo(
       '<span>&lt;/&gt;</span> Embed this map in your page or blog',
       '<textarea style="width:100%;height:100px;">'+
-        '<iframe scrolling="no" frameborder="no" src="'+window.location.host+'/indexEmbed.html" style="width: 400px; height: 400px;">'+
+        '<iframe name="'+app.accountIdName+'" scrolling="no" frameborder="no" src="'+window.location.protocol +'//'+window.location.host+'/indexEmbed.html" style="width: 400px; height: 400px;">'+
         '</iframe>'+
       '</textarea>'
     );
