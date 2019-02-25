@@ -54,6 +54,12 @@ body * {
   margin-top:60px;
 }
 
+.poweredby {
+
+  position:fixed;
+  left:10px;
+  bottom:-30px;
+}
 
 .content .createNewOne {
   cursor:pointer;
