@@ -37,6 +37,7 @@ var FormUtils = {
     ];
 
     that.map = new L.Map('divMap', initData);
+    that.map.scrollWheelZoom.disable();
     that.map.on('zoomend', function() {
       if( !isNaN(that.map.getZoom()) ) {
         $(that.inputZoom).val( that.map.getZoom() );
