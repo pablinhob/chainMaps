@@ -194,51 +194,62 @@
       </div>
 
       <form id="signupForm" method="post" class="form-horizontal"  onSubmit="return false;">
-
-        <div class="form-group"  <% if( accountIdName != false  ) { %> style="display:none;" <%}%>>
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="accountIdName" name="accountIdName" placeholder="Account name (without spaces)" value="<%- accountIdName %>"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-5">
-            <textarea class="form-control" id="accountDesc" name="accountDesc" placeholder="Map description, contact info, etc..." ><%- desc %></textarea>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-sm-5 col-sm-offset-4">
-            <div class="checkbox">
-            <label>
-              <input type="checkbox" id="clusterize" name="clusterize" value="clusterize"  <% if( clusterize == true ){%> checked <%}%> />Clusterize markers
-            </label>
+        <div class="row col-sm-6">
+          <div class="form-group"  <% if( accountIdName != false  ) { %> style="display:none;" <%}%>>
+            <div class="col-sm-12">
+              <label for="accountDesc">Account name</label>
+              <input type="text" class="form-control" id="accountIdName" name="accountIdName" placeholder="Account name (without spaces)" value="<%- accountIdName %>"/>
             </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <div class="col-sm-5">
-            <input type="text" class="form-control" id="accountLat" name="accountLat" placeholder="Latitude"  value="<%-lat%>" />
-            <input type="text"  class="form-control" id="accountLng" name="accountLng" placeholder="Longitude"  value="<%-lng%>" />
-            <input type="text"  class="form-control" id="accountZoom" name="accountZoom" placeholder="Zoom" value="<%-zoom%>"/>
-          </div>
-        </div>
-        <div id="divMap" style="width:400px;height:400px;"></div>
-        <!--div class="form-group">
-          <div class="col-sm-5 col-sm-offset-4">
-            <div class="checkbox">
-            <label>
-              <input type="checkbox" id="agree" name="agree" value="agree"/>I Understand
-            </label>
+          <div class="form-group">
+            <div class="col-sm-12">
+              <label for="accountDesc">Description</label>
+              <textarea class="form-control" id="accountDesc" name="accountDesc"  style="height:160px;" placeholder="Map description, contact info, etc..." ><%- desc %></textarea>
             </div>
           </div>
-        </div-->
-        <div class="form-group">
-          <div class="col-sm-9 col-sm-offset-4">
-            <button type="submit" class="btn btn-primary" name="signup" value="Sign up"><% if( newAccount == true  ) {%>Create account<%}else{%>Save account<%}%></button>
+
+          <div class="form-group">
+            <div class="col-sm-12 col-sm-offset-1">
+              <div class="checkbox">
+                <input type="checkbox" id="clusterize" name="clusterize" value="clusterize"  <% if( clusterize == true ){%> checked <%}%> />Clusterize markers
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-12">
+              <button type="submit" class="btn btn-primary pull-right"  name="signup" value="Sign up"><% if( newAccount == true  ) {%>Create account<%}else{%>Save account<%}%></button>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row col-sm-5 col-sm-offset-1">
+          <div id="divMap" style="height:400px;"></div>
+          <div class="form-group">
+
+            <div class="col-sm-4">
+              <label for="accountLat">Lat: </label>
+              <input type="text" class="form-control" id="accountLat" name="accountLat" placeholder="Latitude"  value="<%-lat%>" />
+            </div>
+            <div class="col-sm-4">
+              <label for="accountLng">Lng: </label>
+              <input type="text"  class="form-control" id="accountLng" name="accountLng" placeholder="Longitude"  value="<%-lng%>" />
+            </div>
+            <div class="col-sm-4">
+              <label for="accountZoom">Zoom: </label>
+              <input type="text"  class="form-control" id="accountZoom" name="accountZoom" placeholder="Zoom" value="<%-zoom%>"/>
+            </div>
+
           </div>
         </div>
+
+
+
+
+
       </form>
     </div>
   </script>
@@ -309,15 +320,15 @@
           <div id="divMap"  style="height:400px;"></div>
           <div class="form-group">
             <div class="col-sm-4">
-              <label for="placeCategory">Lat: </label>
+              <label for="placeLat">Lat: </label>
               <input type="text" class="form-control" id="placeLat" name="placeLat" placeholder="Latitude"  value="<%-lat%>" />
             </div>
             <div class="col-sm-4">
-              <label for="placeCategory">Lng: </label>
+              <label for="placeLng">Lng: </label>
               <input type="text"  class="form-control" id="placeLng" name="placeLng" placeholder="Longitude"  value="<%-lng%>" />
             </div>
             <div class="col-sm-4">
-              <label for="placeCategory">Zoom: </label>
+              <label for="placeZoom">Zoom: </label>
               <input type="text"  class="form-control" id="placeZoom" name="placeZoom" placeholder="Zoom" value="<%-zoom%>"/>
             </div>
           </div>

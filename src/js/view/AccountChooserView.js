@@ -34,7 +34,7 @@ var AccountChooserView = Backbone.View.extend({
         if (r == true) {
 
             app.views.popup.renderEthAccountConf(function(){
-              app.router.navigate('account/false/adminAccount',true);
+              app.router.navigate('account/'+accIdName+'/adminAccount',true);
             });
 
 
