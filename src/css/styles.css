@@ -58,6 +58,8 @@ body * {
 .content .createNewOne {
   cursor:pointer;
   color:#fff;
+  margin-top:5px;
+  font-size: 14px;
 }
 .content .accountForm {
   margin-top: 30px;
