@@ -329,19 +329,24 @@
 
   <script id="placesListTemplate"  type="text/template">
     <div class="container listaEditor">
-      <div><button class="addPlace">Add place</button></div>
+      <div><button class="addPlace btn btn-primary">Add place</button></div>
+
+      <div  class="col-sm-12">
         <div class="loading">Loading...</div>
         <ul class="list-group listContainer">
         </ul>
-      <div><button class="addPlace">Add place</button></div>
+      </div>
+      <div><button class="addPlace btn btn-primary">Add place</button></div>
     </div>
   </script>
 
   <script id="placesListElementTemplate"  type="text/template">
     <li class="list-group-item" dataId="<%-id%>">
-      <div class="title"><%-title%></div>
-      <button class="delete"><i class="fa fa-trash fa-2x"></i></button>
-      <button class="edit"><i class="fa fa-edit fa-2x"></i></button>
+      <div class="title col-sm-10"><%-title%></div>
+      <div class="col-sm-2">
+        <button class="delete"><i class="fa fa-trash fa-2x"></i></button>
+        <button class="edit"><i class="fa fa-edit fa-2x"></i></button>
+      </div>
     </li>
   </script>
 
