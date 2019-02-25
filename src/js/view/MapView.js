@@ -62,7 +62,7 @@ var MapView = Backbone.View.extend({
 
     //L.marker([-20,-20], {icon: L.icon.glyph({ prefix: 'mif', glyph: 'earth' }) }).addTo(that.map);
 
-    that.placeCollection.checkout(function(place){
+    that.placeCollection.pull(function(place){
 
       var contentMarker = '<h2>'+place.get('title')+'</h2>'+
         '<p>'+place.get('desc')+'</p>' +

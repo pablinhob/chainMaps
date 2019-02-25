@@ -31,9 +31,14 @@ var PlacesListView = Backbone.View.extend({
     that.$el.html( that.tpl() );
     $(that.$el).find('.loading').show();
     $(that.$el).find('.listContainer').html('')
-    that.placeCollection.checkout(function(place){
-      that.renderPlace(place);
-    });
+    that.placeCollection.pull(
+      function(place) {
+        that.renderPlace(place);
+      },
+      function(indice) {
+        $(that.$el).find('.loading').html('Add places to your map');
+      }
+    );
 
   },
 
@@ -71,7 +76,8 @@ var PlacesListView = Backbone.View.extend({
 
   deletePlace: function(ev) {
     var that = this;
-    var deleteId = $(ev.target).parent().attr('dataid');
+    var deleteId = $(ev.target).parent().parent().attr('dataid');
+
     var place = that.placeCollection.get(deleteId);
 
 
