@@ -2,7 +2,8 @@ var AccountChooserView = Backbone.View.extend({
   tpl: _.template( $("#accountChooserTemplate").html(), {} ),
   events: {
     //"click input[type=button]": "goAccount"
-    'submit .accountForm': 'goAccount'
+    'submit .accountForm': 'goAccount',
+    'click .createNewOne': 'createNewOne'
   },
   initialize: function(){
 
@@ -42,6 +43,15 @@ var AccountChooserView = Backbone.View.extend({
         }
       }
     });
+  },
+
+  createNewOne: function() {
+    var that = this;
+
+    app.views.popup.renderEthAccountConf(function(){
+      app.router.navigate('account/false/adminAccount',true);
+    });
+
   }
 
 });

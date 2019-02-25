@@ -54,6 +54,11 @@ body * {
   margin-top:60px;
 }
 
+
+.content .createNewOne {
+  cursor:pointer;
+  color:#fff;
+}
 .content .accountForm {
   margin-top: 30px;
 }
