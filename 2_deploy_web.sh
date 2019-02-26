@@ -5,24 +5,36 @@ if [ -z "$1" ]
     echo "argument deploy dir"
 else
   echo "deploy to $1"
-  cp -R src/css $1/css
-  cp -R src/img $1/img
-  cp -R src/js $1/js
-  cp -R src/vendorStatic $1/vendorStatic
+  cp -R src/css $1/
+  cp -R src/img $1/
+  cp -R src/js $1/
+  cp -R src/vendorStatic $1/
   cp -R src/index.html $1/
 
 
-  mkdir -p $1/vendor/bootstrap/dist/{js,css}
+  mkdir -p $1/vendor/bootstrap/dist/{js,css,fonts}
   cp src/vendor/bootstrap/dist/css/bootstrap.min.css $1/vendor/bootstrap/dist/css/bootstrap.min.css
   cp src/vendor/bootstrap/dist/js/bootstrap.min.js $1/vendor/bootstrap/dist/js/bootstrap.min.js
+  cp src/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.eot $1/vendor/bootstrap/dist/fonts/
+  cp src/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.ttf $1/vendor/bootstrap/dist/fonts/
+  cp src/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.woff $1/vendor/bootstrap/dist/fonts/
+  cp src/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.svg $1/vendor/bootstrap/dist/fonts/
+  cp src/vendor/bootstrap/dist/fonts/glyphicons-halflings-regular.woff2 $1/vendor/bootstrap/dist/fonts/
 
-  mkdir -p $1/vendor/bootstrap/dist/{fonts,css}
+
+
+
+
+  mkdir -p $1/vendor/font-awesome/{fonts,css}
+  cp src/vendor/font-awesome/css/font-awesome.css.map $1/vendor/font-awesome/css/font-awesome.css.map
   cp src/vendor/font-awesome/css/font-awesome.min.css $1/vendor/font-awesome/css/font-awesome.min.css
+  cp src/vendor/font-awesome/css/font-awesome.css $1/vendor/font-awesome/css/font-awesome.css
   cp src/vendor/font-awesome/fonts/* $1/vendor/font-awesome/fonts/
   
   mkdir -p $1/vendor/bootstrap-select/dist/{js,css}
   cp src/vendor/bootstrap-select/dist/css/bootstrap-select.min.css $1/vendor/bootstrap-select/dist/css/bootstrap-select.min.css
   cp src/vendor/bootstrap-select/dist/js/bootstrap-select.min.js $1/vendor/bootstrap-select/dist/js/bootstrap-select.min.js
+
 
   mkdir -p $1/vendor/leaflet/dist
   cp src/vendor/leaflet/dist/leaflet.css $1/vendor/leaflet/dist/leaflet.css

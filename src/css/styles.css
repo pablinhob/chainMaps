@@ -54,11 +54,11 @@ body * {
   margin-top:60px;
 }
 
-.poweredby {
-
-  position:fixed;
-  left:10px;
-  bottom:-30px;
+.content .poweredby {
+  color:#fff;
+  position:absolute;
+  right:10px;
+  bottom
 }
 
 .content .createNewOne {
