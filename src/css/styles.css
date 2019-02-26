@@ -94,7 +94,7 @@ body * {
 }
 .listaEditor .listContainer li .title {
   font-size: 25px;
-  float:left;
+
   height: 40px;
 }
 
@@ -135,6 +135,7 @@ body * {
   margin-left:-3px;
   font-size:24px;color:white;font-weight:bold;
 }
+
 
 
 #mapContainer {
