@@ -69,7 +69,7 @@ var PlacesListView = Backbone.View.extend({
     var that = this;
 
     app.router.navigate(
-      'account/'+app.accountIdName+'/adminPlaces/id/'+$(ev.target).parent().attr('dataId'),
+      'account/'+app.accountIdName+'/adminPlaces/id/'+$(ev.target).parent().parent().attr('dataid'),
       true
     );
   },
