@@ -33,7 +33,7 @@ var conf = {
   contractAddress: '0xA0CbBBBcC3FD295311CCC699072751c07BE64C97',
   defaultGasLimit: 1500000,
   currentNetworkId: 3, // 3:ropsten
-  changeNetworkMenuOption: '<li><a href="http://testnet.chainmaps.net"><i class="fa fa-info-circle"></i> Try on test network</a></li>',
+  changeNetworkMenuOption: '<li><a href="http://chainmaps.net"><i class="fa fa-sitemap"></i> Try on main network</a></li>',
   testNetAdvice: '<p>This app is runing now over <a target="_blank" href="https://medium.com/compound-finance/the-beginners-guide-to-using-an-ethereum-test-network-95bbbc85fc1d">Ethereum Ropsten testnet</a>. This blockchain is only for test purposes and is not secure.<br> However, transactions have no cost and is perfect to test and learn.</p><p> If you want to use the app for production purposes, please, use <a href="http://chainmaps.net">the main net</a></p>'
 };
 
