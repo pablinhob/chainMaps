@@ -9,7 +9,11 @@
   <script id="headerTemplate" type="text/template">
     <div class="">
       <%if(fullOptionsRender){%>
-      <div class="logo"><a href=""><img src="img/logo_small.png"> Chain Maps</a></div>
+      <div class="logo"><a href=""><img src="img/logo_small.png"> Chain Maps
+      <% if(conf.testNetAdvice) { %>
+        (ropsten testnet version)
+      <% } %>
+      </a></div>
       <%}%>
       <div class="webMenu">
         <ul class="dropdown-menu">
