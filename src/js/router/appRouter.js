@@ -10,6 +10,7 @@ var AppRouter = Backbone.Router.extend({
   },
   default: function() {
     canvasEnable = true;
+    $('body .header').html('');
     app.views.accountChooser.render();
   },
 
