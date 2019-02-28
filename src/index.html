@@ -20,9 +20,13 @@
               <li><a href="#account/<%-accountIdName%>/adminAccount"><i class="fa fa-compass"></i> Edit map info</a></li>
             <%}%>
           <%}%>
+          <li><a ></a></li>
           <li><a class="displayAccountConfPopup" ><i class="fa fa-credit-card"></i> Account conf (ETH)</a></li>
-          <%= conf.changeNetworkMenuOption %>
           <li><a  class="displayAboutPopup"><i class="fa fa-info-circle"></i> FAQ</a></li>
+          <li><a ></a></li>
+          <%= conf.changeNetworkMenuOption %>
+          <li><a  href="chainMaps.zip"><i class="fa fa-download"></i> Download app on ZIP</a></li>
+          <li><a target="_blank" href="https://github.com/pablinhob/chainMaps"><i class="fa fa-github"></i> Source code</a></li>
         </ul>
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
           <i class="fa fa-bars fa-2x"></i>
@@ -35,7 +39,7 @@
   <script id="FAQContent" type="text/template">
     <h3>What is ChainMaps and what is it for </h3>
     <p>
-      ChainMaps is a simple web GIS, decentralized and based on Ethereum blockchain. Its purpose is to make maps impossible to censor by third parties.
+      ChainMaps is a simple web GIS (Geographic Information System), decentralized and based on Ethereum blockchain. Its purpose is to make maps impossible to censor by third parties.
     </p>
     <p>
       It’s perfect for independent organizations or users who do not want to depend or give their data to companies.

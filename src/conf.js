@@ -34,7 +34,7 @@ var conf = {
   defaultGasLimit: 1500000,
   currentNetworkId: 3, // 3:ropsten
   changeNetworkMenuOption: '<li><a href="http://chainmaps.net"><i class="fa fa-sitemap"></i> Try on main network</a></li>',
-  testNetAdvice: '<p>This app is runing now over <a target="_blank" href="https://medium.com/compound-finance/the-beginners-guide-to-using-an-ethereum-test-network-95bbbc85fc1d">Ethereum Ropsten testnet</a>. This blockchain is only for test purposes and is not secure.<br> However, transactions have no cost and is perfect to test and learn.</p><p> If you want to use the app for production purposes, please, use <a href="http://chainmaps.net">the main net Chainmaps</a></p>'
+  testNetAdvice: '<p>This app is runing now over <a target="_blank" href="https://medium.com/compound-finance/the-beginners-guide-to-using-an-ethereum-test-network-95bbbc85fc1d">Ethereum Ropsten testnet</a>. This blockchain is only for test purposes and is not secure.<br> However, transactions have no cost and is perfect to test and learn.</p><p> If you want to use the app for production purposes, please, use <a href="http://chainmaps.net">the mainnet Chainmaps version</a>.</p>'
 };
 
 
