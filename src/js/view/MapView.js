@@ -64,9 +64,9 @@ var MapView = Backbone.View.extend({
 
     that.placeCollection.pull(function(place){
 
-      var contentMarker = '<h2>'+place.get('title')+'</h2>'+
+      var contentMarker = '<div style="width:255px;height:350px;overflow-y:auto;overflow-x:hidden;"><h2>'+place.get('title')+'</h2>'+
         '<p>'+place.get('desc')+'</p>' +
-        '<img src="'+place.get('imageLink')+'" width="300"/>';
+        '<img src="'+place.get('imageLink')+'" width="250"/></div>';
 
       var markerIcon= false;
       if( place.get('category') != 0 ) {
