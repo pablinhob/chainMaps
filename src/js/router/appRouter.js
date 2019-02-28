@@ -10,7 +10,11 @@ var AppRouter = Backbone.Router.extend({
   },
   default: function() {
     canvasEnable = true;
-    $('body .header').html('');
+    //$('body .header').html('');
+    if(conf.testNetAdvice) {
+      app.views.popup.renderInfo('<span class="glyphicon glyphicon-warning-sign"></span> WARNING!', conf.testNetAdvice );
+    }
+    app.views.header.render(false);
     app.views.accountChooser.render();
   },
 
@@ -37,7 +41,7 @@ var AppRouter = Backbone.Router.extend({
 
   mapMap: function( idName, idPlace ) {
     app.accountIdName = idName;
-    app.views.header.render();
+    app.views.header.render(true);
     app.views.map.render();
     if(idPlace) {
       app.views.map.showPlace(idPlace);
@@ -47,19 +51,19 @@ var AppRouter = Backbone.Router.extend({
   adminAccount: function( idName ) {
     canvasEnable = true;
     app.accountIdName = idName;
-    app.views.header.render();
+    app.views.header.render(true);
     app.views.adminAccount.render();
   },
   adminPlaces: function( idName, idPlace ) {
     canvasEnable = true;
     app.accountIdName = idName;
-    app.views.header.render();
+    app.views.header.render(true);
 
     if(idPlace) {
       app.views.adminPlaceForm.render(idPlace);
     }
     else {
-      app.views.adminPlaceList.render();
+    app.views.header.render(true);
     }
   }
 });

@@ -8,15 +8,20 @@
 
   <script id="headerTemplate" type="text/template">
     <div class="">
+      <%if(fullOptionsRender){%>
       <div class="logo"><a href=""><img src="img/logo_small.png"> Chain Maps</a></div>
+      <%}%>
       <div class="webMenu">
         <ul class="dropdown-menu">
-          <li><a href="#account/<%-accountIdName%>"><i class="fa fa-map"></i> Map</a></li>
-          <%if( accountIdName != false ) { %>
-            <li><a href="#account/<%-accountIdName%>/adminPlaces"><i class="fa fa-map-marker"></i> Edit map places</a></li>
-            <li><a href="#account/<%-accountIdName%>/adminAccount"><i class="fa fa-compass"></i> Edit map info</a></li>
+          <%if(fullOptionsRender){%>
+            <li><a href="#account/<%-accountIdName%>"><i class="fa fa-map"></i> Map</a></li>
+            <%if( accountIdName != false ) { %>
+              <li><a href="#account/<%-accountIdName%>/adminPlaces"><i class="fa fa-map-marker"></i> Edit map places</a></li>
+              <li><a href="#account/<%-accountIdName%>/adminAccount"><i class="fa fa-compass"></i> Edit map info</a></li>
+            <%}%>
           <%}%>
           <li><a class="displayAccountConfPopup" ><i class="fa fa-credit-card"></i> Account conf (ETH)</a></li>
+          <%= conf.changeNetworkMenuOption %>
           <li><a  class="displayAboutPopup"><i class="fa fa-info-circle"></i> FAQ</a></li>
         </ul>
         <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
