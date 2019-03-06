@@ -15,7 +15,7 @@ contract chainMaps {
         string title;
         string desc;
         string imageLink;
-        uint32 category;
+        string category;
         geoLatLng position;
     }
 
@@ -135,7 +135,7 @@ contract chainMaps {
         }
     }
 
-    function setPlace( string memory accountIdName, uint256 ttIndex, string memory title, string memory desc, string memory imageLink, uint32 category, uint32 lat, uint32 lng, uint8 zoom  ) public payable returns (uint256) {
+    function setPlace( string memory accountIdName, uint256 ttIndex, string memory title, string memory desc, string memory imageLink, string memory category, uint32 lat, uint32 lng, uint8 zoom  ) public payable returns (uint256) {
         uint256 ret;
 
 
@@ -209,7 +209,7 @@ contract chainMaps {
             string memory title,
             string memory desc,
             string memory imageLink,
-            uint32 category,
+            string memory category,
             uint32 lat,
             uint32 lng,
             uint8 zoom

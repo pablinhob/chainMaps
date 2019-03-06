@@ -78,11 +78,18 @@ var AccountFormView = Backbone.View.extend({
 
     FormUtils.setFormMap('#accountLat','#accountLng','#accountZoom');
     FormUtils.updateInputLatlng();
-    $('#accountIdName').keypress(function( e ) {
+
+
+
+    $('#accountIdName').keydown(function( e ) {
       if(e.which === 32){
         return false;
       }
     });
+    $('#accountIdName').keyup(function( e ) {
+        $('#accountIdName').val( $('#accountIdName').val().toLowerCase() );
+    });
+
 
     $( "#signupForm" ).validate( {
   		rules: {

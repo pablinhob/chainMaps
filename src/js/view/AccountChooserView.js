@@ -15,11 +15,15 @@ var AccountChooserView = Backbone.View.extend({
     app.data.account = false;
     app.data.locations = false;
 
-    $('.accountForm .accountInput').keypress(function( e ) {
+    $('.accountForm .accountInput').keydown(function( e ) {
       if(e.which === 32){
         return false;
       }
     });
+    $('.accountForm .accountInput').keyup(function( e ) {
+        $('.accountForm .accountInput').val( $('.accountForm .accountInput').val().toLowerCase() );
+    });
+
   },
   goAccount: function() {
     var that = this;
