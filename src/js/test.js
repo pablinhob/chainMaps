@@ -1,5 +1,7 @@
 
 $(document).ready(function() {
+
+
   contract.setAccount({
       accountIdName: 'conta1',
       desc: 'A primeira conta ten encanto porque é a primeira',

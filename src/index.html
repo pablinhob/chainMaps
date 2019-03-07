@@ -26,7 +26,7 @@
           <%}%>
           <li><a ></a></li>
           <li><a class="displayAccountConfPopup" ><i class="fa fa-credit-card"></i> Account conf (ETH)</a></li>
-          <li><a  class="displayAboutPopup"><i class="fa fa-info-circle"></i> FAQ</a></li>
+          <li><a  class="displayAboutPopup"><i class="fa fa-info-circle"></i> FAQ and Author</a></li>
           <li><a ></a></li>
           <%= conf.changeNetworkMenuOption %>
           <li><a  href="<%=conf.appDownloadLink%>"><i class="fa fa-download"></i> Download app on ZIP</a></li>
@@ -65,8 +65,14 @@
     <p>
       Limit the footprint to the fundamental blockchains, therefore only the important data will be stored in the smartContract. For example, map BG Tiles or images should be hosted on third-party sites. If you want to make it more sure, you can host your images into IPFS.
     </p>
-
-
+    <h3>Can i donate?</h3>
+    <p>
+      Yes, you can support this project on each app transaction or through ethereum account: <b><%- conf.donateAccountETH %></b>
+    </p>
+    <h2>Author</h2>
+    <p><b>Pablo Blanco Castro:</b> Software developer, hacktivist and maker</p>
+    <br><br>
+    <b><a target="_blank" href="https://en.wikipedia.org/wiki/Aaron_Swartz">Remember Aaron Swartz 1983-2013</a></b>
   </script>
 
   <script id="popupTransactionTemplate" type="text/template">
@@ -202,7 +208,8 @@
       <div class="row">
         <div id="logo" class="text-center">
         <div><img src="img/logo_medium.png"> </div>
-        <h1>Chain Maps</h1><p>Avoid censorship using the Ethereum blockchain</p>
+        <h1>Chain Maps</h1>
+        <p>Create your maps <br>Avoid censorship using the Ethereum blockchain</p>
         </div>
         <form role="form" class="accountForm" onSubmit="return false;">
           <div class="form-group col-xs-12">
@@ -214,9 +221,23 @@
               </button>
               </span>
             </div>
-            <div class="createNewOne" class="form-group col-xs-12">Create a new one</div>
+            <div class="newOne"><a class="createNewOne" class="form-group col-xs-12">Create a new one</a> | <a href="#account/demo/map">Demo map</a>
           </div>
         </form>
+        <div class="text-center donateFoot">
+
+          <div> &nbsp;</div>
+          <div class="support">
+            <div>SUPPORT</div>
+            <div>ETH: <b><%- conf.donateAccountETH %></b></div>
+            <div>BTC: <b><%- conf.donateAccountBTC %></b></div>
+            <div>LTC: <b><%- conf.donateAccountLTC %></b></div>
+          </div>
+          <div>-</div>
+          <div>2019 Chainmaps - GNU/GPLv3</div>
+          <div>-</div>
+          <div><b><a target="_blank" href="https://en.wikipedia.org/wiki/Aaron_Swartz">Remember Aaron Swartz 1983-2013</a></b></div>
+        </div>
 
       </div>
     </div>

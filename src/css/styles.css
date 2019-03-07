@@ -54,6 +54,12 @@ body * {
   margin-top:60px;
 }
 
+@media (max-width: 600px) {
+  .content #logo {
+    margin-top:0px;
+  }
+}
+
 .content .poweredby {
   color:#fff;
   position:absolute;
@@ -61,7 +67,8 @@ body * {
   bottom
 }
 
-.content .createNewOne {
+
+.content .newOne a {
   cursor:pointer;
   color:#fff;
   margin-top:5px;
@@ -136,7 +143,12 @@ body * {
   font-size:24px;color:white;font-weight:bold;
 }
 
-
+.donateFoot {
+  color:#fff;
+}
+  .donateFoot .support {
+    font-size: 11px;
+  }
 
 #mapContainer {
   width:100%;
