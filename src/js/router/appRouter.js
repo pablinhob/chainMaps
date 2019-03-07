@@ -55,6 +55,7 @@ var AppRouter = Backbone.Router.extend({
     app.views.adminAccount.render();
   },
   adminPlaces: function( idName, idPlace ) {
+
     canvasEnable = true;
     app.accountIdName = idName;
     app.views.header.render(true);
@@ -63,7 +64,7 @@ var AppRouter = Backbone.Router.extend({
       app.views.adminPlaceForm.render(idPlace);
     }
     else {
-    app.views.header.render(true);
+        app.views.adminPlaceList.render();
     }
   }
 });

@@ -12,7 +12,6 @@ var PlacesListView = Backbone.View.extend({
   },
   render: function(){
     var that = this;
-
     contract.addressIsOwner(
       {
         accountIdName: app.accountIdName
