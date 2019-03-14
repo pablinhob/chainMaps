@@ -64,9 +64,16 @@ var MapView = Backbone.View.extend({
 
     that.placeCollection.pull(function(place){
 
-      var contentMarker = '<div style="width:255px;height:350px;overflow-y:auto;overflow-x:hidden;"><h2>'+place.get('title')+'</h2>'+
-        '<p>'+place.get('desc')+'</p>' +
-        '<img src="'+place.get('imageLink')+'" width="250"/></div>';
+      var extraHtml = '';
+      var bubleHeight='';
+      if( place.get('imageLink').trim() != ''  ){
+        contentMarker+='<img src="'+place.get('imageLink')+'" width="250"/></div>';
+        bubleHeight='height:350px;';
+      }
+
+      var contentMarker = '<div style="width:255px;' + bubleHeight + 'overflow-y:auto;overflow-x:hidden;"><h2>'+place.get('title')+'</h2>'+
+        '<p>'+place.get('desc')+'</p>'+ extraHtml;
+
 
       var markerIcon= false;
       if( place.get('category') != 0 ) {
