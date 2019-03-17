@@ -1,6 +1,10 @@
 body {
   font-family: 'Roboto Condensed', sans-serif;
   background-color: #000;
+  background-image: url("../img/collage/portada.jpg");
+  background-repeat: no-repeat;
+ background-attachment: fixed;
+ background-position: center;
 }
 body * {
   font-family: 'Roboto Condensed', sans-serif;
