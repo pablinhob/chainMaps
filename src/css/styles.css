@@ -10,7 +10,7 @@ body * {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-
+.remember a {color:#fff;}
 .header {
   height:60px;
 
