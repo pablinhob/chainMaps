@@ -1,27 +1,37 @@
 // bootstrap glyps https://www.w3schools.com/bootstrap/bootstrap_ref_comp_glyphs.asp
 var Category = [
   'Default marker',
-  'asterisk',
-	'plus',
-	'minus',
+  'camera',
+  'facetime-video',
+	'picture',
+	'music',
+  'film',
+	'file',
+	'heart',
+	'home',
+
+  'grain',
+	'sunglasses',
+  'oil',
+  'tree-conifer',
+	'tree-deciduous',
+
 	'cloud',
 	'envelope',
 	'pencil',
 	'glass',
-	'music',
 	'search',
-	'heart',
 	'star',
 	'user',
-	'film',
+
 	'ok',
 	'remove',
 	'off',
 	'signal',
 	'cog',
 	'trash',
-	'home',
-	'file',
+
+
 	'time',
 	'road',
 	'play-circle',
@@ -33,10 +43,8 @@ var Category = [
 	'tag',
 	'book',
 	'print',
-	'camera',
-	'facetime-video',
-	'picture',
-	'map-marker',
+
+
 	'adjust',
 	'tint',
 
@@ -60,12 +68,6 @@ var Category = [
 	'shopping-cart',
 	'bullhorn',
 	'bell',
-	'thumbs-up',
-	'thumbs-down',
-	'hand-right',
-	'hand-left',
-	'hand-up',
-	'hand-down',
 	'globe',
 	'wrench',
 	'tasks',
@@ -77,8 +79,7 @@ var Category = [
 	'link',
 	'phone',
 	'pushpin',
-	'usd',
-	'gbp',
+
 	'flash',
 	'credit-card',
 	'transfer',
@@ -91,8 +92,7 @@ var Category = [
 	'stats',
 	'copyright-mark',
 	'registration-mark',
-	'tree-conifer',
-	'tree-deciduous',
+
 	'cd',
 	'alert',
 	'equalizer',
@@ -119,12 +119,20 @@ var Category = [
 	'education',
 
 
-	'grain',
-	'sunglasses',
-  'oil',
+
   'ruble',
   'euro',
   'bitcoin',
-	'yen'
-
+	'yen',
+  'usd',
+	'gbp',
+  'asterisk',
+  'plus',
+  'minus',
+  'thumbs-up',
+	'thumbs-down',
+	'hand-right',
+	'hand-left',
+	'hand-up',
+	'hand-down'
 ];

@@ -137,7 +137,7 @@ var MapView = Backbone.View.extend({
         app.data.account.get('zoom')
       );
       L.tileLayer(
-        'http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+        conf.tilesUrl, {
         //maxZoom: 18,
         //scrollWheelZoom: true,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
