@@ -56,9 +56,9 @@ var conf = {
   changeNetworkMenuOption: '<li><a href="http://testnet.chainmaps.net"><i class="fa fa-sitemap"></i> Try on testnet network</a></li>',
   testNetAdvice: false,
   appDownloadLink: 'https://github.com/pablinhob/chainMapsTestNet/archive/master.zip',
-  donateAccountETH: '0xblablaETH',
-  donateAccountBTC: '0xblablaBTC',
-  donateAccountLTC: '0xblablaLTC',
+  donateAccountETH: '0x45953c3414097c20b4EAFF53e7D0813969CD913D',
+  donateAccountBTC: '14KVi3NxNBmC7y4si2B56VQaXpD6bwG5CD',
+  donateAccountLTC: 'LXzeVayuNYwuyMQ7uGrQRyExAsAi7G5rPR',
   tilesUrl: 'http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png'
 };
 
