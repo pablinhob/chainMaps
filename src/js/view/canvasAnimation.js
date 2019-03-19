@@ -2,7 +2,7 @@ var canvasId = 'bgCanvas';
 var canvasEnable = true;
 
 $(document).ready( function(){
-  if(conf.currentNetworkId == 3) {
+  if(conf.testNetAdvice) {
     resizeCanvas();
     windowLoadHandler();
   }
