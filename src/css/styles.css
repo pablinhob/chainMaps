@@ -10,7 +10,7 @@ body * {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-.remember a {color:#fff;}
+.donateFoot a {color:#fff;}
 .header {
   height:60px;
 
@@ -56,6 +56,7 @@ body * {
 .content #logo {
   color:#fff;
   margin-top:60px;
+  font-size: 16px;
 }
 
 @media (max-width: 600px) {
