@@ -10,7 +10,7 @@ else
   cp -R src/js $1/
   cp -R src/vendorStatic $1/
   cp -R src/index.html $1/
-
+  cp -R src/indexEmbed.html $1/
 
   mkdir -p $1/vendor/bootstrap/dist/{js,css,fonts}
   cp src/vendor/bootstrap/dist/css/bootstrap.min.css $1/vendor/bootstrap/dist/css/bootstrap.min.css
