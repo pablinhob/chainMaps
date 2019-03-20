@@ -237,28 +237,32 @@ var contract = {
       txValue = value;
     }
 
-    that.web3.eth.getTransactionCount( ethAccount.getPublicKey() , function(error, result) {
-      var nonce = result;
-      var rawTransaction = {
-        "from": ethAccount.getPublicKey(),
-        "nonce": that.web3.utils.toHex( nonce ),
-        "gasPrice": that.web3.utils.toHex( 0.8 ^1000000000),
-        "gasLimit": that.web3.utils.toHex(gasLimit),
-        "to": conf.contractAddress,
-        "value": that.web3.utils.toHex( value ),//"0x00",
-        "data": data,
-        "chainId": conf.currentNetworkId //change the chainID accordingly
-      };
+    that.web3.eth.getGasPrice(function(e,gasPrice) {
+      that.web3.eth.getTransactionCount( ethAccount.getPublicKey() , function(error, result) {
+        var nonce = result;
+        var rawTransaction = {
+          "from": ethAccount.getPublicKey(),
+          "nonce": that.web3.utils.toHex( nonce ),
+          "gasPrice": that.web3.utils.toHex( parseInt(gasPrice) ),
+          "gasLimit": that.web3.utils.toHex( parseInt(gasLimit) ),
+          "to": conf.contractAddress,
+          "value": that.web3.utils.toHex( value ),//"0x00",
+          "data": data,
+          "chainId": conf.currentNetworkId //change the chainID accordingly
+        };
 
-      var privKey = new ethereumjs.Buffer.Buffer( ethAccount.privateKey , 'hex');
-      var tx = new ethereumjs.Tx(rawTransaction);
+        var privKey = new ethereumjs.Buffer.Buffer( ethAccount.privateKey , 'hex');
+        var tx = new ethereumjs.Tx(rawTransaction);
 
-      tx.sign(privKey);
-      var serializedTx = tx.serialize();
-      that.web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'), function(err, res) {
-          onComplete(res);
+        tx.sign(privKey);
+        var serializedTx = tx.serialize();
+        that.web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'), function(err, res) {
+            console.log('Transaction error:',err);
+            onComplete(res);
+        });
       });
     });
+
   }
 
 };
